@@ -1,4 +1,4 @@
-package main
+package edu.tadp.grupo5
 
 class Recorrido {
   val medio:Medio = new Medio()

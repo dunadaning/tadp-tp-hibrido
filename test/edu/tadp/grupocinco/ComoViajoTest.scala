@@ -1,4 +1,4 @@
-package test
+package edu.tadp.grupocinco
 
 import org.junit.Test
 import main.Direccion

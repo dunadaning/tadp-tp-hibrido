@@ -1,4 +1,4 @@
-package main
+package edu.tadp.grupo5
 
 class Viaje (val direcciones: ParametrosDeViaje, val criterio:Criterio) {
   val dir: ParametrosDeViaje = direcciones

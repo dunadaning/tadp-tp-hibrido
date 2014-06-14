@@ -1,4 +1,4 @@
-package test
+package edu.tadp.grupocinco
 
 import main.Greeter;
 import org.junit.Test;

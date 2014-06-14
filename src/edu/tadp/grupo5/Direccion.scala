@@ -1,4 +1,4 @@
-package main
+package edu.tadp.grupo5
 
 class Direccion(val street:String, val number:Int) {
   var calle: String = street
