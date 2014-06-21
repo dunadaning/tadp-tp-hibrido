@@ -1,8 +1,19 @@
 package edu.tadp.grupo5
 
 class Recorrido {
-  val medio:Medio = new Medio()
-  val inicio:Direccion = new Direccion()
-  val fin:Direccion = new Direccion()
+  var medio:Medio = new Medio(new Tipo())
+  var inicio:Direccion = new Direccion()
+  var fin:Direccion = new Direccion()
+  
+  def setMedio(medio:Medio) = {
+    this.medio = medio
+  }
 
+    def setInicio(direccion:Direccion) = {
+    this.inicio = direccion
+  }
+    
+  def setFin(direccion:Direccion) = {
+    this.fin = direccion
+  }
 }

@@ -4,20 +4,41 @@ object ConsultaExterna {
   
   //SOLO PARA PRUEBAS, SIMULO MODULO EXTERNO
   def consultar(viaje:Viaje) : Array[Recorrido] ={
-    val respuesta: Array[Recorrido]
+    
     val tipo: Tipo = new Tipo('c', "colectivo")
-    val recorrido = new Recorrido()
+    var recorrido = new Recorrido()
     
-    /*viaje.direcciones.origen.calle match {
-      case "Medrano" => println(1)  
-    }*/ 
-
-    recorrido.medio = new Medio()
-    recorrido.medio.tipo = tipo
-    
-    respuesta = new Array(recorrido)
-    
-    respuesta
-      
+    viaje.direcciones.origen.calle match {
+      case "Rivadavia" => getRespuestaDirecto()
+      case "Medrano" => getRespuestaCombina()
+      case "Avellaneda" => getRespuestaCriterio()
+      case "Jujuy" => getRespuestaNoHayRecorrido()
+    } 
+  
+    /*recorrido.setMedio(new Medio(tipo))
+    recorrido.setInicio(new Direccion())
+    recorrido.setFin(new Direccion())
+    respuesta :+ recorrido*/    
   }
+  
+  def getRespuestaDirecto() : Array[Recorrido] = {
+    var respuesta = new Array[Recorrido](1)  
+    respuesta
+  }
+  
+  def getRespuestaCombina() : Array[Recorrido] = {
+    var respuesta = new Array[Recorrido](2)    
+    respuesta
+  }
+
+  def getRespuestaCriterio() : Array[Recorrido] = {
+    var respuesta = new Array[Recorrido](1)    
+    respuesta
+  }
+  
+  def getRespuestaNoHayRecorrido() : Array[Recorrido] = {
+    var respuesta = new Array[Recorrido](0)    
+    respuesta
+  }
+
 }

@@ -1,12 +1,13 @@
 package edu.tadp.grupocinco
 
 import org.junit.Test
-import main.Direccion
-import main.ParametrosDeViaje
-import main.Direccion
-import main.Viaje
-import main.Criterio
-import main.ConsultaExterna
+import org.junit.Assert.assertEquals
+
+import edu.tadp.grupo5.Criterio
+import edu.tadp.grupo5.ParametrosDeViaje
+import edu.tadp.grupo5.Viaje
+import edu.tadp.grupo5.Direccion
+import edu.tadp.grupo5.ConsultaExterna
 
 class ComoViajoTest {
   	
@@ -16,7 +17,7 @@ class ComoViajoTest {
 	  val destino = new Direccion("Independencia", 350)
 	  val direcciones = new ParametrosDeViaje(origen, destino)
 	  val viaje = new Viaje(direcciones)
-	  //assertEquals(ConsultaExterna.consultar(viaje).size,1)
+	  assertEquals("d",ConsultaExterna.consultar(viaje).size,1)
 	}
   
   @Test
@@ -25,7 +26,7 @@ class ComoViajoTest {
 	  val destino = new Direccion("Independencia", 350)
 	  val direcciones = new ParametrosDeViaje(origen, destino)
 	  val viaje = new Viaje(direcciones)
-	  //ConsultaExterna.consultar(viaje)
+	  assertEquals("d",ConsultaExterna.consultar(viaje).size,2)
 	}
   
   @Test
@@ -35,15 +36,15 @@ class ComoViajoTest {
 	  val direcciones = new ParametrosDeViaje(origen, destino)
     val criterio =  new Criterio('T')
 	  val viaje = new Viaje(direcciones, criterio) 
-	  //ConsultaExterna.consultar(viaje)
+	  assertEquals("d",ConsultaExterna.consultar(viaje).size,1)
 	}
   
      @Test
 	def testConsultarViajeNoHayRecorrido {
-    val origen = new Direccion("Medrano", 750)
+    val origen = new Direccion("Jujuy", 750)
 	  val destino = new Direccion("Pedernera", 1350)
 	  val direcciones = new ParametrosDeViaje(origen, destino)
 	  val viaje = new Viaje(direcciones) 
-	  //ConsultaExterna.consultar(viaje)
+	  assertEquals("d",ConsultaExterna.consultar(viaje).size,0)
 	} 
 }

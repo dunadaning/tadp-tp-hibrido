@@ -1,6 +1,6 @@
 package edu.tadp.grupo5
 
-class Medio {
-  var tipo: Tipo
-
+class Medio (val tip: Tipo){
+  var tipo: Tipo = tip
+ 
 }

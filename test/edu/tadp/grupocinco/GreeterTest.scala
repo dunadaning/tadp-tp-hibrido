@@ -1,7 +1,7 @@
 package edu.tadp.grupocinco
 
-import main.Greeter;
 import org.junit.Test;
+import edu.tadp.grupo5.Greeter
 
 class GreeterTest {
 
