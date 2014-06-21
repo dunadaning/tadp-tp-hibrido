@@ -7,9 +7,4 @@ class Viaje (val direcciones: ParametrosDeViaje, val criterio:Criterio) {
     this(direcciones, null)
   }
   
-  def getDir(): ParametrosDeViaje = {
-    println(dir.destino.calle)
-    return dir
-  }
-
 }
