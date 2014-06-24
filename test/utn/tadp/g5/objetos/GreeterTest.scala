@@ -1,7 +1,7 @@
 package utn.tadp.g5.objetos
 
 import org.junit.Test;
-import edu.tadp.grupo5.Greeter
+import utn.tadp.g5.objetos.Greeter
 
 class GreeterTest {
 
