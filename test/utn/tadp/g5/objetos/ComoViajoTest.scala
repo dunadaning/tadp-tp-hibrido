@@ -3,7 +3,7 @@ package utn.tadp.g5.objetos
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-import utn.tadp.g5.objetos.ConsultaExterna
+import utn.tadp.g5.objetos.ModuloExterno
 import utn.tadp.g5.objetos.Direccion
 import utn.tadp.g5.objetos.ParametrosDeViaje
 import utn.tadp.g5.objetos.Viaje
@@ -13,14 +13,16 @@ class ComoViajoTest {
   	
   @Test
 	def testConsultarViajeDirecto {
-    val origen = new Direccion("Rivadavia", 2487)
-	  val destino = new Direccion("Independencia", 350)
+	  val origen = new Direccion("Avellaneda", 37)
+	  val destino = new Direccion("Alsina", 1400)
 	  val direcciones = new ParametrosDeViaje(origen, destino)
-	  val viaje = new Viaje(direcciones)
-	  assertEquals("d",ConsultaExterna.consultar(viaje).size,1)
+	  val viaje = new Viaje(direcciones)	  
+	  val miViaje = new ComoViajar()
+	  
+	  assertEquals("Viaje Directo", miViaje.consultar(viaje).size,1)
 	}
   
-  @Test
+  /*@Test
 	def testConsultarViajeCombina {
     val origen = new Direccion("Medrano", 750)
 	  val destino = new Direccion("Independencia", 350)
@@ -46,5 +48,6 @@ class ComoViajoTest {
 	  val direcciones = new ParametrosDeViaje(origen, destino)
 	  val viaje = new Viaje(direcciones) 
 	  assertEquals("d",ConsultaExterna.consultar(viaje).size,0)
-	} 
+	}
+	* */	
 }
