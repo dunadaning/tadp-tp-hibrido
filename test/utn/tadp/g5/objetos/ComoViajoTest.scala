@@ -19,7 +19,7 @@ class ComoViajoTest {
 	  val viaje = new Viaje(direcciones)	  
 	  val miViaje = new ComoViajar()
 	  
-	  assertEquals("Viaje Directo", miViaje.consultar(viaje).size,1)
+	  assertEquals(miViaje.consultar(viaje).size,1)
 	}
   
   /*@Test

@@ -1,5 +1,7 @@
 package utn.tadp.g5.objetos
 
-class Medio {
-
+class Medio() { 	
+  
+  var linea: Unit
+	
 }

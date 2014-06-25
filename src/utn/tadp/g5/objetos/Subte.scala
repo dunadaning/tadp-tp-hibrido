@@ -1,5 +1,6 @@
 package utn.tadp.g5.objetos
 
-class Subte(linea:Char) extends Medio{
+class Subte(lin:Char) extends Medio {
+	val linea = lin
 
 }

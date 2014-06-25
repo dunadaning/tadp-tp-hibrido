@@ -1,5 +1,6 @@
 package utn.tadp.g5.objetos
 
-class Colectivo(linea:Int) extends Medio{  
-
+class Colectivo(lin:Unit) extends Medio {  
+	linea = lin
+		
 }
