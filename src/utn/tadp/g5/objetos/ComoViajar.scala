@@ -7,22 +7,19 @@ class ComoViajar {
   def consultar(viaje:Viaje, criterio:Criterio) : ArrayBuffer[Recorrido] = {
     
     val recorridos = ArrayBuffer[Recorrido]()   
-    val recorridoIda = new RecorridoIda()
-    val recorridoVuelta = new RecorridoVuelta()    
+    val recorrido = new Recorrido()    
     var transporteCercanosIda = ArrayBuffer[TransporteCercano]()     
     var transporteCercanosFin = ArrayBuffer[TransporteCercano]()
-    //var myTransport = new TransporteCercano()
     
     transporteCercanosIda = ModuloExterno.consultarCercanos(viaje.direcciones.origen)
     transporteCercanosFin = ModuloExterno.consultarCercanos(viaje.direcciones.destino)
 
-    for(myTransport <- transporteCercanosIda.toArray) {
-      //TODO: consultar combinaciones de cercanos. Por cada uno calcular distancia entre
-      //direccion destino y direccion de combinacion
-      //ModuloExterno.consultarCombinacion(myTransport.medio)
+    for(e <- transporteCercanosIda.toArray) {
       
-     if (pasaPorDestino(myTransport.medio, transporteCercanosFin.toArray)){
-        
+     if (pasaPorDestino(e.medio, transporteCercanosFin.toArray)){
+        recorrido.medio = e.medio        
+        recorrido.direccion = e.direccion
+        recorridos += recorrido 
       }
       
     }
@@ -33,13 +30,13 @@ class ComoViajar {
   
   def pasaPorDestino(myTransportIda:Medio, transporteCercanosFin:Array[TransporteCercano]) : Boolean = {
 		  
-	for(myTransportFin <- transporteCercanosFin) {
-	  if (myTransportFin.medio.linea == myTransportIda.linea){
-	    
-	  }
-	}
-	    	  
-    
+	  for(e <- transporteCercanosFin) {
+	  
+	    if (e.medio.getLinea().equals(myTransportIda.getLinea())){	     
+	      return true
+	    }	  
+	  }	 
+	  
     return false
   }
   

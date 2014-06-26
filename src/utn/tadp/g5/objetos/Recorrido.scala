@@ -1,7 +1,11 @@
 package utn.tadp.g5.objetos
 
 class Recorrido {
-  var medio:Medio = new Medio()
-  var direccion:Direccion = new Direccion()
+  var medio:Medio = null// = new Medio()
+  var direccion:Direccion = null// = new Direccion()
+  
+  def getDuracionEstimada():Int = {
+    return 1
+  }
  
 }

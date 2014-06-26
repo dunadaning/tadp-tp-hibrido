@@ -1,7 +1,8 @@
 package utn.tadp.g5.objetos
 
-class Medio() { 	
+class Medio { 	
   
-  var linea: Unit
-	
+    def getLinea(): Any = {}    
+    def getDescripcion():Any = {}
+
 }
