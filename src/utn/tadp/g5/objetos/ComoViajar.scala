@@ -6,26 +6,50 @@ class ComoViajar {
 
   def consultar(viaje:Viaje, criterio:Criterio) : ArrayBuffer[Recorrido] = {
     
-    val recorridos = ArrayBuffer[Recorrido]()   
-    val recorrido = new Recorrido()    
-    var transporteCercanosIda = ArrayBuffer[TransporteCercano]()     
+   
+    var transporteCercanosInicio = ArrayBuffer[TransporteCercano]()     
     var transporteCercanosFin = ArrayBuffer[TransporteCercano]()
     
-    transporteCercanosIda = ModuloExterno.consultarCercanos(viaje.direcciones.origen)
-    transporteCercanosFin = ModuloExterno.consultarCercanos(viaje.direcciones.destino)
+    transporteCercanosInicio = obtenerTransportesCercanosEn(viaje.direcciones.origen)
+    transporteCercanosFin = obtenerTransportesCercanosEn(viaje.direcciones.destino)
 
-    for(e <- transporteCercanosIda.toArray) {
+    return  calcularRecorrido(transporteCercanosInicio, transporteCercanosFin)
+        
+  }
+  
+  def calcularRecorrido(tInicio:ArrayBuffer[TransporteCercano], tFin:ArrayBuffer[TransporteCercano]): ArrayBuffer[Recorrido] = {
+    
+    calcularDirecto(tInicio, tFin)// || calcularCombinado(tInicio, tFin)
+    
+  }
+
+  def calcularDirecto(tInicio:ArrayBuffer[TransporteCercano], tFin:ArrayBuffer[TransporteCercano]): ArrayBuffer[Recorrido] = {
+    val recorridos = ArrayBuffer[Recorrido]()   
+    val recorrido = new Recorrido() 
+        
+    for(e <- tInicio.toArray) {
       
-     if (pasaPorDestino(e.medio, transporteCercanosFin.toArray)){
+     if (pasaPorDestino(e.medio, tFin.toArray)){
         recorrido.medio = e.medio        
         recorrido.direccion = e.direccion
         recorridos += recorrido 
-      }
-      
+      }      
     }
     
-    return  recorridos
+    return recorridos
+  }
+  
+  def calcularCombinado(tInicio:ArrayBuffer[TransporteCercano], tFin:ArrayBuffer[TransporteCercano]): ArrayBuffer[Recorrido] = {
+    val recorridos = ArrayBuffer[Recorrido]()   
+    val recorrido = new Recorrido() 
         
+   //TODO
+    
+    return recorridos
+  }
+  
+  def obtenerTransportesCercanosEn(direccion:Direccion): ArrayBuffer[TransporteCercano] = {    
+    ModuloExterno.consultarCercanos(direccion)
   }
   
   def pasaPorDestino(myTransportIda:Medio, transporteCercanosFin:Array[TransporteCercano]) : Boolean = {

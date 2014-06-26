@@ -27,22 +27,30 @@ object ModuloExterno {
       transporteA = new TransporteCercano(new Subte('A'), new Direccion("Rivadavia", 3504))
       respuesta += transporteA
       
-    }else{
+    }else if (direccion.calle.equals("Alsina")){
       var transporteA = new TransporteCercano(new Subte('A'), new Direccion("Rivadavia", 3504))    
+      respuesta += transporteA
+      
+    }else if (direccion.calle.equals("Pedernera")){
+      var transporteA = new TransporteCercano(new Colectivo(103), new Direccion("Primera Junta", 35))
+      transporteA = new TransporteCercano(new Colectivo(92), new Direccion("Cabildo", 355))
+      respuesta += transporteA
+      
+    }else if (direccion.calle.equals("Brandsen")){
+      var transporteA = new TransporteCercano(new Colectivo(86), new Direccion("Almirante Brown", 378))    
       respuesta += transporteA
     }
         
     return respuesta
   }
   
-  def consultarCombinacion(medio:Medio) : TransporteCercano = {    
-    var respuesta = new TransporteCercano()
+  def consultarCombinacion(medioA:Medio, medioB:Medio) : Direccion = {    
+    var respuesta = new Direccion()
     
-    /*var combina = new TransporteCercano(new Colectivo(103), new Direccion("Rosario", 156))           
-    respuesta += combina 
-    
-    combina = new TransporteCercano(new Subte('H'), new Direccion("Rivadavia", 3000))
-    respuesta += combina*/
+    if (medioA.getLinea().equals(103) && medioA.getLinea().equals(86)){  
+        var combina = new Direccion("Rosario", 156)           
+        respuesta = combina 
+    }
     
     return respuesta
     
