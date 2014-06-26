@@ -7,8 +7,8 @@ class ComoViajar {
   def consultar(viaje:Viaje, criterio:Criterio) : ArrayBuffer[Recorrido] = {
     
    
-    var transporteCercanosInicio = ArrayBuffer[TransporteCercano]()     
-    var transporteCercanosFin = ArrayBuffer[TransporteCercano]()
+    var transporteCercanosInicio = ArrayBuffer[Transporte]()     
+    var transporteCercanosFin = ArrayBuffer[Transporte]()
     
     transporteCercanosInicio = obtenerTransportesCercanosEn(viaje.direcciones.origen)
     transporteCercanosFin = obtenerTransportesCercanosEn(viaje.direcciones.destino)
@@ -17,13 +17,13 @@ class ComoViajar {
         
   }
   
-  def calcularRecorrido(tInicio:ArrayBuffer[TransporteCercano], tFin:ArrayBuffer[TransporteCercano]): ArrayBuffer[Recorrido] = {
+  def calcularRecorrido(tInicio:ArrayBuffer[Transporte], tFin:ArrayBuffer[Transporte]): ArrayBuffer[Recorrido] = {
     
     calcularDirecto(tInicio, tFin)// || calcularCombinado(tInicio, tFin)
     
   }
 
-  def calcularDirecto(tInicio:ArrayBuffer[TransporteCercano], tFin:ArrayBuffer[TransporteCercano]): ArrayBuffer[Recorrido] = {
+  def calcularDirecto(tInicio:ArrayBuffer[Transporte], tFin:ArrayBuffer[Transporte]): ArrayBuffer[Recorrido] = {
     val recorridos = ArrayBuffer[Recorrido]()   
     val recorrido = new Recorrido() 
         
@@ -39,7 +39,7 @@ class ComoViajar {
     return recorridos
   }
   
-  def calcularCombinado(tInicio:ArrayBuffer[TransporteCercano], tFin:ArrayBuffer[TransporteCercano]): ArrayBuffer[Recorrido] = {
+  def calcularCombinado(tInicio:ArrayBuffer[Transporte], tFin:ArrayBuffer[Transporte]): ArrayBuffer[Recorrido] = {
     val recorridos = ArrayBuffer[Recorrido]()   
     val recorrido = new Recorrido() 
         
@@ -48,11 +48,11 @@ class ComoViajar {
     return recorridos
   }
   
-  def obtenerTransportesCercanosEn(direccion:Direccion): ArrayBuffer[TransporteCercano] = {    
+  def obtenerTransportesCercanosEn(direccion:Direccion): ArrayBuffer[Transporte] = {    
     ModuloExterno.consultarCercanos(direccion)
   }
   
-  def pasaPorDestino(myTransportIda:Medio, transporteCercanosFin:Array[TransporteCercano]) : Boolean = {
+  def pasaPorDestino(myTransportIda:Medio, transporteCercanosFin:Array[Transporte]) : Boolean = {
 		  
 	  for(e <- transporteCercanosFin) {
 	  
