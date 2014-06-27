@@ -22,12 +22,24 @@ class ComoViajar {
     var recorridos = ArrayBuffer[Recorrido]()
     
     recorridos += calcularDirecto(tInicio, tFin)
-    recorridos += calcularCombinado(tInicio, tFin)
+    recorridos = fusionarRecorridos(recorridos, calcularCombinado(tInicio, tFin))
     
     recorridos
     
   }
 
+  def fusionarRecorridos(recorridosA: ArrayBuffer[Recorrido], recorridosB:ArrayBuffer[Recorrido]):ArrayBuffer[Recorrido]={
+    var recorridosFusionados = ArrayBuffer[Recorrido]()
+    val recB = recorridosB.toArray
+    recorridosFusionados = recorridosA
+    
+    for (e <- recB){
+      recorridosFusionados+=e
+    }
+    
+    return recorridosFusionados
+  }
+  
   def calcularDirecto(tInicio:ArrayBuffer[Transporte], tFin:ArrayBuffer[Transporte]): Recorrido = {    
     val recorridos = new Recorrido() 
     var transporte = new Transporte()   
@@ -50,8 +62,9 @@ class ComoViajar {
     return mapa.size    
   }
   
-  def calcularCombinado(tInicio:ArrayBuffer[Transporte], tFin:ArrayBuffer[Transporte]): Recorrido = {    
-    val recorridos = new Recorrido() 
+  def calcularCombinado(tInicio:ArrayBuffer[Transporte], tFin:ArrayBuffer[Transporte]): ArrayBuffer[Recorrido] = {    
+    //var recorridos = new Recorrido() 
+    var combinados = new ArrayBuffer[Recorrido]
     var transporteA = new Transporte()
     var transporteB = new Transporte()
     var direccion:Direccion = null
@@ -61,16 +74,19 @@ class ComoViajar {
     for (i <- 0 until ti.size){
      for (p <- 0 until tf.size){
        direccion = ModuloExterno.consultarCombinacion(ti(i).medio, tf(p).medio)
-       if (direccion!=null){              
+       if (direccion!=null){
+         var recorridos = new Recorrido()
+         recorridos.mapa = new HashMap[Int,Transporte]
          transporteA = new Transporte(ti(i).medio, direccion) 
-         transporteB = new Transporte(tf(i).medio, tf(i).direccion) 
+         transporteB = new Transporte(tf(p).medio, tf(p).direccion) 
          recorridos.mapa += (getKeyMap(recorridos.mapa) -> transporteA)
-         recorridos.mapa += (getKeyMap(recorridos.mapa) -> transporteB) 
+         recorridos.mapa += (getKeyMap(recorridos.mapa) -> transporteB)  
+         combinados += recorridos
        }
-     } 
+     }              
     }
     
-    return recorridos
+    return combinados
   }
   
   def obtenerTransportesCercanosEn(direccion:Direccion): ArrayBuffer[Transporte] = {    

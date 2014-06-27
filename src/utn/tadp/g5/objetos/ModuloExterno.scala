@@ -40,6 +40,9 @@ object ModuloExterno {
     }else if (direccion.calle.equals("Brandsen")){
       var transporteA = new Transporte(new Colectivo(86), new Direccion("Almirante Brown", 378))    
       respuesta += transporteA
+      
+      transporteA = new Transporte(new Colectivo(96), new Direccion("Paseo Colon", 970))    
+      respuesta += transporteA
     }
         
     return respuesta
@@ -50,6 +53,8 @@ object ModuloExterno {
     
     if (medioA.getLinea().equals(103) && medioB.getLinea().equals(86)){  
         respuesta = new Direccion("Rosario", 156) 
+    }else if (medioA.getLinea().equals(103) && medioB.getLinea().equals(96)){
+      respuesta = new Direccion("Eva Peron", 560)
     }
     
     return respuesta

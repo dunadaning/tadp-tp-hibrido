@@ -18,6 +18,7 @@ class ComoViajoTest {
 	  val miConsultaDeViaje = new ComoViajar()
 	  val miViaje = miConsultaDeViaje.consultar(parametrosViaje)
 	  
+	  imprimirTest("TEST Viaje Directo:")
 	  mostrarResultadoPorConsola(miViaje)
     
 	  assertEquals(miViaje.recorridos.toArray.size,2)
@@ -31,6 +32,7 @@ class ComoViajoTest {
 	  val miConsultaDeViaje = new ComoViajar()
 	  val miViaje = miConsultaDeViaje.consultar(parametrosViaje)
 	  
+	  imprimirTest("TEST Viaje Combinado:")
 	  mostrarResultadoPorConsola(miViaje)
     
 	  assertEquals(miViaje.recorridos.size,2)
@@ -65,31 +67,33 @@ class ComoViajoTest {
     var combina:String = null
     var resultadoCompleto:String = null
     
-    for (i <- 0 until recorridos.size){
-      orden = (i+1)
-                  
+    for (i <- 0 until recorridos.size){                  
       if (recorridos(i).mapa.size>1){
-        combina = "Alternativa " + orden + " Combinada: "
-        for (e <- 0 until recorridos(i).mapa.size){
+        resultadoCompleto = "Alternativa combinada "
+        orden = (i)
+        for (e <- 0 until recorridos(i).mapa.size){          
           descripcion =  recorridos(i).mapa(e).medio.getDescripcion().toString()
           linea = recorridos(i).mapa(e).medio.getLinea()
           direccion = recorridos(i).mapa(e).direccion.calle + " " + recorridos(i).mapa(e).direccion.numero
-          combina += descripcion + "-" + linea + " / " + "Direccion: " + direccion 
+          resultadoCompleto += orden + " : " + descripcion + "-" + linea + " / " + "Direccion: " + direccion 
           if (e<(recorridos(i).mapa.size-1)){
-            combina += "-->"
+            resultadoCompleto += "-->"
           }                             
         } 
-        resultadoCompleto = combina
         println(resultadoCompleto)
       }else if (recorridos(i).mapa.size>0){
-         descripcion =  recorridos(i).mapa(i).medio.getDescripcion().toString()
+          orden = (i+1) 
+          descripcion =  recorridos(i).mapa(i).medio.getDescripcion().toString()
           linea = recorridos(i).mapa(i).medio.getLinea()
           direccion = recorridos(i).mapa(i).direccion.calle + " " + recorridos(i).mapa(i).direccion.numero
-          resultadoCompleto = "Alternativa " + orden + ": " + descripcion + "-" + linea + " / " + "Direccion: " + direccion
+          resultadoCompleto = "Alternativa directa " + orden + ": " + descripcion + "-" + linea + " / " + "Direccion: " + direccion
           println(resultadoCompleto)   
-      }
-            
-    }      
+      }           
+    } 
+    println("")
   }
-  
+ 
+  def imprimirTest(nombre:String){    
+	  println(nombre)	  
+  }
 }
