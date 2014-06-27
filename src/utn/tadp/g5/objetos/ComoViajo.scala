@@ -10,12 +10,9 @@ class ComoViajo {
 
   def consultar(parametrosDeViaje:ParametrosDeViaje, criterio:Criterio) : Viaje = {
     var viaje = new Viaje()   
-    var transporteCercanosInicio = ArrayBuffer[Transporte]()     
-    var transporteCercanosFin = ArrayBuffer[Transporte]()
+    var transporteCercanosInicio:ArrayBuffer[Transporte] = obtenerTransportesCercanosEn(parametrosDeViaje.origen)    
+    var transporteCercanosFin:ArrayBuffer[Transporte] = obtenerTransportesCercanosEn(parametrosDeViaje.destino)
     
-    transporteCercanosInicio = obtenerTransportesCercanosEn(parametrosDeViaje.origen)
-    transporteCercanosFin = obtenerTransportesCercanosEn(parametrosDeViaje.destino)
-
     viaje.recorridos = calcularRecorridos(transporteCercanosInicio, transporteCercanosFin, criterio)
     viaje.calcularDuraciones()
     viaje.calcularCostos()
