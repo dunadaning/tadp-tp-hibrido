@@ -1,7 +1,7 @@
 package utn.tadp.g5.objetos
 
-class Criterio(val cod:Char) {
+class Criterio() {
   //T-tiempo
   //C-costo
-  var codigo: Char = cod
+  //var codigo: Char = cod
 }

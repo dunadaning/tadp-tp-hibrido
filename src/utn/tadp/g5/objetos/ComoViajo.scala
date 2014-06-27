@@ -3,7 +3,7 @@ package utn.tadp.g5.objetos
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.HashMap
 
-class ComoViajar {
+class ComoViajo {
 
   def consultar(parametrosDeViaje:ParametrosDeViaje, criterio:Criterio) : Viaje = {
     var viaje = new Viaje()   
@@ -14,6 +14,9 @@ class ComoViajar {
     transporteCercanosFin = obtenerTransportesCercanosEn(parametrosDeViaje.destino)
 
     viaje.recorridos = calcularRecorridos(transporteCercanosInicio, transporteCercanosFin, criterio)
+    viaje.calcularDuraciones()
+    viaje.calcularCostos()
+    
     return  viaje
         
   }

@@ -15,7 +15,7 @@ class ComoViajoTest {
 	  val origen = new Direccion("Avellaneda", 37)
 	  val destino = new Direccion("Alsina", 1400)
 	  val parametrosViaje = new ParametrosDeViaje(origen, destino)	 
-	  val miConsultaDeViaje = new ComoViajar()
+	  val miConsultaDeViaje = new ComoViajo()
 	  val miViaje = miConsultaDeViaje.consultar(parametrosViaje)
 	  
 	  imprimirTest("TEST Viaje Directo:")
@@ -29,7 +29,7 @@ class ComoViajoTest {
     val origen = new Direccion("Pedernera", 750)
 	  val destino = new Direccion("Brandsen", 350)
 	  val parametrosViaje = new ParametrosDeViaje(origen, destino)	 
-	  val miConsultaDeViaje = new ComoViajar()
+	  val miConsultaDeViaje = new ComoViajo()
 	  val miViaje = miConsultaDeViaje.consultar(parametrosViaje)
 	  
 	  imprimirTest("TEST Viaje Combinado:")
@@ -37,18 +37,26 @@ class ComoViajoTest {
     
 	  assertEquals(miViaje.recorridos.size,2)
 	}
-  /*
+ 
   @Test
 	def testConsultarViajeCriterio {
-    val origen = new Direccion("Avellaneda", 750)
-	  val destino = new Direccion("Corrientes", 350)
-	  val direcciones = new ParametrosDeViaje(origen, destino)
-    val criterio =  new Criterio('T')
-	  val viaje = new Viaje(direcciones, criterio) 
-	  assertEquals("d",ConsultaExterna.consultar(viaje).size,1)
+    
+    val miCriterio =  new CriterioTiempo()
+    val origen = new Direccion("Jujuy", 750)
+	  val destino = new Direccion("Campichuelo", 350)	  
+	  val parametrosViaje = new ParametrosDeViaje(origen, destino)	 
+	  val miConsultaDeViaje = new ComoViajo()
+	  val miViaje = miCriterio.consultar(miConsultaDeViaje.consultar(parametrosViaje))
+	  	  
+	  imprimirTest("TEST Viaje Criterio:")
+	  mostrarResultadoPorConsola(miViaje)
+    
+	  assertEquals(miViaje.recorridos.size,2)
+	  
 	}
   
-     @Test
+  /*
+  @Test
 	def testConsultarViajeNoHayRecorrido {
     val origen = new Direccion("Jujuy", 750)
 	  val destino = new Direccion("Pedernera", 1350)
@@ -56,7 +64,7 @@ class ComoViajoTest {
 	  val viaje = new Viaje(direcciones) 
 	  assertEquals("d",ConsultaExterna.consultar(viaje).size,0)
 	}
-	* */
+	*/
   
   def mostrarResultadoPorConsola(viaje: Viaje){   
     var orden:Int = 0
