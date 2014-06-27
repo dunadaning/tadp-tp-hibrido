@@ -1,6 +1,7 @@
 package utn.tadp.g5.objetos
 
 import scala.collection.mutable.HashMap
+import utn.tadp.g5.objetos.Transporte
 
 class Recorrido {
   //var medio:Medio = null// = new Medio()

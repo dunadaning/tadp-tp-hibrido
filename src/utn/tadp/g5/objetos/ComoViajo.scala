@@ -2,6 +2,9 @@ package utn.tadp.g5.objetos
 
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.HashMap
+import utn.tadp.g5.objetos.Transporte
+import utn.tadp.g5.objetos.mediosTransporte.Medio
+import utn.tadp.g5.objetos.criterios.Criterio
 
 class ComoViajo {
 

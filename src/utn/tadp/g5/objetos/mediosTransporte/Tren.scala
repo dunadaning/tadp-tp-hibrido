@@ -1,4 +1,6 @@
-package utn.tadp.g5.objetos
+package utn.tadp.g5.objetos.mediosTransporte
+
+import utn.tadp.g5.objetos.mediosTransporte.Medio
 
 class Contains(r: Range) { 
   def unapply(i: Int): Boolean = r contains i 

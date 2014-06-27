@@ -1,4 +1,4 @@
-package utn.tadp.g5.objetos
+package utn.tadp.g5.objetos.mediosTransporte
 
 class Medio { 	
   

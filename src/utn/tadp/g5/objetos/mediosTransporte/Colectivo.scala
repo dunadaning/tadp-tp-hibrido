@@ -1,4 +1,7 @@
-package utn.tadp.g5.objetos
+package utn.tadp.g5.objetos.mediosTransporte
+
+import utn.tadp.g5.objetos.mediosTransporte.Contains
+import utn.tadp.g5.objetos.mediosTransporte.Medio
 
 class Colectivo(li:Int) extends Medio {  
 	val linea = li

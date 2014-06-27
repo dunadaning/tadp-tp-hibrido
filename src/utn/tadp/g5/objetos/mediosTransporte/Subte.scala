@@ -1,4 +1,6 @@
-package utn.tadp.g5.objetos
+package utn.tadp.g5.objetos.mediosTransporte
+
+import utn.tadp.g5.objetos.mediosTransporte.Medio
 
 class Subte(li:Char) extends Medio {
 	 val linea = li

@@ -1,6 +1,10 @@
 package utn.tadp.g5.objetos
 
 import scala.collection.mutable.ArrayBuffer
+import utn.tadp.g5.objetos.Transporte
+import utn.tadp.g5.objetos.mediosTransporte.Subte
+import utn.tadp.g5.objetos.mediosTransporte.Medio
+import utn.tadp.g5.objetos.mediosTransporte.Colectivo
 
 object ModuloExterno {
   
