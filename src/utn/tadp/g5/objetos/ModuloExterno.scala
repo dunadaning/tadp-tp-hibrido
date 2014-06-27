@@ -33,6 +33,7 @@ object ModuloExterno {
       
     }else if (direccion.calle.equals("Pedernera")){
       var transporteA = new Transporte(new Colectivo(103), new Direccion("Primera Junta", 35))
+      respuesta += transporteA
       transporteA = new Transporte(new Colectivo(92), new Direccion("Cabildo", 355))
       respuesta += transporteA
       
@@ -47,9 +48,8 @@ object ModuloExterno {
   def consultarCombinacion(medioA:Medio, medioB:Medio) : Direccion = {    
     var respuesta: Direccion = null//new Direccion()
     
-    if (medioA.getLinea().equals(103) && medioA.getLinea().equals(86)){  
-        var combina = new Direccion("Rosario", 156)           
-        respuesta = combina 
+    if (medioA.getLinea().equals(103) && medioB.getLinea().equals(86)){  
+        respuesta = new Direccion("Rosario", 156) 
     }
     
     return respuesta

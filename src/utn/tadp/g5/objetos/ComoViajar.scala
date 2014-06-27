@@ -21,7 +21,7 @@ class ComoViajar {
   def calcularRecorridos(tInicio:ArrayBuffer[Transporte], tFin:ArrayBuffer[Transporte], criterio:Criterio): ArrayBuffer[Recorrido] = {
     var recorridos = ArrayBuffer[Recorrido]()
     
-    recorridos += calcularDirecto(tInicio, tFin)// || calcularCombinado(tInicio, tFin)
+    recorridos += calcularDirecto(tInicio, tFin)
     recorridos += calcularCombinado(tInicio, tFin)
     
     recorridos
@@ -52,7 +52,8 @@ class ComoViajar {
   
   def calcularCombinado(tInicio:ArrayBuffer[Transporte], tFin:ArrayBuffer[Transporte]): Recorrido = {    
     val recorridos = new Recorrido() 
-    var transporte = new Transporte()
+    var transporteA = new Transporte()
+    var transporteB = new Transporte()
     var direccion:Direccion = null
     val ti = tInicio.toArray
     val tf = tFin.toArray
@@ -61,8 +62,10 @@ class ComoViajar {
      for (p <- 0 until tf.size){
        direccion = ModuloExterno.consultarCombinacion(ti(i).medio, tf(p).medio)
        if (direccion!=null){              
-         transporte = new Transporte(ti(i).medio, direccion)       
-         recorridos.mapa += (i -> transporte)         
+         transporteA = new Transporte(ti(i).medio, direccion) 
+         transporteB = new Transporte(tf(i).medio, tf(i).direccion) 
+         recorridos.mapa += (getKeyMap(recorridos.mapa) -> transporteA)
+         recorridos.mapa += (getKeyMap(recorridos.mapa) -> transporteB) 
        }
      } 
     }
