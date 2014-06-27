@@ -45,7 +45,7 @@ object ModuloExterno {
   }
   
   def consultarCombinacion(medioA:Medio, medioB:Medio) : Direccion = {    
-    var respuesta = new Direccion()
+    var respuesta: Direccion = null//new Direccion()
     
     if (medioA.getLinea().equals(103) && medioA.getLinea().equals(86)){  
         var combina = new Direccion("Rosario", 156)           

@@ -1,10 +1,20 @@
 package utn.tadp.g5.objetos
 
-class Viaje (val direcciones: ParametrosDeViaje, val criterio:Criterio) {
-  val dir: ParametrosDeViaje = direcciones
+import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.HashMap
+
+class Viaje { 
+  var recorridos: ArrayBuffer[Recorrido] = null
+  var duraciones: HashMap[Int,Int] = null
+  var costos: HashMap[Int,Double] = null
   
-  def this(direcciones: ParametrosDeViaje){
+  /*def this(direcciones: ParametrosDeViaje){
     this(direcciones, null)
+  }*/
+  
+  def calcularDuracion() : Int = {
+    //TODO
+    1
   }
   
 }

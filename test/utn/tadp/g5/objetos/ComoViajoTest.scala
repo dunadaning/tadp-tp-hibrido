@@ -1,13 +1,12 @@
 package utn.tadp.g5.objetos
 
+import scala.collection.mutable.ArrayBuffer
+
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import utn.tadp.g5.objetos.ModuloExterno
+
 import utn.tadp.g5.objetos.Direccion
 import utn.tadp.g5.objetos.ParametrosDeViaje
-import utn.tadp.g5.objetos.Viaje
-import utn.tadp.g5.objetos.Criterio
-import scala.collection.mutable.ArrayBuffer
 
 class ComoViajoTest {
   	
@@ -15,14 +14,13 @@ class ComoViajoTest {
 	def testConsultarViajeDirecto {
 	  val origen = new Direccion("Avellaneda", 37)
 	  val destino = new Direccion("Alsina", 1400)
-	  val direcciones = new ParametrosDeViaje(origen, destino)
-	  val viaje = new Viaje(direcciones)	  
-	  val miViaje = new ComoViajar()
-	  val miRecorrido = miViaje.consultar(viaje)
+	  val parametrosViaje = new ParametrosDeViaje(origen, destino)	 
+	  val miConsultaDeViaje = new ComoViajar()
+	  val miViaje = miConsultaDeViaje.consultar(parametrosViaje)
 	  
-    mostrarResultadoPorConsola(miRecorrido)
+	  mostrarResultadoPorConsola(miViaje)
     
-	  assertEquals(miRecorrido.size,1)
+	  assertEquals(miViaje.recorridos.size,1)
 	}
   
   /*
@@ -55,17 +53,18 @@ class ComoViajoTest {
 	}
 	* */
   
-  def mostrarResultadoPorConsola(recorrido: ArrayBuffer[Recorrido]){   
+  def mostrarResultadoPorConsola(viaje: Viaje){   
     var orden:Int = 0
     var descripcion:String = null
     var linea:Any = null 
     var direccion:String = null
+    val recorridos = viaje.recorridos.toArray
     
-    for (i <- 0 until recorrido.size){
-      orden = (i+1)
-      descripcion =  recorrido(i).medio.getDescripcion().toString()
-      linea = recorrido(i).medio.getLinea()
-      direccion = recorrido(i).direccion.calle + " " + recorrido(i).direccion.numero
+    for (i <- 0 until recorridos.size){
+      orden = (i+1)      
+      descripcion =  recorridos(i).mapa(i).medio.getDescripcion().toString()
+      linea = recorridos(i).mapa(i).medio.getLinea()
+      direccion = recorridos(i).mapa(i).direccion.calle + " " + recorridos(i).mapa(i).direccion.numero
       
       println("Transporte " + orden + ": " + descripcion + "-" + linea + " / " + "Direccion: " + direccion)  
     
