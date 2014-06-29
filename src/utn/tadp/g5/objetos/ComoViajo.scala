@@ -97,14 +97,14 @@ class ComoViajo {
   }
   
   def pasaPorDestino(myTransportIda:Medio, transporteCercanosFin:Array[Transporte]) : Boolean = {
-		  
+
 	  for(e <- transporteCercanosFin) {
-	  
+
 	    if (e.medio.getLinea().equals(myTransportIda.getLinea())){	     
 	      return true
 	    }	  
 	  }	 
-	  
+
     return false
   }
   
@@ -112,4 +112,4 @@ class ComoViajo {
     this.consultar(viaje, null)
   }
   
-}
+}}

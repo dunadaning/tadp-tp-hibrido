@@ -65,6 +65,8 @@ object ModuloExterno {
     
   }
   
+  def combinan(medioA :Medio, medioB: Medio)= true
+  
   def consultarDistanciaColectivo(colectivo:Colectivo, inicio:Direccion, fin:Direccion) : Int = {        
     return 5000    
   }

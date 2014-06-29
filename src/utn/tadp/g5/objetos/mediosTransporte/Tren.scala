@@ -1,16 +1,42 @@
 package utn.tadp.g5.objetos.mediosTransporte
 
 import utn.tadp.g5.objetos.mediosTransporte.Medio
+import utn.tadp.g5.objetos.Direccion
 
 class Contains(r: Range) { 
   def unapply(i: Int): Boolean = r contains i 
 }
 
-class Tren(li:String) extends Medio{
+class Tren(li:String, estaciones: List[Direccion]) extends MedioConEstaciones{
 	val linea = li
 	val descripcion = "Tren"	
+	val tiempoPorEstacion = 3
 	val C1 = new Contains(1 to 5)
-  val C2 = new Contains(6 to 8)	
+	val C2 = new Contains(6 to 8)	
+	
+	def getEstaciones() = estaciones
+	
+	def costoPara(direccionSalida:Direccion, direccionLlegada:Direccion):Double={
+	  this.costoPara(this.estacionesEntre(direccionSalida, direccionLlegada))
+	}
+	
+	def costoPara(estacionesRecorridas:Int)= 1
+	
+	 def tiempoCombinacionSubte(direccionCombinacion : Direccion, direccionSalida:Direccion, direccionLlegada:Direccion)={
+	   5.0 + this.tiempoPara(direccionSalida, direccionLlegada)
+	 }
+	 
+	 def tiempoCombinacionTren(direccionCombinacion : Direccion, direccionSalida:Direccion, direccionLlegada:Direccion)={
+	   6.0 + this.tiempoPara(direccionSalida, direccionLlegada)
+	 }
+	 
+	def costoCombinacion(medio:Medio, direccionSalida:Direccion, direccionLlegada:Direccion)={
+	  medio.costoCombinacionTren(direccionSalida, direccionLlegada)
+	}
+	
+	def tiempoCombinacion(direccionCombinacion:Direccion, medio:Medio, direccionSalida:Direccion, direccionLlegada:Direccion)={
+	  medio.tiempoCombinacionTren(direccionCombinacion, direccionSalida, direccionLlegada)
+	}
 	
 	def calcularPrecio(estaciones:Int):Double ={
 	  

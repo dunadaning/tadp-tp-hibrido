@@ -2,11 +2,29 @@ package utn.tadp.g5.objetos
 
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.HashMap
+import utn.tadp.g5.objetos.tarjetas.Zona
 
 class Viaje { 
   var recorridos: ArrayBuffer[Recorrido] = null //Cada indice del Array es una alternativa de viaje
   var duraciones: HashMap[Int,Int] = null //Cada clave es la alternativa
   var costos: HashMap[Int,Double] = null //Cada clave es la alternativa
+  var tramo:Tramo = null
+  
+  def perteneceALaZona(zona:Zona)={
+    this.tramo.perteneceALaZona(zona)
+  }
+  
+  def costoViaje()={
+    this.tramo.costoTramo()
+  }
+  
+  def saleDesdeLaZona(zona:Zona)={
+    this.tramo.saleDesdeLaZona(zona)
+  }
+  
+  def llegaALaZona(zona:Zona)={
+    this.tramo.llegaALaZona(zona)
+  }
   
   def calcularDuraciones(){
     //TODO a partir de los recorridos, calcular cada duracion por alternativa
