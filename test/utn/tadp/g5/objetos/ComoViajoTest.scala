@@ -69,20 +69,22 @@ class ComoViajoTest {
     var orden:Int = 0
     var descripcion:String = null
     var linea:Any = null 
-    var direccion:String = null
+    var direccionInicio:String = null
+    var direccionFin:String = null
     val recorridos = viaje.recorridos.toArray
     var combina:String = null
     var resultadoCompleto:String = null
     
     for (i <- 0 until recorridos.size){                  
       if (recorridos(i).mapa.size>1){
-        resultadoCompleto = "Alternativa combinada "
-        orden = (i)
+        resultadoCompleto = "Alternativa combinada " + i.toString() + " : "
+        
         for (e <- 0 until recorridos(i).mapa.size){          
           descripcion =  recorridos(i).mapa(e).medio.getDescripcion().toString()
           linea = recorridos(i).mapa(e).medio.getLinea()
-          direccion = recorridos(i).mapa(e).direccion.calle + " " + recorridos(i).mapa(e).direccion.numero
-          resultadoCompleto += orden + " : " + descripcion + "-" + linea + " / " + "Direccion: " + direccion 
+          direccionInicio = recorridos(i).mapa(e).direccionInicio.calle + " " + recorridos(i).mapa(e).direccionInicio.numero
+          direccionFin = recorridos(i).mapa(e).direccionFin.calle + " " + recorridos(i).mapa(e).direccionFin.numero
+          resultadoCompleto += descripcion + "-" + linea + " / " + "Direccion (desde/hasta): " + direccionInicio + " a " + direccionFin
           if (e<(recorridos(i).mapa.size-1)){
             resultadoCompleto += "-->"
           }                             
@@ -92,14 +94,16 @@ class ComoViajoTest {
           orden = (i+1) 
           descripcion =  recorridos(i).mapa(i).medio.getDescripcion().toString()
           linea = recorridos(i).mapa(i).medio.getLinea()
-          direccion = recorridos(i).mapa(i).direccion.calle + " " + recorridos(i).mapa(i).direccion.numero
-          resultadoCompleto = "Alternativa directa " + orden + ": " + descripcion + "-" + linea + " / " + "Direccion: " + direccion
+          direccionInicio = recorridos(i).mapa(i).direccionInicio.calle + " " + recorridos(i).mapa(i).direccionInicio.numero
+          direccionFin = recorridos(i).mapa(i).direccionFin.calle + " " + recorridos(i).mapa(i).direccionFin.numero
+          resultadoCompleto = "Alternativa directa " + orden + ": " + descripcion + "-" + linea + " / " + "Direccion (desde/hasta): " + direccionInicio + " a " + direccionFin
+          
           println(resultadoCompleto)   
       }           
     } 
     println("")
   }
- 
+  
   def imprimirTest(nombre:String){    
 	  println(nombre)	  
   }

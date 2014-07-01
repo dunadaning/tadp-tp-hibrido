@@ -8,13 +8,13 @@ class Recorrido {
   //var medio:Medio = null// = new Medio()
   //var direccion:Direccion = null// = new Direccion()
   var mapa:HashMap[Int,Transporte] = new HashMap
-  val tramos = new ArrayBuffer[Tramo]
+  //val tramos = new ArrayBuffer[Tramo]
  
   def calcular():Int = {
     return 1
   }
   
-  def this(transporteSalida:Transporte, transporteLlegada :Transporte)={
+  /*def this(transporteSalida:Transporte, transporteLlegada :Transporte)={
    this()
    this.transportes += transporteSalida
    this.transportes += transporteLlegada
@@ -26,11 +26,11 @@ class Recorrido {
    this.transportes += new Transporte(transporteSalida.medio , direccion)
    this.transportes += new Transporte(transporteLlegada.medio, direccion)
    this.transportes += transporteLlegada
-  }
+  }*/
   
-  def costo() = {
+  /*def costo() = {
     for()
-  }
+  }*/
   def tiempoDeViaje() = 1
  
 }

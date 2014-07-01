@@ -7,20 +7,22 @@ class Subte(li:Char, estaciones:List[Direccion]) extends MedioConEstaciones {
 	 val linea = li
 	 val precio = 4.5
 	 val descripcion = "Subte"
-	 val tiempoPorEstacion = 2
+	 val tiempoPorEstacion:Double = 2
 	   
+	 
 	 def getEstaciones() = estaciones
-	 def costoPara():Double ={
+	 //def costoPara():Double ={
+	 def costoPara(direccionSalida:Direccion, direccionLlegada:Direccion):Double = {
 	   precio
 	 }
 	 
-	 def costoCombinacionSubte(direccionSalida:Direccion, direccionLlegada:Direccion) = 0
+	 override def costoCombinacionSubte(direccionSalida:Direccion, direccionLlegada:Direccion) = 0
 	 
-	 def tiempoCombinacionSubte(direccionCombinacion : Direccion, direccionSalida:Direccion, direccionLlegada:Direccion)={
+	 override def tiempoCombinacionSubte(direccionCombinacion : Direccion, direccionSalida:Direccion, direccionLlegada:Direccion)={
 	   4.0 + this.tiempoPara(direccionSalida, direccionLlegada)
 	 }
 	 
-	 def tiempoCombinacionTren(direccionCombinacion : Direccion, direccionSalida:Direccion, direccionLlegada:Direccion)={
+	 override def tiempoCombinacionTren(direccionCombinacion : Direccion, direccionSalida:Direccion, direccionLlegada:Direccion)={
 	   5.0 + this.tiempoPara(direccionSalida, direccionLlegada)
 	 }
 	 
@@ -39,4 +41,5 @@ class Subte(li:Char, estaciones:List[Direccion]) extends MedioConEstaciones {
 	 override def getDescripcion(): String = {
 		return descripcion
 	 }   
+	
 }

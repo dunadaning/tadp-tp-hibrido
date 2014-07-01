@@ -3,11 +3,13 @@ package utn.tadp.g5.objetos.criterios
 import utn.tadp.g5.objetos.criterios.Criterio
 import utn.tadp.g5.objetos.Viaje
 import utn.tadp.g5.objetos.Tramo
+import utn.tadp.g5.objetos.Recorrido
 
 class CriterioTiempo extends Criterio {
   
-  def cumpleCriterioSobre(unTramo:Tramo, otroTramo:Tramo)={
-    unTramo.tiempoTramo() <= otroTramo.tiempoTramo()
+  def cumpleCriterioSobre(unTramo:Recorrido, otroTramo:Recorrido): Boolean = {
+    //unTramo.tiempoTramo() <= otroTramo.tiempoTramo()
+    true
   }
   
   def consultar(viaje:Viaje):Viaje = {

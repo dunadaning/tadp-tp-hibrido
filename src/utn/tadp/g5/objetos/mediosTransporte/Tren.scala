@@ -10,7 +10,7 @@ class Contains(r: Range) {
 class Tren(li:String, estaciones: List[Direccion]) extends MedioConEstaciones{
 	val linea = li
 	val descripcion = "Tren"	
-	val tiempoPorEstacion = 3
+	val tiempoPorEstacion:Double = 3
 	val C1 = new Contains(1 to 5)
 	val C2 = new Contains(6 to 8)	
 	
@@ -22,11 +22,11 @@ class Tren(li:String, estaciones: List[Direccion]) extends MedioConEstaciones{
 	
 	def costoPara(estacionesRecorridas:Int)= 1
 	
-	 def tiempoCombinacionSubte(direccionCombinacion : Direccion, direccionSalida:Direccion, direccionLlegada:Direccion)={
+	 override def tiempoCombinacionSubte(direccionCombinacion : Direccion, direccionSalida:Direccion, direccionLlegada:Direccion)={
 	   5.0 + this.tiempoPara(direccionSalida, direccionLlegada)
 	 }
 	 
-	 def tiempoCombinacionTren(direccionCombinacion : Direccion, direccionSalida:Direccion, direccionLlegada:Direccion)={
+	 override def tiempoCombinacionTren(direccionCombinacion : Direccion, direccionSalida:Direccion, direccionLlegada:Direccion)={
 	   6.0 + this.tiempoPara(direccionSalida, direccionLlegada)
 	 }
 	 
