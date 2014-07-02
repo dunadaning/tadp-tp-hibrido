@@ -123,4 +123,78 @@ class TramoTest {
 	  val tramo2 = new TramoSimple(new Direccion("Rivadavia", 1700), this.getColectivo(), new Direccion("Rivadavia", 700))
 	  assertTiempoTramoCompuesto(tramo1, tramo2, tramo1.tiempoTramo() +tramo2.tiempoTramo() + 7.5)
 	}
+	
+	@Test def unTramoColectivoSubteCuestaLaSumaDeAmbos()={
+	  val tramo1 = new TramoSimple(new Direccion("Rivadavia", 3000), this.getColectivo(), new Direccion("Rivadavia", 2000))
+	  val tramo2 = new TramoSimple(new Direccion("Rivadavia", 14000), this.getSubte(), new Direccion("Rivadavia", 12000))
+	  val costoCombinado = tramo1.costoTramo() +tramo2.costoTramo()
+	  assertCostoTramoCompuesto(tramo1, tramo2, costoCombinado)
+	}
+	
+	@Test def unTramoSubteColectivoCuestaLaSumaDeAmbos()={
+	  val tramo1 = new TramoSimple(new Direccion("Rivadavia", 3000), this.getColectivo(), new Direccion("Rivadavia", 2000))
+	  val tramo2 = new TramoSimple(new Direccion("Rivadavia", 14000), this.getSubte(), new Direccion("Rivadavia", 12000))
+	  val costoCombinado = tramo1.costoTramo() +tramo2.costoTramo()
+	  assertCostoTramoCompuesto(tramo2, tramo1, costoCombinado)
+	}
+	
+	@Test def unTramoColectivoSubteTardaLaSumaDeAmbosMasElTiempoCombinacion()={
+	  val tramo1 = new TramoSimple(new Direccion("Rivadavia", 3000), this.getColectivo(), new Direccion("Rivadavia", 13500))
+	  val tramo2 = new TramoSimple(new Direccion("Rivadavia", 14000), this.getSubte(), new Direccion("Rivadavia", 12000))
+	  assertTiempoTramoCompuesto(tramo1, tramo2, 12.5 + tramo1.tiempoTramo() +tramo2.tiempoTramo())
+	}
+	
+	@Test def unTramoSubteColectivoTardaLaSumaDeAmbosMasElTiempoCombinacion()={
+	  val tramo1 = new TramoSimple(new Direccion("Rivadavia", 3000), this.getColectivo(), new Direccion("Rivadavia", 13500))
+	  val tramo2 = new TramoSimple(new Direccion("Rivadavia", 14000), this.getSubte(), new Direccion("Rivadavia", 12000))
+	  assertTiempoTramoCompuesto(tramo2, tramo1, 90 * 2.5 + tramo1.tiempoTramo() +tramo2.tiempoTramo())
+	}
+	
+	@Test def unTramoColectivoTrenCuestaLaSumaDeAmbos()={
+	  val tramo1 = new TramoSimple(new Direccion("Rivadavia", 3000), this.getColectivo(), new Direccion("Rivadavia", 2000))
+	  val tramo2 = new TramoSimple(new Direccion("Rivadavia", 3000), this.getTren1(), new Direccion("Rivadavia", 2000))
+	  assertCostoTramoCompuesto(tramo1, tramo2, tramo1.costoTramo() + tramo2.costoTramo())
+	}
+	
+	@Test def unTramoTrenColectivoCuestaLaSumaDeAmbos()={
+	  val tramo1 = new TramoSimple(new Direccion("Rivadavia", 3000), this.getColectivo(), new Direccion("Rivadavia", 2000))
+	  val tramo2 = new TramoSimple(new Direccion("Rivadavia", 3000), this.getTren1(), new Direccion("Rivadavia", 2000))
+	  assertCostoTramoCompuesto(tramo2, tramo1, tramo1.costoTramo() + tramo2.costoTramo())
+	}
+	
+	@Test def unTramoColectivoTrenTardaLaSumaDeAmbosMasElTiempoCombinacion()={
+	  val tramo1 = new TramoSimple(new Direccion("Rivadavia", 3000), this.getColectivo(), new Direccion("Rivadavia", 2000))
+	  val tramo2 = new TramoSimple(new Direccion("Rivadavia", 3000), this.getTren1(), new Direccion("Rivadavia", 2000))
+	  assertTiempoTramoCompuesto(tramo1, tramo2, 25 + tramo1.tiempoTramo() +tramo2.tiempoTramo())
+	}
+
+	@Test def unTramoTrenColectivoTardaLaSumaDeAmbosMasElTiempoCombinacion()={
+	  val tramo1 = new TramoSimple(new Direccion("Rivadavia", 3000), this.getColectivo(), new Direccion("Rivadavia", 2000))
+	  val tramo2 = new TramoSimple(new Direccion("Rivadavia", 3000), this.getTren1(), new Direccion("Rivadavia", 2000))
+	  assertTiempoTramoCompuesto(tramo2, tramo1, 25 + tramo1.tiempoTramo() +tramo2.tiempoTramo())
+	}
+	
+	@Test def unTramoTrenSubteCuestaLaSumaDeAmbos()={
+	  val tramo1 = new TramoSimple(new Direccion("Rivadavia", 3000), this.getTren1(), new Direccion("Rivadavia", 2000))
+	  val tramo2 = new TramoSimple(new Direccion("Rivadavia", 14000), this.getSubte(), new Direccion("Rivadavia", 12000))
+	  assertCostoTramoCompuesto(tramo1, tramo2, tramo1.costoTramo() + tramo2.costoTramo())
+	}
+
+	@Test def unTramoSubteTrenCuestaLaSumaDeAmbos()={
+	  val tramo1 = new TramoSimple(new Direccion("Rivadavia", 3000), this.getTren1(), new Direccion("Rivadavia", 2000))
+	  val tramo2 = new TramoSimple(new Direccion("Rivadavia", 14000), this.getSubte(), new Direccion("Rivadavia", 12000))
+	  assertCostoTramoCompuesto(tramo2, tramo1, tramo1.costoTramo() + tramo2.costoTramo())
+	}
+	
+	@Test def unTramoTrenSubteTardaLaSumaDeAmbosMasElTiempoCombinacion()={
+	  val tramo1 = new TramoSimple(new Direccion("Rivadavia", 3000), this.getTren1(), new Direccion("Rivadavia", 2000))
+	  val tramo2 = new TramoSimple(new Direccion("Rivadavia", 14000), this.getSubte(), new Direccion("Rivadavia", 12000))
+	  assertTiempoTramoCompuesto(tramo1, tramo2, 5 + tramo1.tiempoTramo() +tramo2.tiempoTramo())
+	}
+
+	@Test def unTramoSubteTrenTardaLaSumaDeAmbosMasElTiempoCombinacion()={
+	  val tramo1 = new TramoSimple(new Direccion("Rivadavia", 3000), this.getTren1(), new Direccion("Rivadavia", 2000))
+	  val tramo2 = new TramoSimple(new Direccion("Rivadavia", 14000), this.getSubte(), new Direccion("Rivadavia", 12000))
+	  assertTiempoTramoCompuesto(tramo2, tramo1, 5 + tramo1.tiempoTramo() +tramo2.tiempoTramo())
+	}	
 }
