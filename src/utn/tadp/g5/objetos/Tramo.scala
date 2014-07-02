@@ -28,13 +28,13 @@ class TramoSimple(direccionSalida: Direccion, medio:Medio, direccionLlegada:Dire
 	}
 	
 	def tiempoCombinacion(tramoCombinado: TramoSimple)={
-	  tramoCombinado.getMedio().tiempoCombinacion(tramoCombinado.getDireccionLlegada(),medio, direccionSalida, direccionLlegada)
+	  tramoCombinado.getMedio().tiempoCombinacion(this.getDireccionLlegada(),medio, tramoCombinado.getDireccionSalida())
 	}
 }
 
 class TramoCombinado(tramo1: TramoSimple, tramo2:TramoSimple) extends Tramo{
   def costoTramo() = tramo1.costoTramo() + tramo2.costoCombinacion(tramo1)
-  def tiempoTramo() = tramo1.tiempoTramo() + tramo2.tiempoCombinacion(tramo1)
+  def tiempoTramo() = tramo1.tiempoTramo() + tramo1.tiempoCombinacion(tramo2) + tramo2.tiempoTramo()
   
   def perteneceALaZona(zona:Zona)={
 	 tramo1.perteneceALaZona(zona) || tramo2.perteneceALaZona(zona) ||

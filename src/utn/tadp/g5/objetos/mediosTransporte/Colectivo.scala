@@ -13,7 +13,7 @@ class Colectivo(li:Int) extends Medio {
 	val descripcion = "Colectivo"	
 	val C1 = new Contains(0 to 3)
 	val C2 = new Contains(4 to 6)
-	val velocidad = 15
+	val velocidad = 15.0
 	
 	def costoPara(direccionSalida:Direccion, direccionLlegada:Direccion):Double={
 	  val distancia = this.calcularDistancia(direccionSalida, direccionLlegada)
@@ -38,8 +38,8 @@ class Colectivo(li:Int) extends Medio {
 	  medio.costoCombinacionColectivo(direccionSalida, direccionLlegada)
 	}
 	
-	def tiempoCombinacion(direccionCombinacion:Direccion, medio:Medio, direccionSalida:Direccion, direccionLlegada:Direccion)={
-	  medio.tiempoCombinacionColectivo(direccionCombinacion, direccionSalida, direccionLlegada)
+	def tiempoCombinacion(direccionCombinacion:Direccion, medio:Medio, direccionSalida:Direccion)={
+	  medio.tiempoCombinacionColectivo(direccionCombinacion, direccionSalida)
 	}
 	
 	def calcularDistancia(direccionSalida:Direccion, direccionLlegada:Direccion)={
@@ -49,7 +49,7 @@ class Colectivo(li:Int) extends Medio {
 	def tiempoPara(direccionSalida:Direccion, direccionLlegada:Direccion)={
 	  val distancia = this.calcularDistancia(direccionSalida, direccionLlegada)
 	  
-	  distancia / velocidad * 60
+	  (distancia / velocidad) * 60
 	}
 	
 	def calcularPrecio(distancia:Int):Double ={

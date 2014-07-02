@@ -9,7 +9,7 @@ trait Medio {
     def getLinea(): Any = {}    
     def getDescripcion():Any = {}
     def costoCombinacion(medio:Medio,direccionSalida:Direccion, direccionLlegada:Direccion):Double
-    def tiempoCombinacion(direccionCombinacion : Direccion, medio:Medio,direccionSalida:Direccion, direccionLlegada:Direccion):Double
+    def tiempoCombinacion(direccionCombinacion:Direccion, medio:Medio, direccionSalida:Direccion):Double
     def costoPara(direccionSalida:Direccion, direccionLlegada:Direccion):Double
     def tiempoPara(direccionSalida:Direccion, direccionLlegada:Direccion):Double
     
@@ -17,12 +17,12 @@ trait Medio {
     def costoCombinacionTren(direccionSalida:Direccion, direccionLlegada:Direccion) = this.costoPara(direccionSalida, direccionLlegada)
     def costoCombinacionSubte(direccionSalida:Direccion, direccionLlegada:Direccion) = this.costoPara(direccionSalida, direccionLlegada)
     
-    def tiempoCombinacionColectivo(direccionCombinacion : Direccion, direccionSalida:Direccion, direccionLlegada:Direccion) = this.tiempoCombinacionBase(direccionCombinacion, direccionSalida)
-    def tiempoCombinacionSubte(direccionCombinacion : Direccion, direccionSalida:Direccion, direccionLlegada:Direccion) = this.tiempoCombinacionBase(direccionCombinacion, direccionSalida)
-    def tiempoCombinacionTren(direccionCombinacion : Direccion, direccionSalida:Direccion, direccionLlegada:Direccion) = this.tiempoCombinacionBase(direccionCombinacion, direccionSalida)
+    def tiempoCombinacionColectivo(direccionCombinacion : Direccion, direccionSalida:Direccion) = this.tiempoCombinacionBase(direccionCombinacion, direccionSalida)
+    def tiempoCombinacionSubte(direccionCombinacion : Direccion, direccionSalida:Direccion) = this.tiempoCombinacionBase(direccionCombinacion, direccionSalida)
+    def tiempoCombinacionTren(direccionCombinacion : Direccion, direccionSalida:Direccion) = this.tiempoCombinacionBase(direccionCombinacion, direccionSalida)
     
-    def tiempoCombinacionBase(direccionSalida:Direccion, direccionLlegada:Direccion) = {
-      ModuloExterno.consultarDistanciaPie(direccionSalida, direccionLlegada) / 1000 * 2.5
+    def tiempoCombinacionBase(direccionCombinacion:Direccion, direccionLlegada:Direccion) = {
+      ModuloExterno.consultarDistanciaPie(direccionCombinacion, direccionLlegada) * 25.0
     }
     
 }

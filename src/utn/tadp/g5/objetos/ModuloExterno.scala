@@ -71,15 +71,19 @@ object ModuloExterno {
   
   def combinan(medioA :Medio, medioB: Medio)= true
   
-  def consultarDistanciaColectivo(colectivo:Colectivo, inicio:Direccion, fin:Direccion) : Int = {        
+  def consultarDistanciaColectivo(colectivo:Colectivo, inicio:Direccion, fin:Direccion) : Double = {        
     if(inicio.calle == fin.calle ){
-      return (fin.numero - inicio.numero).abs /1000
+      return (fin.numero - inicio.numero).abs /1000.0
     }
     
-    return 5000    
+    return 5000.0    
   }
     
-  def consultarDistanciaPie(inicio:Direccion, fin:Direccion) : Int = {        
-    return 50000    
+  def consultarDistanciaPie(inicio:Direccion, fin:Direccion) : Double = {        
+   if(inicio.calle == fin.calle ){
+      return (fin.numero - inicio.numero).abs /1000.0
+   }
+    
+    return 50000.0    
   } 
 }
