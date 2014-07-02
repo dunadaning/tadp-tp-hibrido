@@ -18,6 +18,10 @@ class Viaje {
     this.tramo.costoTramo()
   }
   
+  def tiempoViaje()={
+    this.tramo.tiempoTramo()
+  }
+  
   def saleDesdeLaZona(zona:Zona)={
     this.tramo.saleDesdeLaZona(zona)
   }
