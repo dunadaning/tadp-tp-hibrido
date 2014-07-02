@@ -1,6 +1,5 @@
 package utn.tadp.g5.objetos.mediosTransporte
 
-import utn.tadp.g5.objetos.mediosTransporte.Medio
 import utn.tadp.g5.objetos.Direccion
 
 class Subte(li:Char, estaciones:List[Direccion]) extends MedioConEstaciones {

@@ -8,7 +8,7 @@ trait MedioConEstaciones extends Medio {
 	
 	def estacionesEntre(direccionSalida:Direccion, direccionLlegada:Direccion)={
 	  val estaciones = this.getEstaciones()
-	  estaciones.indexOf(direccionLlegada) - estaciones.indexOf(direccionSalida)
+	  (estaciones.indexOf(direccionLlegada) - estaciones.indexOf(direccionSalida)).abs
 	}
 	
 	def tiempoPara(direccionSalida:Direccion, direccionLlegada:Direccion):Double={

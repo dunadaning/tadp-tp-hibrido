@@ -34,8 +34,8 @@ object ModuloExterno {
       respuesta += transporteA
       
     }else if (direccion.calle.equals("Alsina")){
-      var transporteA = new Cercano(new Subte('A', List[Direccion](new Direccion("Saenz Peña"))))
-      transporteA.direccion = new Direccion("Saenz Peña") 
+      var transporteA = new Cercano(new Subte('A', List[Direccion](new Direccion("Saenz Peï¿½a"))))
+      transporteA.direccion = new Direccion("Saenz Penia") 
       
       respuesta += transporteA
       
@@ -72,6 +72,10 @@ object ModuloExterno {
   def combinan(medioA :Medio, medioB: Medio)= true
   
   def consultarDistanciaColectivo(colectivo:Colectivo, inicio:Direccion, fin:Direccion) : Int = {        
+    if(inicio.calle == fin.calle ){
+      return (fin.numero - inicio.numero).abs /1000
+    }
+    
     return 5000    
   }
     

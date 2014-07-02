@@ -1,7 +1,7 @@
 package utn.tadp.g5.objetos.mediosTransporte
 
-import utn.tadp.g5.objetos.mediosTransporte.Medio
 import utn.tadp.g5.objetos.Direccion
+import scala.collection.mutable.HashMap
 
 class Contains(r: Range) { 
   def unapply(i: Int): Boolean = r contains i 
@@ -11,8 +11,13 @@ class Tren(li:String, estaciones: List[Direccion]) extends MedioConEstaciones{
 	val linea = li
 	val descripcion = "Tren"	
 	val tiempoPorEstacion:Double = 3
+	val tablaPrecios = new HashMap[Int,Double]
 	val C1 = new Contains(1 to 5)
 	val C2 = new Contains(6 to 8)	
+	
+	def addPrecio(cantidadEstaciones:Int, precio:Double){
+	  tablaPrecios(cantidadEstaciones) = precio
+	}
 	
 	def getEstaciones() = estaciones
 	
@@ -20,7 +25,14 @@ class Tren(li:String, estaciones: List[Direccion]) extends MedioConEstaciones{
 	  this.costoPara(this.estacionesEntre(direccionSalida, direccionLlegada))
 	}
 	
-	def costoPara(estacionesRecorridas:Int)= 1
+	def costoPara(estacionesRecorridas:Int):Double={
+	  for(cantidadEstaciones <- tablaPrecios.keySet){
+	    if(estacionesRecorridas <= estacionesRecorridas){
+	      return tablaPrecios(cantidadEstaciones) 
+	    }
+	  }
+	  return 0.0
+	}
 	
 	 override def tiempoCombinacionSubte(direccionCombinacion : Direccion, direccionSalida:Direccion, direccionLlegada:Direccion)={
 	   5.0 + this.tiempoPara(direccionSalida, direccionLlegada)

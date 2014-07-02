@@ -7,7 +7,9 @@ import scala.collection.mutable.HashMap
 import utn.tadp.g5.objetos.tarjetas.Zona
 import utn.tadp.g5.objetos.tarjetas.Zona
 import java.lang.invoke.LambdaForm
-import utn.tadp.g5.objetos.estadisticas.Criterio
+import utn.tadp.g5.objetos.estadisticas.Filtro
+import utn.tadp.g5.objetos.tarjetas.Zona
+
 
 trait HistoricoViajes{
   type Linea = String
@@ -17,14 +19,14 @@ trait HistoricoViajes{
 }
 
 
-class Estadistica[T] {
+abstract class Estadistica[T] {
 	type Viajes = ArrayBuffer[Viaje]
   
 	val viajes = this.getViajes()
 	val historicoViajes:HistoricoViajes = null
-	val criterios = new ArrayBuffer[Criterio]()
+	val criterios = new ArrayBuffer[Filtro]()
 	
-	def agregarCriterio(criterio:Criterio){
+	def agregarCriterio(criterio:Filtro){
 	  criterios += criterio
 	}
 	
@@ -88,19 +90,27 @@ class Estadistica[T] {
 
 }
 
-class EstadisticaPorZona extends Estadistica{
+class EstadisticaPorZona extends Estadistica[Zona]{
+	def getElementosComparacion():ArrayBuffer[Zona] = null
 	
-	
-}
-
-class EstadisticaPorLineas extends Estadistica{
+	def formaParteDelElemento(viaje: Viaje):Boolean = true
 	
 }
 
-class EstadisticaPorTipo extends Estadistica{
+class EstadisticaPorLineas extends Estadistica[String]{
+	def getElementosComparacion():ArrayBuffer[String] = null
 	
+	def formaParteDelElemento(viaje: Viaje):Boolean = true
 }
 
-class EstadisticaPorCompania extends Estadistica{
+class EstadisticaPorTipo extends Estadistica[String]{
+	def getElementosComparacion():ArrayBuffer[String] = null
 	
+	def formaParteDelElemento(viaje: Viaje):Boolean = true
+}
+
+class EstadisticaPorCompania extends Estadistica[String]{
+	def getElementosComparacion():ArrayBuffer[String] = null
+	
+	def formaParteDelElemento(viaje: Viaje):Boolean = true
 }
