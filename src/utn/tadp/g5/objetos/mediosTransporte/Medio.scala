@@ -24,5 +24,5 @@ trait Medio {
     def tiempoCombinacionBase(direccionCombinacion:Direccion, direccionLlegada:Direccion) = {
       ModuloExterno.consultarDistanciaPie(direccionCombinacion, direccionLlegada) * 25.0
     }
-    
+            
 }
