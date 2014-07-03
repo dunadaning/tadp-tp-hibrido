@@ -36,7 +36,7 @@ class ComoViajoTest {
     
 	  assertEquals(miViaje.recorridos.size,2)
 	}
- 
+ /*
   @Test
 	def testConsultarViajeCriterio {
     
@@ -54,7 +54,7 @@ class ComoViajoTest {
 	  
 	}
   
-  /*
+  
   @Test
 	def testConsultarViajeNoHayRecorrido {
     val origen = new Direccion("Jujuy", 750)
@@ -86,7 +86,7 @@ class ComoViajoTest {
           direccionFin = recorridos(i).mapa(e).direccionFin.calle + " " + recorridos(i).mapa(e).direccionFin.numero
           resultadoCompleto += descripcion + "-" + linea + " / " + "Direccion (desde/hasta): " + direccionInicio + " a " + direccionFin
           if (e<(recorridos(i).mapa.size-1)){
-            resultadoCompleto += "-->"
+            resultadoCompleto += " --> "
           }                             
         } 
         println(resultadoCompleto)
@@ -94,8 +94,18 @@ class ComoViajoTest {
           orden = (i+1) 
           descripcion =  recorridos(i).mapa(i).medio.getDescripcion().toString()
           linea = recorridos(i).mapa(i).medio.getLinea()
-          direccionInicio = recorridos(i).mapa(i).direccionInicio.calle + " " + recorridos(i).mapa(i).direccionInicio.numero
-          direccionFin = recorridos(i).mapa(i).direccionFin.calle + " " + recorridos(i).mapa(i).direccionFin.numero
+          direccionInicio = recorridos(i).mapa(i).direccionInicio.calle
+          
+          if (recorridos(i).mapa(i).direccionInicio.numero>0){
+            direccionInicio += " " + recorridos(i).mapa(i).direccionInicio.numero
+          }
+          
+          direccionFin = recorridos(i).mapa(i).direccionFin.calle
+          
+          if (recorridos(i).mapa(i).direccionFin.numero>0){
+            direccionFin += " " + recorridos(i).mapa(i).direccionFin.numero
+          }
+          
           resultadoCompleto = "Alternativa directa " + orden + ": " + descripcion + "-" + linea + " / " + "Direccion (desde/hasta): " + direccionInicio + " a " + direccionFin
           
           println(resultadoCompleto)   
