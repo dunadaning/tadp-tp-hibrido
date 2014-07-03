@@ -28,7 +28,7 @@ class Tren(li:String, estaciones: List[Direccion]) extends MedioConEstaciones{
 	
 	def costoPara(estacionesRecorridas:Int):Double={
 	  for(cantidadEstaciones <- tablaPrecios.keySet){
-	    if(estacionesRecorridas <= estacionesRecorridas){
+	    if(estacionesRecorridas <= cantidadEstaciones){
 	      return tablaPrecios(cantidadEstaciones) 
 	    }
 	  }
