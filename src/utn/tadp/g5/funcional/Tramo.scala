@@ -13,7 +13,7 @@ case class TramoSimple(direccionSalida: Direccion, medio:Medio, direccionLlegada
   def tiempoTramo() = medio.tiempoPara(direccionSalida, direccionLlegada)
 }
 
-case class TramoCompuesto(tramo1: TramoSimple, tramo2: TramoSimple){
+case class TramoCombinado(tramo1: TramoSimple, tramo2: TramoSimple){
   
   def costoTramo()={
     (tramo1, tramo2) match{
@@ -23,7 +23,7 @@ case class TramoCompuesto(tramo1: TramoSimple, tramo2: TramoSimple){
   }
   
   def tiempoTramo()={
-    tramo1.costoTramo() + tramo2.costoTramo() + this.tiempoCombinacion()
+    tramo1.tiempoTramo() + tramo2.tiempoTramo() + this.tiempoCombinacion()
   }
   
   def tiempoCombinacion()={

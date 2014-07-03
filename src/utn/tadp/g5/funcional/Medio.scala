@@ -52,7 +52,7 @@ case class Colectivo(linea: String) extends Medio{
 	}
 	
 	def calcularDistancia(direccionSalida: Direccion, direccionLlegada:Direccion)={
-	  0.0//ModuloExterno.consultarDistanciaColectivo(this, direccionSalida, direccionLlegada)
+	 ModuloExterno.consultarDistanciaColectivo(null, direccionSalida, direccionLlegada)
 	}
 }
 
