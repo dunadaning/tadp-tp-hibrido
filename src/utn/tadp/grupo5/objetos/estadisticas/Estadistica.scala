@@ -7,7 +7,7 @@ import scala.collection.mutable.HashMap
 import utn.tadp.g5.objetos.tarjetas.Zona
 import utn.tadp.g5.objetos.tarjetas.Zona
 import java.lang.invoke.LambdaForm
-import utn.tadp.g5.objetos.estadisticas.Filtro
+//import utn.tadp.g5.objetos.estadisticas.Filtro
 import utn.tadp.g5.objetos.tarjetas.Zona
 
 
@@ -25,9 +25,14 @@ abstract class Estadistica[T] {
 	val viajes = this.getViajes()
 	val historicoViajes:HistoricoViajes = null
 	val criterios = new ArrayBuffer[Filtro]()
+	val elementosComparacion = new ArrayBuffer[T]()
 	
 	def agregarCriterio(criterio:Filtro){
 	  criterios += criterio
+	}
+	
+	def agregarElementoComparacion(elemento :T){
+	  elementosComparacion += elemento
 	}
 	
 	def cumple(viaje:Viaje)={
@@ -38,14 +43,16 @@ abstract class Estadistica[T] {
 	  historicoViajes.getViajes().filter( v => this.cumple(v))
 	}
 	
-	def getElementosComparacion():ArrayBuffer[T]
 	
-	def formaParteDelElemento(viaje: Viaje):Boolean
+	def formaParteDelElemento(viaje: Viaje):Boolean = 
+	  elementosComparacion.exists(elem => this.perteneceElemento(viaje, elem))
+	  
+	def perteneceElemento(viaje: Viaje, elemento: T): Boolean
 	
 	def getEstadistica(bloque: (Viajes => Double))={
 		val estadistica = new HashMap[T, Double]()
 				
-		for(elementoComparacion <- this.getElementosComparacion()){
+		for(elementoComparacion <- this.elementosComparacion){
 		  val viajesElemento = viajes.filter(viaje => this.formaParteDelElemento(viaje) && this.cumple(viaje))
 		  estadistica(elementoComparacion)= bloque.apply(viajesElemento)
 		}
@@ -80,7 +87,7 @@ abstract class Estadistica[T] {
 	}
 
 	def getEstadisticaPorcentajeUtilizacion()={
-		val cantidadUsos = this.getElementosComparacion().length
+		val cantidadUsos = this.elementosComparacion.length
 	  
 		val bloque:(Viajes => Double) = 
 		  viajes => viajes.length / cantidadUsos
@@ -91,26 +98,21 @@ abstract class Estadistica[T] {
 }
 
 class EstadisticaPorZona extends Estadistica[Zona]{
-	def getElementosComparacion():ArrayBuffer[Zona] = null
-	
-	def formaParteDelElemento(viaje: Viaje):Boolean = true
-	
+
+	def perteneceElemento(viaje: Viaje, elem: Zona): Boolean = viaje.perteneceALaZona(elem)
 }
 
-class EstadisticaPorLineas extends Estadistica[String]{
-	def getElementosComparacion():ArrayBuffer[String] = null
+class EstadisticaPorLinea extends Estadistica[String]{
 	
-	def formaParteDelElemento(viaje: Viaje):Boolean = true
+	def perteneceElemento(viaje: Viaje, elem: String): Boolean = viaje.getLineas().contains(elem)
 }
 
 class EstadisticaPorTipo extends Estadistica[String]{
-	def getElementosComparacion():ArrayBuffer[String] = null
-	
-	def formaParteDelElemento(viaje: Viaje):Boolean = true
+
+	def perteneceElemento(viaje: Viaje, elem: String): Boolean = viaje.getTipos().contains(elem)
 }
 
 class EstadisticaPorCompania extends Estadistica[String]{
-	def getElementosComparacion():ArrayBuffer[String] = null
-	
-	def formaParteDelElemento(viaje: Viaje):Boolean = true
+
+	def perteneceElemento(viaje: Viaje, elem: String): Boolean = true
 }

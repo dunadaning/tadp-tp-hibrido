@@ -10,6 +10,10 @@ class Viaje {
   var costos: HashMap[Int,Double] = null //Cada clave es la alternativa
   var tramo:Tramo = null
   
+  def getLineas() = recorridos.map(recorrido => recorrido.getLineas()).flatten
+  
+  def getTipos() = recorridos.map(recorrido => recorrido.getTipos()).flatten
+  
   def perteneceALaZona(zona:Zona)={
     this.tramo.perteneceALaZona(zona)
   }

@@ -1,7 +1,6 @@
 package utn.tadp.g5.objetos
 
 import scala.collection.mutable.HashMap
-import utn.tadp.g5.objetos.Transporte
 import scala.collection.mutable.ArrayBuffer
 
 class Recorrido {
@@ -10,6 +9,10 @@ class Recorrido {
   var mapa:HashMap[Int,Transporte] = new HashMap
   //val tramos = new ArrayBuffer[Tramo]
  
+  def getLineas() = mapa.mapValues(transporte => transporte.medio.getLinea())
+  
+  def getTipos() = mapa.mapValues(transporte => transporte.medio.getDescripcion())
+  
   def calcular():Int = {
     return 1
   }

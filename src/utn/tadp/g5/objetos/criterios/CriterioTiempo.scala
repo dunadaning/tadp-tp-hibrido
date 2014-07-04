@@ -1,6 +1,6 @@
 package utn.tadp.g5.objetos.criterios
 
-import utn.tadp.g5.objetos.criterios.Criterio
+//import utn.tadp.g5.objetos.criterios.Criterio
 import utn.tadp.g5.objetos.Viaje
 import utn.tadp.g5.objetos.Tramo
 import utn.tadp.g5.objetos.Recorrido

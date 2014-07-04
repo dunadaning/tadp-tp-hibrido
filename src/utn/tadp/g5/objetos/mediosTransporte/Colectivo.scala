@@ -61,8 +61,8 @@ class Colectivo(li:Int) extends Medio {
 	  }	 
 	}
 	
-	override def getLinea(): Int = {
-	  return linea
+	override def getLinea(): String = {
+	  return linea.toString
   }
 	
 	override def getDescripcion(): String = {

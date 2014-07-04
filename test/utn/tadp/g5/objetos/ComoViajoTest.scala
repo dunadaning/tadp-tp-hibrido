@@ -3,8 +3,6 @@ package utn.tadp.g5.objetos
 import scala.collection.mutable.ArrayBuffer
 import org.junit.Assert._
 import org.junit.Test
-import utn.tadp.g5.objetos.Direccion
-import utn.tadp.g5.objetos.ParametrosDeViaje
 import utn.tadp.g5.objetos.criterios.CriterioTiempo
 
 class ComoViajoTest {
