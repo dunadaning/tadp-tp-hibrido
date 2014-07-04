@@ -9,27 +9,37 @@ trait ModuloExterno{
 	def consultarCombinacion(medioA:Medio, medioB:Medio):Direccion
 }
 
+class NoHayViajeDisponibleException extends Exception
+
 class ComoViajo {
-  val moduloExterno:ModuloExterno = null 
+  var moduloExterno:ModuloExterno = null 
+  type Criterio = {def apply(tramo1:Tramo, tramo2:Tramo, tarjetas:ArrayBuffer[Tarjeta]):Tramo}
   
-  def getViaje(direccionSalida: Direccion, direccionLlegada: Direccion)={
-    
+  def getViaje(direccionSalida: Direccion, direccionLlegada: Direccion, criterio: Criterio, tarjetas:ArrayBuffer[Tarjeta])={
+	this.getTramo(direccionSalida, direccionLlegada, criterio, tarjetas)match{
+	  case None => throw new NoHayViajeDisponibleException()
+	  case Some(tramo) => new Viaje(direccionSalida, tramo, direccionLlegada, tarjetas)
+	}
   }
   
-  def getPosiblesTramos(direccionSalida: Direccion, direccionLlegada: Direccion)={
+  def getTramo(direccionSalida: Direccion, direccionLlegada: Direccion, criterio:Criterio, tarjetas:ArrayBuffer[Tarjeta])={
     val mediosCercaDeLaLlegada = moduloExterno.consultarCercanos(direccionLlegada)
     val mediosCercaDeLaSalida = moduloExterno.consultarCercanos(direccionSalida)
     val posiblesTramos = new ArrayBuffer[Tramo]()
+    var tramo:Option[Tramo] = None
     
-    for(medioSalida <- mediosCercaDeLaSalida){
-      for(medioLlegada <- mediosCercaDeLaLlegada){
-    	  
+    for(tuplaSalida <- mediosCercaDeLaSalida){
+      for(tuplaLlegada <- mediosCercaDeLaLlegada){
+    	val tramoCandidato = this.getTramoCandidato(tuplaSalida, tuplaLlegada)
+    	tramo = tramoCandidato.fold(tramo)(tramoC => tramo.fold(Some(tramoC))
+    	    (min => Some(criterio(min, tramoC, tarjetas))))     
       }
     }
     
+    tramo
   }
   
-  def getTramo(tuplaSalida:(Medio,Direccion), tuplaLlegada:(Medio,Direccion)):Option[Tramo]={
+  def getTramoCandidato(tuplaSalida:(Medio,Direccion), tuplaLlegada:(Medio,Direccion)):Option[Tramo]={
     
     val (medioLlegada, direccionLlegada) = tuplaLlegada
     val (medioSalida, direccionSalida) = tuplaSalida
@@ -46,6 +56,31 @@ class ComoViajo {
     }
     
     return None
+  } 	
+}
+
+class Viaje(direccionSalida:Direccion, tramo:Tramo, direccionLlegada:Direccion, tarjetas:ArrayBuffer[Tarjeta]){
+	def costo() = tramo.costoTramo(tarjetas)
+	def tiempo() = tramo.tiempoTramo()
+}
+
+
+class criterioMenorCosto{
+  def apply(tramo1:Tramo, tramo2:Tramo, tarjetas:ArrayBuffer[Tarjeta])={
+    if(tramo1.costoTramo(tarjetas) <= tramo2.costoTramo(tarjetas)){
+      tramo1
+    }else{
+      tramo2
+    }
   }
-  	
+}
+
+class criterioMenorTiempo{
+  def apply(tramo1:Tramo, tramo2:Tramo, tarjetas:ArrayBuffer[Tarjeta])={
+    if(tramo1.tiempoTramo()<= tramo2.costoTramo()){
+      tramo1
+    }else{
+      tramo2
+    }
+  }
 }
