@@ -8,12 +8,12 @@ trait Tramo {
 	def costoTramo():Double
 }
 
-case class TramoSimple(direccionSalida: Direccion, medio:Medio, direccionLlegada:Direccion){
+case class TramoSimple(direccionSalida: Direccion, medio:Medio, direccionLlegada:Direccion)extends Tramo{
   def costoTramo()= medio.costoPara(direccionSalida, direccionLlegada)
   def tiempoTramo() = medio.tiempoPara(direccionSalida, direccionLlegada)
 }
 
-case class TramoCombinado(tramo1: TramoSimple, tramo2: TramoSimple){
+case class TramoCombinado(tramo1: TramoSimple, tramo2: TramoSimple) extends Tramo{
   
   def costoTramo()={
     (tramo1, tramo2) match{
