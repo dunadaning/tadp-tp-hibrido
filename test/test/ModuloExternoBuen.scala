@@ -11,8 +11,13 @@ import utn.tadp.g5.funcional.Subte
 object ModuloExternoImplementado extends ModuloExterno{
   def consultarCercanos(direccion :Direccion):ArrayBuffer[(Medio,Direccion)]={
     val cercanos = new ArrayBuffer[(Medio,Direccion)]()
+    
     if(direccion.calle== "Albariño" && direccion.numero == 291){
       cercanos += ((this.getColectivo1(),new Direccion("Albariño", 300)))
+    }
+    
+    if(direccion.calle== "Albariño" && direccion.numero == 600){
+      cercanos += ((this.getColectivo1(),new Direccion("Albariño", 600)))
     }
     
     if(direccion.calle == "Rivadavia" && direccion.numero == 12800){
@@ -25,7 +30,14 @@ object ModuloExternoImplementado extends ModuloExterno{
     
     if(direccion.calle == "Medrano" && direccion.numero == 900){
       cercanos += ((this.getColectivo1(), new Direccion("Medrano", 890)))
-      cercanos += ((this.getTren2(), new Direccion("Medrano", 910)))
+    }
+    
+    if(direccion.calle == "Rivadavia" && direccion.numero == 600){
+    	cercanos += ((this.getTren2(), new Direccion("Rivadavia", 700)))      
+    }
+    
+    if(direccion.calle == "Rivadavia" && direccion.numero == 3100){
+    	cercanos += ((this.getTren1(), new Direccion("Rivadavia", 3000)))      
     }
     
     cercanos
@@ -37,11 +49,11 @@ object ModuloExternoImplementado extends ModuloExterno{
       combinan = true
     }
         
-    if((medioA.getLinea() == "Sarmiento" && medioB.getLinea() == "113")){      
+    if((medioA.getLinea() == "Sarmiento" && medioB.getLinea() == "Roca")){      
       combinan = true
     }    
 
-    if((medioB.getLinea() == "Sarmiento" && medioA.getLinea() == "113")){
+    if((medioB.getLinea() == "Sarmiento" && medioA.getLinea() == "Roca")){
       combinan = true
     }    
     
@@ -54,21 +66,30 @@ object ModuloExternoImplementado extends ModuloExterno{
     	direccionCombinacion = new Direccion("Rivadavia",12000)
     }
     
-    if((medioA.getLinea() == "Sarmiento" && medioB.getLinea() == "113")){
-       direccionCombinacion = new Direccion("Medrano", 700)
+    if((medioA.getLinea() == "Sarmiento" && medioB.getLinea() == "Roca")){
+       direccionCombinacion = new Direccion("Rivadavia", 2000)
     }    
 
-    if((medioB.getLinea() == "Sarmiento" && medioA.getLinea() == "113")){
-       direccionCombinacion = new Direccion("Medrano",910)
+    if((medioB.getLinea() == "Sarmiento" && medioA.getLinea() == "Roca")){
+       direccionCombinacion = new Direccion("Rivadavia", 2000)
     }    
     
     direccionCombinacion
   }
-  def consultarDistanciaPie(direccionLlegada:Direccion, direccionSalida:Direccion)={
-    (direccionLlegada.numero + direccionSalida.numero) / 10.0
-  }
-  def consultarDistanciaColectivo(direccionLlegada:Direccion, direccionSalida:Direccion)={
-    (direccionLlegada.numero + direccionSalida.numero) / 100.0
+ 
+  def consultarDistanciaPie(direccionLlegada:Direccion, direccionSalida:Direccion):Double={
+   if(direccionLlegada.calle == direccionSalida.calle ){
+      return (direccionSalida.numero - direccionLlegada.numero).abs /1000.0
+   }
+   return 50000.0    
+  } 
+ 
+  def consultarDistanciaColectivo(direccionLlegada:Direccion, direccionSalida:Direccion):Double={
+   if(direccionLlegada.calle == direccionSalida.calle ){
+      return (direccionSalida.numero - direccionLlegada.numero).abs /1000.0
+    }
+    
+    return 5000.0   
   }
   
   def getSubte()={
@@ -95,8 +116,8 @@ object ModuloExternoImplementado extends ModuloExterno{
 	}
 	
 	def getTren2()={
-	  val tren = new Tren("Sarmiento",List(new Direccion("Medrano", 700), new Direccion("Medrano", 910),
-	      new Direccion("Medrano", 1000)))
+	  val tren = new Tren("Sarmiento",List(new Direccion("Rivadavia", 700), new Direccion("Rivadavia", 910),
+	      new Direccion("Rivadavia", 2000)))
 	  tren.addPrecio(1, 3)
 	  tren.addPrecio(2, 7)
 	  tren

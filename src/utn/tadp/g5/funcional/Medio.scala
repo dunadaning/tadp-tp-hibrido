@@ -3,6 +3,7 @@ package utn.tadp.g5.funcional
 import utn.tadp.g5.objetos.Direccion
 import utn.tadp.g5.objetos.ModuloExterno
 import scala.collection.immutable.TreeMap
+import test.ModuloExternoImplementado
 
 trait Medio {
 	def getLinea(): String
@@ -10,8 +11,8 @@ trait Medio {
 	def tiempoPara(direccionSalida:Direccion, direccionLlegada:Direccion):Double
 }
 
-class Contains(r: Range) { 
-  def unapply(i: Double): Boolean = r contains i 
+class Contains(inicio:Double, fin:Double) { 
+  def unapply(i: Double): Boolean = inicio <= i && i <= fin
 }
 
 trait MedioConEstaciones extends Medio {
@@ -29,15 +30,15 @@ trait MedioConEstaciones extends Medio {
 }
 
 object Colectivo{
-  var moduloExterno:ModuloExterno = null
+  var moduloExterno:ModuloExterno = ModuloExternoImplementado
 }
 
 case class Colectivo(linea: String) extends Medio{
 	def getLinea()= linea
 	val velocidad = 15
 	
-	val entre0y3 = new Contains(0 to 3)
-	val entre4y6 = new Contains(4 to 6)
+	val entre0y3 = new Contains(0.0,  3.0)
+	val entre4y6 = new Contains(4.0 , 6.0)
 	
 	def costoPara(direccionSalida:Direccion, direccionLlegada:Direccion):Double ={
 	  val distancia = this.calcularDistancia(direccionSalida, direccionLlegada)
