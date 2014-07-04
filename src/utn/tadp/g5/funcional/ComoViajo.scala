@@ -2,17 +2,20 @@ package utn.tadp.g5.funcional
 
 import utn.tadp.g5.objetos.Direccion
 import scala.collection.mutable.ArrayBuffer
+import test.ModuloExternoImplementado
 
 trait ModuloExterno{
 	def consultarCercanos(direccion :Direccion):ArrayBuffer[(Medio,Direccion)]
 	def combinan(medioA :Medio, medioB: Medio):Boolean
 	def consultarCombinacion(medioA:Medio, medioB:Medio):Direccion
+	def consultarDistanciaPie(direccionLlegada:Direccion, direccionSalida:Direccion):Double
+	def consultarDistanciaColectivo(direccionLlegada:Direccion, direccionSalida:Direccion):Double
 }
 
 class NoHayViajeDisponibleException extends Exception
 
 class ComoViajo {
-  var moduloExterno:ModuloExterno = null 
+  var moduloExterno:ModuloExterno = ModuloExternoImplementado 
   type Criterio = {def apply(tramo1:Tramo, tramo2:Tramo, tarjetas:ArrayBuffer[Tarjeta]):Tramo}
   
   def getViaje(direccionSalida: Direccion, direccionLlegada: Direccion, criterio: Criterio, tarjetas:ArrayBuffer[Tarjeta])={
@@ -65,7 +68,7 @@ class Viaje(direccionSalida:Direccion, tramo:Tramo, direccionLlegada:Direccion, 
 }
 
 
-class criterioMenorCosto{
+class CriterioMenorCosto{
   def apply(tramo1:Tramo, tramo2:Tramo, tarjetas:ArrayBuffer[Tarjeta])={
     if(tramo1.costoTramo(tarjetas) <= tramo2.costoTramo(tarjetas)){
       tramo1
@@ -75,7 +78,7 @@ class criterioMenorCosto{
   }
 }
 
-class criterioMenorTiempo{
+class CriterioMenorTiempo{
   def apply(tramo1:Tramo, tramo2:Tramo, tarjetas:ArrayBuffer[Tarjeta])={
     if(tramo1.tiempoTramo()<= tramo2.costoTramo()){
       tramo1

@@ -28,6 +28,10 @@ trait MedioConEstaciones extends Medio {
 	}
 }
 
+object Colectivo{
+  var moduloExterno:ModuloExterno = null
+}
+
 case class Colectivo(linea: String) extends Medio{
 	def getLinea()= linea
 	val velocidad = 15
@@ -52,7 +56,7 @@ case class Colectivo(linea: String) extends Medio{
 	}
 	
 	def calcularDistancia(direccionSalida: Direccion, direccionLlegada:Direccion)={
-	 ModuloExterno.consultarDistanciaColectivo(null, direccionSalida, direccionLlegada)
+	 Colectivo.moduloExterno.consultarDistanciaColectivo(direccionSalida, direccionLlegada)
 	}
 }
 

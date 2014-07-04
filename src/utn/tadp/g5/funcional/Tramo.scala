@@ -5,6 +5,7 @@ import utn.tadp.g5.objetos.ModuloExterno
 import scala.collection.mutable.ArrayBuffer
 
 trait Tramo {
+	var moduloExterno:ModuloExterno=null
 	def tiempoTramo():Double
 	def costoTramo():Double
 	def costoTramo(tarjetas: ArrayBuffer[Tarjeta]):Double
@@ -49,7 +50,7 @@ case class TramoCombinado(tramoSalida: TramoSimple, tramoLlegada: TramoSimple) e
       case (Tren(_,_), Tren(_,_)) => 6
       case (Tren(_,_), Subte(_,_)) => 5
       case (Subte(_,_), Tren(_,_)) => 5
-      case (_,_) => ModuloExterno.consultarDistanciaPie(tramoSalida.direccionLlegada , tramoLlegada.direccionSalida) * 25.0
+      case (_,_) => moduloExterno.consultarDistanciaPie(tramoSalida.direccionLlegada , tramoLlegada.direccionSalida) * 25.0
     }
   }
   
