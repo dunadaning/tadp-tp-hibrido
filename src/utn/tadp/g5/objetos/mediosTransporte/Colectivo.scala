@@ -1,16 +1,14 @@
 package utn.tadp.g5.objetos.mediosTransporte
 
-import utn.tadp.g5.objetos.mediosTransporte.Contains
-import utn.tadp.g5.objetos.mediosTransporte.Medio
 import utn.tadp.g5.objetos.Direccion
 import utn.tadp.g5.objetos.ModuloExterno
 import utn.tadp.g5.objetos.Direccion
 import utn.tadp.g5.objetos.Direccion
 import utn.tadp.g5.objetos.Tramo
 
-class Colectivo(li:Int) extends Medio {  
-	val linea = li
-	val descripcion = "Colectivo"	
+class Colectivo(linea:Int, compania: String) extends Medio {  
+
+	val descripcion = "Colectivo"
 	val C1 = new Contains(0 to 3)
 	val C2 = new Contains(4 to 6)
 	val velocidad = 15.0
@@ -62,11 +60,14 @@ class Colectivo(li:Int) extends Medio {
 	}
 	
 	override def getLinea(): String = {
-	  return linea.toString
+	  linea.toString
   }
 	
 	override def getDescripcion(): String = {
 	  return descripcion
   }
-	
+
+	override def getCompania(): String = {
+	  compania
+	}
 }

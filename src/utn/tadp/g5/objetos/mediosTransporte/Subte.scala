@@ -2,10 +2,11 @@ package utn.tadp.g5.objetos.mediosTransporte
 
 import utn.tadp.g5.objetos.Direccion
 
-class Subte(li:Char, estaciones:List[Direccion]) extends MedioConEstaciones {
-	 val linea = li
+class Subte(linea:Char, estaciones:List[Direccion]) extends MedioConEstaciones {
+
 	 val precio = 4.5
 	 val descripcion = "Subte"
+	 val compania = "Metrovias"
 	 val tiempoPorEstacion:Double = 2
 	   
 	 
@@ -35,11 +36,15 @@ class Subte(li:Char, estaciones:List[Direccion]) extends MedioConEstaciones {
 	}
 	 
 	 override def getLinea(): Char = {
-        return linea
+        linea
      }
 
 	 override def getDescripcion(): String = {
 		return descripcion
 	 }   
+	 
+	 override def getCompania(): String = {
+	   compania
+	 }
 	
 }

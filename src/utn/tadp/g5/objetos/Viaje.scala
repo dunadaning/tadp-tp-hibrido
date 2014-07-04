@@ -14,6 +14,8 @@ class Viaje {
   
   def getTipos() = recorridos.map(recorrido => recorrido.getTipos()).flatten
   
+  def getCompanias() = recorridos.map(recorrido => recorrido.getCompanias()).flatten
+  
   def perteneceALaZona(zona:Zona)={
     this.tramo.perteneceALaZona(zona)
   }

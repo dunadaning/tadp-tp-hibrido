@@ -114,5 +114,5 @@ class EstadisticaPorTipo extends Estadistica[String]{
 
 class EstadisticaPorCompania extends Estadistica[String]{
 
-	def perteneceElemento(viaje: Viaje, elem: String): Boolean = true
+	def perteneceElemento(viaje: Viaje, elem: String): Boolean = viaje.getCompanias().contains(elem)
 }

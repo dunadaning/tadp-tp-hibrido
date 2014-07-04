@@ -8,6 +8,7 @@ trait Medio {
   
     def getLinea(): Any = {}    
     def getDescripcion():Any = {}
+    def getCompania():String
     def costoCombinacion(medio:Medio,direccionSalida:Direccion, direccionLlegada:Direccion):Double
     def tiempoCombinacion(direccionCombinacion:Direccion, medio:Medio, direccionSalida:Direccion):Double
     def costoPara(direccionSalida:Direccion, direccionLlegada:Direccion):Double

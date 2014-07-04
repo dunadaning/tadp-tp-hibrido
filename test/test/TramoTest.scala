@@ -22,11 +22,11 @@ class TramoTest {
 	}
 	
 	def getColectivo()={
-	  new Colectivo(113)
+	  new Colectivo(113,"")
 	}
 	
 	def getTren1()={
-	  val tren = new Tren("Sarmiento",List(new Direccion("Rivadavia", 2000), new Direccion("Rivadavia", 3000),
+	  val tren = new Tren("Sarmiento", "", List(new Direccion("Rivadavia", 2000), new Direccion("Rivadavia", 3000),
 	      new Direccion("Rivadavia", 4000)))
 	  tren.addPrecio(1, 2)
 	  tren.addPrecio(2, 5)
@@ -34,7 +34,7 @@ class TramoTest {
 	}
 	
 	def getTren2()={
-	  val tren = new Tren("Sarmiento",List(new Direccion("Rivadavia", 3000), new Direccion("Rivadavia", 4500),
+	  val tren = new Tren("Sarmiento", "", List(new Direccion("Rivadavia", 3000), new Direccion("Rivadavia", 4500),
 	      new Direccion("Rivadavia", 7000)))
 	  tren.addPrecio(1, 3)
 	  tren.addPrecio(2, 7)

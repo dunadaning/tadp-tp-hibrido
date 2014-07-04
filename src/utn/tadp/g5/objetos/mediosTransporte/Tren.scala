@@ -8,8 +8,8 @@ class Contains(r: Range) {
   def unapply(i: Int): Boolean = r contains i 
 }
 
-class Tren(li:String, estaciones: List[Direccion]) extends MedioConEstaciones{
-	val linea = li
+class Tren(linea:String, compania: String, estaciones: List[Direccion]) extends MedioConEstaciones{
+
 	val descripcion = "Tren"	
 	val tiempoPorEstacion:Double = 3
 	var tablaPrecios = new TreeMap[Int,Double]
@@ -61,11 +61,15 @@ class Tren(li:String, estaciones: List[Direccion]) extends MedioConEstaciones{
 	}
 	
 	override def getLinea(): String = {
-	  return linea
+	  linea
   }
 	
 	override def getDescripcion(): String = {
 	  return descripcion
   }
+	
+	override def getCompania(): String = {
+	  compania
+	}
 	
 }

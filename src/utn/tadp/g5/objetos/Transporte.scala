@@ -1,6 +1,5 @@
 package utn.tadp.g5.objetos
 
-import utn.tadp.g5.objetos.Direccion
 import utn.tadp.g5.objetos.mediosTransporte.Medio
 
 class Transporte(tipo:Medio, inicio:Direccion, fin:Direccion) {

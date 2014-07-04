@@ -13,6 +13,8 @@ class Recorrido {
   
   def getTipos() = mapa.mapValues(transporte => transporte.medio.getDescripcion())
   
+  def getCompanias() = mapa.mapValues(transporte => transporte.medio.getCompania())
+  
   def calcular():Int = {
     return 1
   }
