@@ -12,12 +12,12 @@ object ModuloExternoImplementado extends ModuloExterno{
   def consultarCercanos(direccion :Direccion):ArrayBuffer[(Medio,Direccion)]={
     val cercanos = new ArrayBuffer[(Medio,Direccion)]()
     
-    if(direccion.calle== "Albariño" && direccion.numero == 291){
-      cercanos += ((this.getColectivo1(),new Direccion("Albariño", 300)))
+    if(direccion.calle== "Albarinio" && direccion.numero == 291){
+      cercanos += ((this.getColectivo1(),new Direccion("Albarinio", 300)))
     }
     
-    if(direccion.calle== "Albariño" && direccion.numero == 600){
-      cercanos += ((this.getColectivo1(),new Direccion("Albariño", 600)))
+    if(direccion.calle== "Albarinio" && direccion.numero == 600){
+      cercanos += ((this.getColectivo1(),new Direccion("Albarinio", 600)))
     }
     
     if(direccion.calle == "Rivadavia" && direccion.numero == 12800){
