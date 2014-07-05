@@ -19,7 +19,7 @@ case class TramoSimple(direccionSalida: Direccion, medio:Medio, direccionLlegada
   def tiempoTramo() = medio.tiempoPara(direccionSalida, direccionLlegada)
   
   def costoTramo(tarjetas: ArrayBuffer[Tarjeta])={
-    this.costoTramo() - tarjetas.map(_.aplicarDescuento(this)).sum
+    this.costoTramo() //- tarjetas.map(_.aplicarDescuento(this)).sum
   }
   
   def perteneceALaZona(zona:Zona) = zona.incluye(direccionSalida) && zona.incluye(direccionLlegada)
@@ -37,7 +37,7 @@ case class TramoCombinado(tramoSalida: TramoSimple, tramoLlegada: TramoSimple) e
   }
   
   def costoTramo(tarjetas: ArrayBuffer[Tarjeta])={
-    this.costoTramo() - tarjetas.map(_.aplicarDescuento(this)).sum
+    this.costoTramo() //- tarjetas.map(_.aplicarDescuento(this)).sum
   }
   
   def tiempoTramo()={

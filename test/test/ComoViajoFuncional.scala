@@ -14,6 +14,8 @@ import utn.tadp.g5.funcional.ComoViajo
 import utn.tadp.g5.funcional.CriterioMenorTiempo
 import utn.tadp.g5.funcional.Tarjeta
 import utn.tadp.g5.funcional.CriterioMenorCosto
+import utn.tadp.g5.funcional.TramoCombinado
+import utn.tadp.g5.funcional.CriterioMenorTiempo
 
 class ComoViajoFuncional {
 	@Test(expected = classOf[NoHayViajeDisponibleException]) 
@@ -28,6 +30,16 @@ class ComoViajoFuncional {
 	
 	@Test def testSePuedeCrearUnViajeDeTramoCompuesto(){
 	  val viaje = new ComoViajo().getViaje(new Direccion("Rivadavia",600),new Direccion("Rivadavia", 3100),new CriterioMenorCosto(), new ArrayBuffer[Tarjeta]())
-	  assertEquals(9.0, viaje.costo, 0.0)
+	  assertEquals(9.0, viaje.costo(), 0.0)
+	}
+	
+	@Test def testElCriterioPorCostoEligeElDeMenor(){
+	  val viaje = new ComoViajo().getViaje(new Direccion("Carabobo",2000),new Direccion("Carabobo", 4600),new CriterioMenorCosto(), new ArrayBuffer[Tarjeta]())
+	  assertEquals(2.5, viaje.costo(), 0.0)
+	}
+	
+	@Test def testElCriterioPorTiempoEligeElDeMenor(){
+	  val viaje = new ComoViajo().getViaje(new Direccion("Carabobo",2000),new Direccion("Carabobo", 4600),new CriterioMenorTiempo(), new ArrayBuffer[Tarjeta]())
+	  assertEquals(2.0, viaje.tiempo(), 0.0)
 	}
 }

@@ -54,7 +54,7 @@ class ComoViajo {
     if(moduloExterno.combinan(medioLlegada, medioSalida)){
       val direccionCombinacion = moduloExterno.consultarCombinacion(medioLlegada, medioSalida)
       val tramoSalida= new TramoSimple(direccionSalida, medioSalida, direccionCombinacion)
-      val tramoLlegada = new TramoSimple(direccionCombinacion, medioSalida, direccionSalida)
+      val tramoLlegada = new TramoSimple(direccionCombinacion, medioLlegada, direccionSalida)
       return Some(new TramoCombinado(tramoSalida, tramoLlegada))
     }
     
@@ -65,6 +65,7 @@ class ComoViajo {
 class Viaje(direccionSalida:Direccion, tramo:Tramo, direccionLlegada:Direccion, tarjetas:ArrayBuffer[Tarjeta]){
 	def costo() = tramo.costoTramo(tarjetas)
 	def tiempo() = tramo.tiempoTramo()
+	def getTramo() = tramo
 }
 
 
@@ -80,7 +81,7 @@ class CriterioMenorCosto{
 
 class CriterioMenorTiempo{
   def apply(tramo1:Tramo, tramo2:Tramo, tarjetas:ArrayBuffer[Tarjeta])={
-    if(tramo1.tiempoTramo()<= tramo2.costoTramo()){
+    if(tramo1.tiempoTramo()<= tramo2.tiempoTramo()){
       tramo1
     }else{
       tramo2

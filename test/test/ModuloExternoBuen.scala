@@ -40,6 +40,16 @@ object ModuloExternoImplementado extends ModuloExterno{
     	cercanos += ((this.getTren1(), new Direccion("Rivadavia", 3000)))      
     }
     
+    if(direccion.calle == "Carabobo" && direccion.numero == 2000){
+      cercanos += ((this.getColectivoCarabobo(), new Direccion("Carabobo", 2000)))      
+	  cercanos += ((this.getSubteCarabobo(), new Direccion("Carabobo", 2000)))      
+    }
+
+    if(direccion.calle == "Carabobo" && direccion.numero == 4600){
+      cercanos += ((this.getColectivoCarabobo(), new Direccion("Carabobo", 4600)))      
+ 	  cercanos += ((this.getSubteCarabobo(), new Direccion("Carabobo", 4500)))      
+    }    
+    
     cercanos
   }
   
@@ -121,5 +131,16 @@ object ModuloExternoImplementado extends ModuloExterno{
 	  tren.addPrecio(1, 3)
 	  tren.addPrecio(2, 7)
 	  tren
+	}
+	
+	def getColectivoCarabobo()={
+	  new Colectivo("8")
+	}
+	
+	def getSubteCarabobo()={
+	   new Subte("A", List(new Direccion("Carabobo", 2000),
+	     new Direccion("Carabobo", 4500),
+	     new Direccion("Carabobo", 7000),
+	     new Direccion("Carabobo", 7500))) 
 	}
 }
