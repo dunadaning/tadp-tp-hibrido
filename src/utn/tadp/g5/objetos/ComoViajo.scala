@@ -16,8 +16,8 @@ class ComoViajo {
     transporteCercanosFin = obtenerTransportesCercanosEn(parametrosDeViaje.destino)
 
     viaje.recorridos = calcularRecorridos(transporteCercanosInicio, transporteCercanosFin, criterio)
-    //viaje.calcularDuraciones()
-    //viaje.calcularCostos()
+    viaje.calcularDuraciones()
+    viaje.calcularCostos()
     
     return  viaje
         
