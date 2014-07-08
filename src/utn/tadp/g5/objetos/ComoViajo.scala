@@ -8,7 +8,8 @@ import utn.tadp.g5.objetos.criterios.Criterio
 class ComoViajo {
 
   def consultar(parametrosDeViaje:ParametrosDeViaje, criterio:Criterio) : Viaje = {
-    var viaje = new Viaje()   
+    
+    var viaje = new Viaje()    
     var transporteCercanosInicio = ArrayBuffer[Cercano]()     
     var transporteCercanosFin = ArrayBuffer[Cercano]()
     
@@ -34,37 +35,32 @@ class ComoViajo {
   }
 
   def fusionarRecorridos(recorridosA: ArrayBuffer[Recorrido], recorridosB:ArrayBuffer[Recorrido]):ArrayBuffer[Recorrido]={
-	//CORRECCION: Muy procedural, las colecciones son objetos. Se reemplaza por una línea: recorridosA ++ recorridosB
     var recorridosFusionados = ArrayBuffer[Recorrido]()
-    val recB = recorridosB.toArray
     recorridosFusionados = recorridosA
     
-    for (e <- recB){
-      recorridosFusionados+=e
-    }
+    recorridosFusionados.appendAll(recorridosB)
     
-    return recorridosFusionados
+    recorridosFusionados
   }
   
   def calcularDirecto(tInicio:ArrayBuffer[Cercano], tFin:ArrayBuffer[Cercano]): Recorrido = {    
-    val recorridos = new Recorrido() 
-    var transporte = new Transporte()   
-    val ti = tInicio.toArray
-    val tf = tFin.toArray
-    var indxFin:Int = -1
+    val recorridos = new Recorrido()    
     
-    //CORRECCION: De nuevo no usan los mensajes de colecciones.
-    //Se puede reemplazar por un filter y un map.
-    for (i <- 0 until ti.size){
-     indxFin = pasaPorDestino(ti(i).medio, tf)
-     if (indxFin > -1){       
+    //CORRECCION: map en lugar de foreach
+    tInicio.foreach(cercano => this.obtenerRecorrido(cercano, tFin, recorridos))
+    recorridos
+  }
+  
+  def obtenerRecorrido(inicio: Cercano, transportesFin: ArrayBuffer[Cercano], recorridos: Recorrido) = {
+        
+    val cercano = pasaPorDestino(inicio.medio, transportesFin)
+    var transporte = new Transporte()
+    
+    if (!cercano.equals(None)){       
        
-       transporte = new Transporte(ti(i).medio, ti(i).direccion, tf(indxFin).direccion)       
-       recorridos.mapa += (getKeyMap(recorridos.mapa) -> transporte)      
-      }      
-    }
-    
-    return recorridos
+      transporte = new Transporte(inicio.medio, inicio.direccion, cercano.get.direccion)       
+      recorridos.mapa += (getKeyMap(recorridos.mapa) -> transporte)       
+      } 
   }
   
   def getKeyMap(mapa:HashMap[Int,Transporte]): Int = {
@@ -101,17 +97,10 @@ class ComoViajo {
   def obtenerTransportesCercanosEn(direccion:Direccion): ArrayBuffer[Cercano] = {    
     ModuloExterno.consultarCercanos(direccion)
   }
-  
-  def pasaPorDestino(myTransportIda:Medio, transporteCercanosFin:Array[Cercano]) : Int = {
-		  
-	  for(i <- 0 until transporteCercanosFin.size) {
-	  
-	    if (transporteCercanosFin(i).medio.getLinea().equals(myTransportIda.getLinea())){	     
-	      return i
-	    }	  
-	  }	 
-	//CORRECCION: deberia devolver un booleano, no -1 si no pasa y otro int si pasa.  
-    return -1
+
+  //CORRECCION: pasaPorDestino no expresa lo que hace.
+  def pasaPorDestino(myTransportIda:Medio, transporteCercanosFin:ArrayBuffer[Cercano]) : Option[Cercano] = {
+	  transporteCercanosFin.find(cercano => cercano.elMedioCoinideCon(myTransportIda))
   }
   
   def consultar(viaje:ParametrosDeViaje) : Viaje = {
