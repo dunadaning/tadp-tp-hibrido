@@ -14,4 +14,9 @@ class Cercano(tipo:Medio, dir:Direccion) {
 	  this(tipo, null)
 	}
 	
+	def elMedioCoinideCon(otroMedio: Medio): Boolean = {
+	  
+	  medio.getLinea().equals(otroMedio.getLinea())
+	}
+	
 }
