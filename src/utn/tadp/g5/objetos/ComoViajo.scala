@@ -34,6 +34,7 @@ class ComoViajo {
   }
 
   def fusionarRecorridos(recorridosA: ArrayBuffer[Recorrido], recorridosB:ArrayBuffer[Recorrido]):ArrayBuffer[Recorrido]={
+	//CORRECCION: Muy procedural, las colecciones son objetos. Se reemplaza por una línea: recorridosA ++ recorridosB
     var recorridosFusionados = ArrayBuffer[Recorrido]()
     val recB = recorridosB.toArray
     recorridosFusionados = recorridosA
@@ -52,6 +53,8 @@ class ComoViajo {
     val tf = tFin.toArray
     var indxFin:Int = -1
     
+    //CORRECCION: De nuevo no usan los mensajes de colecciones.
+    //Se puede reemplazar por un filter y un map.
     for (i <- 0 until ti.size){
      indxFin = pasaPorDestino(ti(i).medio, tf)
      if (indxFin > -1){       
@@ -107,7 +110,7 @@ class ComoViajo {
 	      return i
 	    }	  
 	  }	 
-	  
+	//CORRECCION: deberia devolver un booleano, no -1 si no pasa y otro int si pasa.  
     return -1
   }
   

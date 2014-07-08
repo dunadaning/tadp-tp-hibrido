@@ -11,6 +11,7 @@ class Transporte(tipo:Medio, inicio:Direccion, fin:Direccion) {
 	  this.medio == otroTransporte.medio 
 	}
 	
+	//CORRECCION: Un transporte con todo null no sirve para nada
 	def this(){
 	  this(null, null, null)
 	}

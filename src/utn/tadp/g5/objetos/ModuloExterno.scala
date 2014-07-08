@@ -9,9 +9,6 @@ import scala.collection.mutable.ListBuffer
 object ModuloExterno {
   
   //SOLO PARA PRUEBAS, SIMULO MODULO EXTERNO!!!!
-  //SOLO PARA PRUEBAS, SIMULO MODULO EXTERNO!!!!
-  //SOLO PARA PRUEBAS, SIMULO MODULO EXTERNO!!!!
-  //SOLO PARA PRUEBAS, SIMULO MODULO EXTERNO!!!!
   
   def consultarCercanos(direccion:Direccion) : ArrayBuffer[Cercano] = {
     var respuesta = ArrayBuffer[Cercano]()    

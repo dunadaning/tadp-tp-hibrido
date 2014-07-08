@@ -5,7 +5,10 @@ import scala.collection.mutable.HashMap
 import utn.tadp.g5.objetos.tarjetas.Zona
 
 class Viaje { 
+  //CORRECCION: recorridos, duraciones y costos deberia ser una sola coleccion con objetos que tengan esos tres datos(por ej: Recorrido)
   var recorridos: ArrayBuffer[Recorrido] = null //Cada indice del Array es una alternativa de viaje
+  
+  //CORRECCION: Un Array o una lista es mas apropiado que un map en este caso.
   var duraciones = new HashMap[Int,Double]//Cada clave es la alternativa
   var costos = new HashMap[Int,Double]//Cada clave es la alternativa
   var tramo:Tramo = null
@@ -39,6 +42,7 @@ class Viaje {
   def calcularDuraciones(){
     //TODO a partir de los recorridos, calcular cada duracion por alternativa
     val alternativas = recorridos.toArray
+    
     for(i <- 0 until alternativas.size){
       duraciones += (i -> getDuracion(alternativas(i).mapa))  
     }
