@@ -60,10 +60,10 @@ class Viaje {
     var total:Double = 0
     
     for (i <- 0 until recorrido.size){
-      total += recorrido(i).medio.tiempoPara(recorrido(i).direccionInicio, recorrido(i).direccionFin)
+      total += recorrido(i).getMedio.tiempoPara(recorrido(i).getDireccionInicio, recorrido(i).getDireccionFin)
       if (i>0){
         //combinacion
-        total +=recorrido(i).medio.tiempoCombinacion(recorrido(i).direccionInicio, recorrido(i-1).medio, recorrido(i).direccionFin)         
+        total +=recorrido(i).getMedio.tiempoCombinacion(recorrido(i).getDireccionInicio, recorrido(i-1).getMedio, recorrido(i).getDireccionFin)         
       }
       
     }
@@ -75,10 +75,10 @@ class Viaje {
     var total:Double = 0
     
     for (i <- 0 until recorrido.size){
-      total += recorrido(i).medio.costoPara(recorrido(i).direccionInicio, recorrido(i).direccionFin) 
+      total += recorrido(i).getMedio.costoPara(recorrido(i).getDireccionInicio, recorrido(i).getDireccionFin) 
       if (i>0){
         //combinacion
-        total +=recorrido(i).medio.costoCombinacion(recorrido(i-1).medio, recorrido(i).direccionInicio, recorrido(i).direccionFin)         
+        total +=recorrido(i).getMedio.costoCombinacion(recorrido(i-1).getMedio, recorrido(i).getDireccionInicio, recorrido(i).getDireccionFin)         
       }
     }
     

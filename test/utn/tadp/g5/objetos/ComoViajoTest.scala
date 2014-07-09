@@ -103,10 +103,10 @@ class ComoViajoTest {
         resultadoCompleto = "Alternativa combinada " + (ordenCom).toString() + " : "
         
         for (e <- 0 until recorridos(i).mapa.size){          
-          descripcion =  recorridos(i).mapa(e).medio.getDescripcion().toString()
-          linea = recorridos(i).mapa(e).medio.getLinea()
-          direccionInicio = recorridos(i).mapa(e).direccionInicio.calle + " " + recorridos(i).mapa(e).direccionInicio.numero
-          direccionFin = recorridos(i).mapa(e).direccionFin.calle + " " + recorridos(i).mapa(e).direccionFin.numero
+          descripcion =  recorridos(i).mapa(e).getMedio.getDescripcion().toString()
+          linea = recorridos(i).mapa(e).getMedio.getLinea()
+          direccionInicio = recorridos(i).mapa(e).getDireccionInicio.calle + " " + recorridos(i).mapa(e).getDireccionInicio.numero
+          direccionFin = recorridos(i).mapa(e).getDireccionFin.calle + " " + recorridos(i).mapa(e).getDireccionFin.numero
           resultadoCompleto += descripcion + "-" + linea + " / " + "Direccion (desde/hasta): " + direccionInicio + " a " + direccionFin
           if (e<(recorridos(i).mapa.size-1)){
             resultadoCompleto += " --> "
@@ -119,18 +119,18 @@ class ComoViajoTest {
       }else if (recorridos(i).mapa.size>0){
           //orden = (i+1)
           ordenDir += 1
-          descripcion =  recorridos(i).mapa(i).medio.getDescripcion().toString()
-          linea = recorridos(i).mapa(i).medio.getLinea()
-          direccionInicio = recorridos(i).mapa(i).direccionInicio.calle
+          descripcion =  recorridos(i).mapa(i).getMedio.getDescripcion().toString()
+          linea = recorridos(i).mapa(i).getMedio.getLinea()
+          direccionInicio = recorridos(i).mapa(i).getDireccionInicio.calle
           
-          if (recorridos(i).mapa(i).direccionInicio.numero>0){
-            direccionInicio += " " + recorridos(i).mapa(i).direccionInicio.numero
+          if (recorridos(i).mapa(i).getDireccionInicio.numero>0){
+            direccionInicio += " " + recorridos(i).mapa(i).getDireccionInicio.numero
           }
           
-          direccionFin = recorridos(i).mapa(i).direccionFin.calle
+          direccionFin = recorridos(i).mapa(i).getDireccionFin.calle
           
-          if (recorridos(i).mapa(i).direccionFin.numero>0){
-            direccionFin += " " + recorridos(i).mapa(i).direccionFin.numero
+          if (recorridos(i).mapa(i).getDireccionFin.numero>0){
+            direccionFin += " " + recorridos(i).mapa(i).getDireccionFin.numero
           }
           
           resultadoCompleto = "Alternativa directa " + ordenDir + ": " + descripcion + "-" + linea + " / " + "Direccion (desde/hasta): " + direccionInicio + " a " + direccionFin

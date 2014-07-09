@@ -44,23 +44,24 @@ class ComoViajo {
   }
   
   def calcularDirecto(tInicio:ArrayBuffer[Cercano], tFin:ArrayBuffer[Cercano]): Recorrido = {    
-    val recorridos = new Recorrido()    
+    val recorrido = new Recorrido()    
     
-    //CORRECCION: map en lugar de foreach
-    tInicio.foreach(cercano => this.obtenerRecorrido(cercano, tFin, recorridos))
-    recorridos
+    //CORRECCION: map en lugar de foreach - cambio foreach por foldLeft
+    tInicio.foldLeft(recorrido)((recorrido: Recorrido, cercano: Cercano) => this.obtenerRecorrido(cercano, tFin, recorrido))
   }
   
-  def obtenerRecorrido(inicio: Cercano, transportesFin: ArrayBuffer[Cercano], recorridos: Recorrido) = {
+  def obtenerRecorrido(inicio: Cercano, transportesFin: ArrayBuffer[Cercano], recorridos: Recorrido): Recorrido = {
         
-    val cercano = pasaPorDestino(inicio.medio, transportesFin)
+    val cercano = buscarMedioQuePasaPorDestino(inicio.medio, transportesFin)
     var transporte = new Transporte()
     
     if (!cercano.equals(None)){       
        
       transporte = new Transporte(inicio.medio, inicio.direccion, cercano.get.direccion)       
-      recorridos.mapa += (getKeyMap(recorridos.mapa) -> transporte)       
-      } 
+      recorridos.mapa += (getKeyMap(recorridos.mapa) -> transporte)     
+      
+      }
+          recorridos
   }
   
   def getKeyMap(mapa:HashMap[Int,Transporte]): Int = {
@@ -99,7 +100,7 @@ class ComoViajo {
   }
 
   //CORRECCION: pasaPorDestino no expresa lo que hace.
-  def pasaPorDestino(myTransportIda:Medio, transporteCercanosFin:ArrayBuffer[Cercano]) : Option[Cercano] = {
+  def buscarMedioQuePasaPorDestino(myTransportIda:Medio, transporteCercanosFin:ArrayBuffer[Cercano]) : Option[Cercano] = {
 	  transporteCercanosFin.find(cercano => cercano.elMedioCoinideCon(myTransportIda))
   }
   
