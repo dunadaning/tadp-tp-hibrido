@@ -6,6 +6,7 @@ import utn.tadp.g5.objetos.Tramo
 import utn.tadp.g5.objetos.Recorrido
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.HashMap
+import scala.collection.mutable.MutableList
 
 class CriterioTiempo extends Criterio {
   
@@ -33,8 +34,8 @@ class CriterioTiempo extends Criterio {
     
     viajeRespuesta.recorridos = ArrayBuffer[Recorrido]()
     viajeRespuesta.recorridos += viaje.recorridos(idx)
-    viajeRespuesta.duraciones = new HashMap[Int,Double]
-    viajeRespuesta.duraciones += (0 -> viaje.duraciones(idx))
+    viajeRespuesta.duraciones = new MutableList[Double]
+    viajeRespuesta.duraciones += viaje.duraciones(idx)
     viajeRespuesta.costos = new HashMap[Int,Double]
     viajeRespuesta.costos += (0 -> viaje.costos(idx))
     viajeRespuesta
