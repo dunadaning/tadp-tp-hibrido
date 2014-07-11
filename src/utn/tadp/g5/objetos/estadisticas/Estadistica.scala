@@ -62,29 +62,29 @@ abstract class Estadistica[T] {
 	}
 	
 	def calcularCostoTotal(viajes: Viajes)={
-	  //viajes.foldRight(0.0)((viaje, acum) => acum + viaje.costoViaje())
+	  viajes.foldRight(0.0)((viaje, acum) => acum + viaje.costoViaje())
 	}
 	
 	def calcularTiempoTotal(viajes:Viajes)={
-	  //viajes.foldRight(0.0)((viaje, acum) => acum + viaje.tiempoViaje())
+	  viajes.foldRight(0.0)((viaje, acum) => acum + viaje.tiempoViaje())
 	}
 	
 	def getEstadisticaCostoPromedio()={
-		//val bloque:(Viajes => Double) = 
-		//  viajes => ( this.calcularCostoTotal(viajes) / viajes.length)
-		//this.getEstadistica(bloque)
+		val bloque:(Viajes => Double) = 
+		  viajes => ( this.calcularCostoTotal(viajes) / viajes.length)
+		this.getEstadistica(bloque)
 	}
 	
 	def getEstadisticaTiempoPromedio()={
-		//val bloque:(Viajes => Double) = 
-		//  viajes => ( this.calcularTiempoTotal(viajes) / viajes.length)
-		//this.getEstadistica(bloque)
+		val bloque:(Viajes => Double) = 
+		  viajes => ( this.calcularTiempoTotal(viajes) / viajes.length)
+		this.getEstadistica(bloque)
 	}
 	
 	def getEstadisticaFacturacionTotal()={
-		//val bloque:(Viajes => Double) = 
-		//  viajes => this.calcularCostoTotal(viajes)
-		//this.getEstadistica(bloque)
+		val bloque:(Viajes => Double) = 
+		  viajes => this.calcularCostoTotal(viajes)
+		this.getEstadistica(bloque)
 	}
 
 	def getEstadisticaPorcentajeUtilizacion()={
@@ -98,11 +98,11 @@ abstract class Estadistica[T] {
 
 }
 
-//class EstadisticaPorZona extends Estadistica[Zona]{
-//
-//	def perteneceElemento(recorrido: Recorrido, elem: Zona): Boolean = recorrido.perteneceALaZona(elem)
-//
-//}
+abstract class EstadisticaPorZona extends Estadistica[Zona]{
+
+	def perteneceElemento(recorrido: Recorrido, elem: Zona): Boolean = recorrido.perteneceALaZona(elem)
+
+}
 
 class EstadisticaPorLinea extends Estadistica[String]{
 	
