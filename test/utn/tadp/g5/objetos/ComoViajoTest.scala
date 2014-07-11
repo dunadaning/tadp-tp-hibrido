@@ -110,7 +110,7 @@ class ComoViajoTest {
 	  imprimirDescripcion("Dado una consulta con descuento, se le aplica el mismo al costo")
 	  mostrarResultadoPorConsola(miViaje, miDescuento)
     
-	  miViaje.recorridos.foreach(recorrido => assertTrue(recorrido.costo == 0))
+	  miViaje.recorridos.foreach(recorrido => assertTrue(recorrido.getCosto(miDescuento) == 0))
 	  
 	}    
 
@@ -146,7 +146,7 @@ class ComoViajoTest {
 	  imprimirDescripcion("Dado una consulta con descuento, se le aplica el mismo al costo")
 	  mostrarResultadoPorConsola(miViaje, miDescuento)
     
-	  miViaje.recorridos.foreach(recorrido => recorrido.getPorcentajeDescuento()==10)
+	  //miViaje.recorridos.foreach(recorrido => recorrido.getPorcentajeDescuento()==10)
     
 	}
 
@@ -232,7 +232,7 @@ class ComoViajoTest {
   
   def imprimirCostos(viaje:Viaje, i:Int, tarjeta:Tarjeta){
     println("Costo: $ " + viaje.recorridos(i).getCosto(tarjeta))
-    if (viaje.recorridos(i).descuento>0) println("Descuento: $ " + viaje.recorridos(i).descuento)
+    //if (viaje.recorridos(i).descuento>0) println("Descuento: $ " + viaje.recorridos(i).descuento)
   }
   
   def imprimirTest(nombre:String){    

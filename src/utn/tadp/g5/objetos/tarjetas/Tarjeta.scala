@@ -12,7 +12,7 @@ abstract class Tarjeta(descuento:Double) {
   
   def aplicarDescuentoAlRecorrido(recorrido:Recorrido):Double={
 	  if (aplica(recorrido)) 
-	    return aplicarDescuentoAlCosto(recorrido.costo)
+	    return aplicarDescuentoAlCosto(recorrido.getCosto())
 	  
 	  return 0
 	}

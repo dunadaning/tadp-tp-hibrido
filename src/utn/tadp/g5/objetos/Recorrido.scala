@@ -7,9 +7,6 @@ import utn.tadp.g5.objetos.tarjetas.Zona
 
 class Recorrido {
   var ruta = List[Transporte]()
-  var costo:Double = 0
-  var descuento:Double = 0
-  var duracion:Double = 0
   
   def getLineas() = ruta.map(transporte => transporte.getMedio().getLinea())
   
@@ -31,6 +28,10 @@ class Recorrido {
   //CORRECCION: idem calcularDuracion
   def getCosto(tarjeta:Tarjeta) = {
     ruta.foldLeft(0.0)((acum,transporte) => acum + this.costoPara(transporte))- this.aplicarDescuento(tarjeta)
+  }
+  
+  def getCosto():Double = {
+    getCosto(null)
   }
   
   def costoPara(transporte:Transporte)={
@@ -58,8 +59,8 @@ class Recorrido {
     ruta.exists(transporte => transporte.llegaALaZona(zona))
   }
   
-  def getCostoTotal() = costo + descuento
+  //def getCostoTotal() = costo + descuento
   
-  def getPorcentajeDescuento() = (descuento * 100) / getCostoTotal()
+  //def getPorcentajeDescuento() = (descuento * 100) / getCostoTotal()
   
 }

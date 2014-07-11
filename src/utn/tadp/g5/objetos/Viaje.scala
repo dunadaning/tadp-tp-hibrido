@@ -33,17 +33,17 @@ class Viaje {
 
   
   def getRecorridoDuracionMinima():Recorrido = {
-    recorridos.min(Ordering.by((r:Recorrido) => r.duracion))
+    recorridos.min(Ordering.by((r:Recorrido) => r.getDuracion()))
   }
   
   def getRecorridoCostoMinimo():Recorrido = {
-    recorridos.min(Ordering.by((r:Recorrido) => r.costo))
+    recorridos.min(Ordering.by((r:Recorrido) => r.getCosto()))
   }
   
   def costoViaje():Double = {
    var costoViaje:Double = 0
    
-   recorridos.foreach(recorrido => costoViaje += recorrido.costo)
+   recorridos.foreach(recorrido => costoViaje += recorrido.getCosto())
    
    costoViaje
    
@@ -52,7 +52,7 @@ class Viaje {
   def tiempoViaje():Double = {
    var tiempoViaje:Double = 0
    
-   recorridos.foreach(recorrido => tiempoViaje += recorrido.duracion)
+   recorridos.foreach(recorrido => tiempoViaje += recorrido.getDuracion())
    
    costoViaje
    
