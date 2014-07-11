@@ -24,11 +24,11 @@ class Viaje {
   def getCompanias() = recorridos.flatMap(recorrido => recorrido.getCompanias())
     
   def calcularDuraciones(){
-    recorridos.map(recorrido => recorrido.calcularDuracion())
+    recorridos.map(recorrido => recorrido.getDuracion())
   }
 
   def calcularCostos(tarjeta:Tarjeta){
-    recorridos.map(recorrido => recorrido.calcularCosto(tarjeta))
+    recorridos.map(recorrido => recorrido.getCosto(tarjeta))
   }
 
   

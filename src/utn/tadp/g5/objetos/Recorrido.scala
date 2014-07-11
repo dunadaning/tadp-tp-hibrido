@@ -16,15 +16,11 @@ class Recorrido {
   def getTipos() = ruta.map(transporte => transporte.getMedio().getDescripcion())
   
   def getCompanias() = ruta.map(transporte => transporte.getMedio().getCompania())
-  
-  def getDuracion() = calcularDuracion()
-  
-  def getCosto(tarjeta:Tarjeta) = calcularCosto(tarjeta)//costo
-  
+
   //CORRECCION: no esta bueno hacerlo con map. Para hacer una sumatoria usen fold. 
   // Ademas se va a aumentar la duración cada vez que se llame a calcularDuracion.
   // Deberian calcular la duracion en el metodo getDuracion sin efecto colateral(sin cambiar la variable duracion).
-  def calcularDuracion() = {
+  def getDuracion() = {
     ruta.foldLeft(0.0)((acum , transporte) => acum + this.tiempoPara(transporte)) 
   }
   
@@ -33,7 +29,7 @@ class Recorrido {
   }
 
   //CORRECCION: idem calcularDuracion
-  def calcularCosto(tarjeta:Tarjeta) = {
+  def getCosto(tarjeta:Tarjeta) = {
     ruta.foldLeft(0.0)((acum,transporte) => acum + this.costoPara(transporte))- this.aplicarDescuento(tarjeta)
   }
   
