@@ -23,7 +23,7 @@ trait HistoricoViajes{
 abstract class Estadistica[T] {
 	type Viajes = ArrayBuffer[Viaje]
   
-	val viajes = this.getViajes()
+	val viajes:Viajes = new ArrayBuffer[Viaje] // = this.getViajes()
 	val historicoViajes:HistoricoViajes = null
 	val criterios = new ArrayBuffer[Filtro]()
 	val elementosComparacion = new ArrayBuffer[T]()
@@ -98,9 +98,9 @@ abstract class Estadistica[T] {
 
 }
 
-abstract class EstadisticaPorZona extends Estadistica[Zona]{
+class EstadisticaPorZona extends Estadistica[Zona]{
 
-	def perteneceElemento(recorrido: Recorrido, elem: Zona): Boolean = recorrido.perteneceALaZona(elem)
+	def perteneceElemento(viaje: Viaje, elem: Zona): Boolean = viaje.perteneceALaZona(elem)
 
 }
 

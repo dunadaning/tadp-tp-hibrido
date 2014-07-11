@@ -90,6 +90,10 @@ object ModuloExterno {
       return (13).abs
     }
     
+    if(inicio.calle.equals("Diaz Velez") && fin.calle.equals("Bartolome Mitre") ){
+      return (5.4).abs
+    }
+        
     if(inicio.calle.equals("Rosario") && fin.calle.equals("Brandsen") ){
       return (9).abs
     }

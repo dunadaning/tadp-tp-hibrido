@@ -10,7 +10,6 @@ class Recorrido {
   var duracion:Double = 0
   var costo:Double = 0
   var descuento:Double = 0
-  var tramo:Tramo = null
   
   def getLineas() = ruta.map(transporte => transporte.getMedio().getLinea())
   

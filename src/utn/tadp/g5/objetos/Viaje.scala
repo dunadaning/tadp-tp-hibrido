@@ -56,4 +56,8 @@ class Viaje {
    costoViaje
    
   }  
+  
+  def perteneceALaZona(zona:Zona):Boolean = {
+    recorridos.forall(recorrido => recorrido.perteneceALaZona(zona))
+  }
 }
