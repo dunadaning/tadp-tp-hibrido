@@ -4,6 +4,7 @@ import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.HashMap
 import utn.tadp.g5.objetos.tarjetas.Zona
 import scala.collection.mutable.MutableList
+import utn.tadp.g5.objetos.tarjetas.Tarjeta
 
 class Viaje { 
   //CORRECCION: recorridos, duraciones y costos deberia ser una sola coleccion con objetos que tengan esos tres datos(por ej: Recorrido)
@@ -47,8 +48,8 @@ class Viaje {
   }
   
 
-  def calcularCostos(){
-    recorridos.map(recorrido => recorrido.calcularCosto())
+  def calcularCostos(tarjeta:Tarjeta){
+    recorridos.map(recorrido => recorrido.calcularCosto(tarjeta))
   }
 
   

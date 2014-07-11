@@ -5,10 +5,11 @@ import scala.collection.mutable.HashMap
 import utn.tadp.g5.objetos.mediosTransporte.Medio
 import utn.tadp.g5.objetos.criterios.Criterio
 import scala.collection.mutable.ListBuffer
+import utn.tadp.g5.objetos.tarjetas.Tarjeta
 
 class ComoViajo {
 
-  def consultar(parametrosDeViaje:ParametrosDeViaje, criterio:Criterio) : Viaje = {
+  def consultar(parametrosDeViaje:ParametrosDeViaje, tarjeta:Tarjeta) : Viaje = {
     
     var viaje = new Viaje()    
     var transporteCercanosInicio = ArrayBuffer[Cercano]()     
@@ -17,15 +18,15 @@ class ComoViajo {
     transporteCercanosInicio = obtenerTransportesCercanosEn(parametrosDeViaje.origen)
     transporteCercanosFin = obtenerTransportesCercanosEn(parametrosDeViaje.destino)
 
-    viaje.recorridos = calcularRecorridos(transporteCercanosInicio, transporteCercanosFin, criterio)
+    viaje.recorridos = calcularRecorridos(transporteCercanosInicio, transporteCercanosFin)
     viaje.calcularDuraciones()
-    viaje.calcularCostos()
+    viaje.calcularCostos(tarjeta)
     
     return  viaje
         
   }
     
-  def calcularRecorridos(tInicio:ArrayBuffer[Cercano], tFin:ArrayBuffer[Cercano], criterio:Criterio): List[Recorrido] = {    
+  def calcularRecorridos(tInicio:ArrayBuffer[Cercano], tFin:ArrayBuffer[Cercano]): List[Recorrido] = {    
     var recorridos = ListBuffer[Recorrido]()
     
     recorridos = fusionarRecorridos(calcularDirecto(tInicio, tFin), calcularCombinado(tInicio, tFin))
@@ -59,9 +60,7 @@ class ComoViajo {
         recorrido = new Recorrido()
         recorrido.ruta = List(transporte)
         recorridos += recorrido}
-         
-    //recorridos += recorrido 
-    //var r = recorridos.toList
+
     recorridos
   }
   
@@ -122,5 +121,5 @@ class ComoViajo {
   def consultar(viaje:ParametrosDeViaje) : Viaje = {
     this.consultar(viaje, null)
   }
-  
+    
 }

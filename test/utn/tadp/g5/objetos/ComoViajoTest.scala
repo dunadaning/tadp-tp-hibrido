@@ -2,9 +2,11 @@ package utn.tadp.g5.objetos
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
-
 import utn.tadp.g5.objetos.criterios.CriterioCosto
 import utn.tadp.g5.objetos.criterios.CriterioTiempo
+import utn.tadp.g5.objetos.tarjetas.Discapacitados
+import utn.tadp.g5.objetos.tarjetas.Turismo
+import utn.tadp.g5.objetos.tarjetas.Trabajo
 
 class ComoViajoTest {
  	
@@ -74,6 +76,60 @@ class ComoViajoTest {
 	  
 	}
     
+  @Test
+	def testConsultarViajeDescuentoDiscapacitado {
+    
+    val miDescuento =  new Discapacitados()
+    val origen = new Direccion("Avellaneda", 750)
+	  val destino = new Direccion("Alsina", 350)	  
+	  val parametrosViaje = new ParametrosDeViaje(origen, destino)	 
+	  val miConsultaDeViaje = new ComoViajo()
+	  val miViaje = miConsultaDeViaje.consultar(parametrosViaje, miDescuento)
+	  	  
+	  imprimirTest("TEST Viaje con Descuento para Discapacitados:")
+	  imprimirDescripcion("Dado una consulta con descuento, se le aplica el mismo al costo")
+	  mostrarResultadoPorConsola(miViaje)
+    
+	  assertEquals(miViaje.recorridos.size,1)
+	  
+	}    
+
+  @Test
+	def testConsultarViajeDescuentoTrabajo {
+    
+    val miDescuento =  new Trabajo()
+    val origen = new Direccion("Avellaneda", 750)
+	  val destino = new Direccion("Alsina", 350)	  
+	  val parametrosViaje = new ParametrosDeViaje(origen, destino)	 
+	  val miConsultaDeViaje = new ComoViajo()
+	  val miViaje = miConsultaDeViaje.consultar(parametrosViaje, miDescuento)
+	  	  
+	  imprimirTest("TEST Viaje con Descuento para Trabajador:")
+	  imprimirDescripcion("Dado una consulta con descuento, se le aplica el mismo al costo")
+	  mostrarResultadoPorConsola(miViaje)
+    
+	  assertEquals(miViaje.recorridos.size,1)
+	  
+	}
+/*
+  @Test
+	def testConsultarViajeDescuentoTurismo {
+    
+    val miDescuento =  new Turismo()
+    val origen = new Direccion("Avellaneda", 750)
+	  val destino = new Direccion("Alsina", 350)	  
+	  val parametrosViaje = new ParametrosDeViaje(origen, destino)	 
+	  val miConsultaDeViaje = new ComoViajo()
+	  val miViaje = miConsultaDeViaje.consultar(parametrosViaje, miDescuento)
+	  	  
+	  imprimirTest("TEST Viaje con Descuento para Turismo:")
+	  imprimirDescripcion("Dado una consulta con descuento, se le aplica el mismo al costo")
+	  mostrarResultadoPorConsola(miViaje)
+    
+	  assertEquals(miViaje.recorridos.size,1)
+	  
+	}
+*/  
   @Test
 	def testConsultarViajeNoHayRecorrido {
 	  val origen = new Direccion("Jujuy", 37)
@@ -153,6 +209,7 @@ class ComoViajoTest {
   
   def imprimirCostos(viaje:Viaje, i:Int){
     println("Costo: $ " + viaje.recorridos(i).costo)
+    if (viaje.recorridos(i).descuento>0) println("Descuento: $ " + viaje.recorridos(i).descuento)
   }
   
   def imprimirTest(nombre:String){    
