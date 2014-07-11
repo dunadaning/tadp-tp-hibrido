@@ -21,9 +21,7 @@ class Recorrido {
   
   def getCosto(tarjeta:Tarjeta) = calcularCosto(tarjeta)//costo
   
-  //CORRECCION: no esta bueno hacerlo con map. Para hacer una sumatoria usen fold. 
-  // Ademas se va a aumentar la duración cada vez que se llame a calcularDuracion.
-  // Deberian calcular la duracion en el metodo getDuracion sin efecto colateral(sin cambiar la variable duracion).
+  //CORRECCION: Deberian calcular la duracion en el metodo getDuracion sin efecto colateral(sin cambiar la variable duracion).
   def calcularDuracion() = {
     ruta.foldLeft(0.0)((acum , transporte) => acum + this.tiempoPara(transporte)) 
   }
