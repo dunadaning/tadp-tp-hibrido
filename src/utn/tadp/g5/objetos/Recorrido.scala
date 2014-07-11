@@ -48,4 +48,8 @@ class Recorrido {
     ruta.exists(transporte => transporte.llegaALaZona(zona))
   }
   
+  def getCostoTotal() = costo + descuento
+  
+  def getPorcentajeDescuento() = (descuento * 100) / getCostoTotal()
+  
 }

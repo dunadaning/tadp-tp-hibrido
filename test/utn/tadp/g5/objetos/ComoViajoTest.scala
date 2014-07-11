@@ -1,6 +1,6 @@
 package utn.tadp.g5.objetos
 
-import org.junit.Assert.assertEquals
+import org.junit.Assert._
 import org.junit.Test
 import utn.tadp.g5.objetos.criterios.CriterioCosto
 import utn.tadp.g5.objetos.criterios.CriterioTiempo
@@ -23,7 +23,7 @@ class ComoViajoTest {
 	  imprimirDescripcion("Consulta de un origen/destino, resultado una sola posibilidad de viaje")
 	  mostrarResultadoPorConsola(miViaje)
     
-	  assertEquals(miViaje.recorridos.size,1)
+	  miViaje.recorridos.foreach(recorrido => assertEquals(recorrido.ruta.size,1))
 	}
 
   @Test
@@ -37,8 +37,8 @@ class ComoViajoTest {
 	  imprimirTest("TEST Viaje Combinado:")
 	  imprimirDescripcion("Dado un origen y un destino se tiene como resultado 2 alternativas de viaje que a su vez son combinadas")
 	  mostrarResultadoPorConsola(miViaje)
-    
-	  assertEquals(miViaje.recorridos.size,3)
+ 
+	  miViaje.recorridos.foreach(recorrido => assertTrue(recorrido.ruta.size > 1))
 	}
 
   @Test
@@ -109,7 +109,7 @@ class ComoViajoTest {
 	  imprimirDescripcion("Dado una consulta con descuento, se le aplica el mismo al costo")
 	  mostrarResultadoPorConsola(miViaje)
     
-	  assertEquals(miViaje.recorridos.size,1)
+	  miViaje.recorridos.foreach(recorrido => assertTrue(recorrido.costo == 0))
 	  
 	}    
 
@@ -132,7 +132,7 @@ class ComoViajoTest {
 	}
 
   @Test
-	def testConsultarViajeDescuentoTurismo {
+	def testConsultarViajeDescuentoTurismoEnZona {
     var centro:Zona = null
     val miDescuento =  new Turismo(centro)
     val origen = new Direccion("Avellaneda", 750)
@@ -145,8 +145,8 @@ class ComoViajoTest {
 	  imprimirDescripcion("Dado una consulta con descuento, se le aplica el mismo al costo")
 	  mostrarResultadoPorConsola(miViaje)
     
-	  assertEquals(miViaje.recorridos.size,1)
-	  
+	  miViaje.recorridos.foreach(recorrido => recorrido.getPorcentajeDescuento()==10)
+    
 	}
 
   @Test
