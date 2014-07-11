@@ -7,9 +7,9 @@ import utn.tadp.g5.objetos.tarjetas.Zona
 
 class Recorrido {
   var ruta = List[Transporte]()
-  var duracion:Double = 0
   var costo:Double = 0
   var descuento:Double = 0
+  var duracion:Double = 0
   
   def getLineas() = ruta.map(transporte => transporte.getMedio().getLinea())
   
@@ -17,7 +17,7 @@ class Recorrido {
   
   def getCompanias() = ruta.map(transporte => transporte.getMedio().getCompania())
   
-  def getDuracion() = duracion
+  def getDuracion() = this.calcularDuracion()
   
   def getCosto() = costo
   
@@ -25,19 +25,29 @@ class Recorrido {
   // Ademas se va a aumentar la duración cada vez que se llame a calcularDuracion.
   // Deberian calcular la duracion en el metodo getDuracion sin efecto colateral(sin cambiar la variable duracion).
   def calcularDuracion() {
-    ruta.map(transporte => duracion+=transporte.getMedio().tiempoPara(transporte.getDireccionInicio(), transporte.getDireccionFin()))    
+    ruta.foldLeft(0.0)((acum , transporte) => acum + this.tiempoPara(transporte)) 
+  }
+  
+  def tiempoPara(transporte:Transporte)={
+    transporte.getMedio().tiempoPara(transporte.getDireccionInicio(), transporte.getDireccionFin())
   }
 
   //CORRECCION: idem calcularDuracion
-  def calcularCosto(tarjeta:Tarjeta) {
-    ruta.map(transporte => costo+=transporte.getMedio().costoPara(transporte.getDireccionInicio(), transporte.getDireccionFin()))
-    if (tarjeta!=null) aplicarDescuento(tarjeta)
+  def calcularCosto(tarjeta:Tarjeta){
+    ruta.foldLeft(0.0)((acum,transporte) => acum + this.costoPara(transporte))- this.aplicarDescuento(tarjeta)
+  }
+  
+  def costoPara(transporte:Transporte)={
+    transporte.getMedio().costoPara(transporte.getDireccionInicio(), transporte.getDireccionFin())
   }
   
   //CORRECCION: de nuevo el efecto colateral. Deberian aplicar el descuento cuando se pide el costo total.
-  def aplicarDescuento(tarjeta:Tarjeta){
-    descuento = tarjeta.aplicarDescuentoAlRecorrido(this)
-    costo -= (descuento)
+  def aplicarDescuento(tarjeta:Tarjeta)={
+    if (tarjeta!=null){
+      tarjeta.aplicarDescuentoAlRecorrido(this)
+    }else{
+      0
+    }
   }
   
   def perteneceALaZona(zona:Zona)={
