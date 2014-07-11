@@ -42,23 +42,16 @@ class Viaje {
     this.tramo.llegaALaZona(zona)
   }
   
-  /*def calcularDuraciones(){
-    //TODO a partir de los recorridos, calcular cada duracion por alternativa
-    val alternativas = recorridos.toArray
-    
-    for(i <- 0 until alternativas.size){
-      duraciones += getDuracion(alternativas(i).mapa)
-    }
-  }
-
-  def calcularCostos(){
-    //TODO a partir de los recorridos, calcular cada costo por alternativa
-    val alternativas = recorridos.toArray
-    for(i <- 0 until alternativas.size){
-      costos += (i -> getCosto(alternativas(i).mapa))  
-    }
+  def calcularDuraciones(){
+    recorridos.map(recorrido => recorrido.calcularDuracion())
   }
   
+
+  def calcularCostos(){
+    recorridos.map(recorrido => recorrido.calcularCosto())
+  }
+  
+/*  
   def getDuracion(recorrido:HashMap[Int,Transporte]):Double = {
     var total:Double = 0
     

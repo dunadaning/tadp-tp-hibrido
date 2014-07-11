@@ -36,5 +36,12 @@ class Recorrido {
     for()
   }*/
   def tiempoDeViaje() = 1
- 
+  
+  def calcularDuracion() {
+    ruta.map(transporte => duracion+=transporte.getMedio().tiempoPara(transporte.getDireccionInicio(), transporte.getDireccionFin()))    
+  }
+
+  def calcularCosto() {
+    ruta.map(transporte => duracion+=transporte.getMedio().costoPara(transporte.getDireccionInicio(), transporte.getDireccionFin()))    
+  }
 }
