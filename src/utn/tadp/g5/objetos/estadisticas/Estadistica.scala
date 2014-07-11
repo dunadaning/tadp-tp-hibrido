@@ -1,13 +1,14 @@
 package utn.tadp.g5.objetos.estadisticas
 
 import scala.collection.mutable.ArrayBuffer
-import utn.tadp.g5.objetos.Viaje
-import utn.tadp.g5.objetos.Viaje
 import scala.collection.mutable.HashMap
+
+import utn.tadp.g5.objetos.Recorrido
+import utn.tadp.g5.objetos.Viaje
+import utn.tadp.g5.objetos.Viaje
+import utn.tadp.g5.objetos.estadisticas.Filtro
 import utn.tadp.g5.objetos.tarjetas.Zona
 import utn.tadp.g5.objetos.tarjetas.Zona
-import java.lang.invoke.LambdaForm
-//import utn.tadp.g5.objetos.estadisticas.Filtro
 import utn.tadp.g5.objetos.tarjetas.Zona
 
 
@@ -61,29 +62,29 @@ abstract class Estadistica[T] {
 	}
 	
 	def calcularCostoTotal(viajes: Viajes)={
-	  viajes.foldRight(0.0)((viaje, acum) => acum + viaje.costoViaje())
+	  //viajes.foldRight(0.0)((viaje, acum) => acum + viaje.costoViaje())
 	}
 	
 	def calcularTiempoTotal(viajes:Viajes)={
-	  viajes.foldRight(0.0)((viaje, acum) => acum + viaje.tiempoViaje())
+	  //viajes.foldRight(0.0)((viaje, acum) => acum + viaje.tiempoViaje())
 	}
 	
 	def getEstadisticaCostoPromedio()={
-		val bloque:(Viajes => Double) = 
-		  viajes => ( this.calcularCostoTotal(viajes) / viajes.length)
-		this.getEstadistica(bloque)
+		//val bloque:(Viajes => Double) = 
+		//  viajes => ( this.calcularCostoTotal(viajes) / viajes.length)
+		//this.getEstadistica(bloque)
 	}
 	
 	def getEstadisticaTiempoPromedio()={
-		val bloque:(Viajes => Double) = 
-		  viajes => ( this.calcularTiempoTotal(viajes) / viajes.length)
-		this.getEstadistica(bloque)
+		//val bloque:(Viajes => Double) = 
+		//  viajes => ( this.calcularTiempoTotal(viajes) / viajes.length)
+		//this.getEstadistica(bloque)
 	}
 	
 	def getEstadisticaFacturacionTotal()={
-		val bloque:(Viajes => Double) = 
-		  viajes => this.calcularCostoTotal(viajes)
-		this.getEstadistica(bloque)
+		//val bloque:(Viajes => Double) = 
+		//  viajes => this.calcularCostoTotal(viajes)
+		//this.getEstadistica(bloque)
 	}
 
 	def getEstadisticaPorcentajeUtilizacion()={
@@ -97,10 +98,11 @@ abstract class Estadistica[T] {
 
 }
 
-class EstadisticaPorZona extends Estadistica[Zona]{
-
-	def perteneceElemento(viaje: Viaje, elem: Zona): Boolean = viaje.perteneceALaZona(elem)
-}
+//class EstadisticaPorZona extends Estadistica[Zona]{
+//
+//	def perteneceElemento(recorrido: Recorrido, elem: Zona): Boolean = recorrido.perteneceALaZona(elem)
+//
+//}
 
 class EstadisticaPorLinea extends Estadistica[String]{
 	

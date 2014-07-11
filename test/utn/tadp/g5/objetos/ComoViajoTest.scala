@@ -7,6 +7,7 @@ import utn.tadp.g5.objetos.criterios.CriterioTiempo
 import utn.tadp.g5.objetos.tarjetas.Discapacitados
 import utn.tadp.g5.objetos.tarjetas.Turismo
 import utn.tadp.g5.objetos.tarjetas.Trabajo
+import utn.tadp.g5.objetos.tarjetas.Zona
 
 class ComoViajoTest {
  	
@@ -58,6 +59,24 @@ class ComoViajoTest {
 	  
 	}
 
+  @Test
+	def testConsultarViajeDirectoB {
+    
+    val miCriterio =  new CriterioCosto()
+    val origen = new Direccion("Pedernera", 750)
+	  val destino = new Direccion("Rosario", 350)	  
+	  val parametrosViaje = new ParametrosDeViaje(origen, destino)	 
+	  val miConsultaDeViaje = new ComoViajo()
+	  val miViaje = miCriterio.consultar(miConsultaDeViaje.consultar(parametrosViaje))
+	  	  
+	  imprimirTest("TEST Viaje Directo:")
+	  imprimirDescripcion("Se consulta un solo tramo de un viaje combinado para testear el costo")
+	  mostrarResultadoPorConsola(miViaje)
+    
+	  assertEquals(miViaje.recorridos.size,1)
+	  
+	}
+      
     @Test
 	def testConsultarViajeCriterio {
     
@@ -98,7 +117,7 @@ class ComoViajoTest {
 	def testConsultarViajeDescuentoTrabajo {
     
     val miDescuento =  new Trabajo()
-    val origen = new Direccion("Avellaneda", 750)
+    val origen = new Direccion("Rivadavia", 750)
 	  val destino = new Direccion("Alsina", 350)	  
 	  val parametrosViaje = new ParametrosDeViaje(origen, destino)	 
 	  val miConsultaDeViaje = new ComoViajo()
@@ -111,11 +130,11 @@ class ComoViajoTest {
 	  assertEquals(miViaje.recorridos.size,1)
 	  
 	}
-/*
+
   @Test
 	def testConsultarViajeDescuentoTurismo {
-    
-    val miDescuento =  new Turismo()
+    var centro:Zona = null
+    val miDescuento =  new Turismo(centro)
     val origen = new Direccion("Avellaneda", 750)
 	  val destino = new Direccion("Alsina", 350)	  
 	  val parametrosViaje = new ParametrosDeViaje(origen, destino)	 
@@ -129,7 +148,7 @@ class ComoViajoTest {
 	  assertEquals(miViaje.recorridos.size,1)
 	  
 	}
-*/  
+
   @Test
 	def testConsultarViajeNoHayRecorrido {
 	  val origen = new Direccion("Jujuy", 37)
@@ -144,7 +163,7 @@ class ComoViajoTest {
     
 	  assertEquals(miViaje.recorridos.size,0)
 	}
-	
+
   def mostrarResultadoPorConsola(viaje: Viaje){   
     var orden:Int = 0
     var descripcion:String = null

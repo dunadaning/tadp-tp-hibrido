@@ -5,6 +5,7 @@ import utn.tadp.g5.objetos.mediosTransporte.Subte
 import utn.tadp.g5.objetos.mediosTransporte.Medio
 import utn.tadp.g5.objetos.mediosTransporte.Colectivo
 import scala.collection.mutable.ListBuffer
+import utn.tadp.g5.objetos.tarjetas.Zona
 
 object ModuloExterno {
   
@@ -31,6 +32,10 @@ object ModuloExterno {
       transporteA.direccion = new Direccion("Rio de Janeiro")
       
       respuesta += transporteA
+    
+    }else if (direccion.calle.equals("Rivadavia")){
+      var transporteA = new Cercano(new Colectivo(8, ""), new Direccion("Rivadavia",1000))    
+      respuesta += transporteA
       
     }else if (direccion.calle.equals("Alsina")){
       var transporteA = new Cercano(new Subte('A', this.getEstacionesSubte('A')))
@@ -38,8 +43,15 @@ object ModuloExterno {
       respuesta += transporteA
       
       transporteA = new Cercano(new Colectivo(105,""), new Direccion("Bartolome Mitre",350))
-      respuesta += transporteA    
+      respuesta += transporteA   
       
+      transporteA = new Cercano(new Colectivo(8,""), new Direccion("Rivadavia",4350))
+      respuesta += transporteA 
+    
+    }else if (direccion.calle.equals("Rosario")){
+      var transporteA = new Cercano(new Colectivo(103,""), new Direccion("Rosario",350))
+      respuesta += transporteA    
+        
     }else if (direccion.calle.equals("Pedernera")){
       var transporteA = new Cercano(new Colectivo(103,""), new Direccion("Primera Junta", 35))
       respuesta += transporteA
@@ -73,24 +85,29 @@ object ModuloExterno {
   def combinan(medioA :Medio, medioB: Medio)= true
   
   def consultarDistanciaColectivo(colectivo:Colectivo, inicio:Direccion, fin:Direccion) : Double = {        
-    if(inicio.calle == fin.calle ){
-      return (fin.numero - inicio.numero).abs /1000.0
-    }
     
-    if(inicio.calle.equals("Primera Junta") == fin.calle.equals("Rosario") ){
+    if(inicio.calle.equals("Primera Junta") && fin.calle.equals("Rosario") ){
       return (13).abs
     }
     
-    if(inicio.calle.equals("Rosario") == fin.calle.equals("Brandsen") ){
+    if(inicio.calle.equals("Rosario") && fin.calle.equals("Brandsen") ){
       return (9).abs
     }
     
-    if(inicio.calle.equals("Primera Junta") == fin.calle.equals("Eva Peron") ){
+    if(inicio.calle.equals("Primera Junta") && fin.calle.equals("Eva Peron") ){
       return (2).abs
     }
     
-    if(inicio.calle.equals("Eva Peron") == fin.calle.equals("Paseo Colon") ){
+    if(inicio.calle.equals("Eva Peron") && fin.calle.equals("Paseo Colon") ){
       return (17.5).abs
+    }
+    
+    if(inicio.calle.equals("Rivadavia") && fin.calle.equals("Rivadavia") ){
+      return (16.7).abs
+    }
+    
+    if(inicio.calle == fin.calle ){
+      return (fin.numero - inicio.numero).abs /1000.0
     }
     
     return 0    
@@ -102,6 +119,23 @@ object ModuloExterno {
    }
     
     return 0    
+  }
+  
+  def direccionIncluidaEnZona(zona:Zona, direccion:Direccion):Boolean = {
+    
+    if (direccion.calle.equals("Rivadavia")){
+      return true
+    }else if (direccion.calle.equals("Bransden")){
+      return true
+    }else if (direccion.calle.equals("Alsina")){
+      return true
+    }else if (direccion.calle.equals("Rio de Janeiro")){
+      return true
+    }else if (direccion.calle.equals("Saenz Penia")){
+      return true
+    }
+    
+    false
   }
   
   def getEstacionesSubte(linea:Char):List[Direccion] = {

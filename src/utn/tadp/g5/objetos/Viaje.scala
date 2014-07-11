@@ -15,38 +15,16 @@ class Viaje {
   //var duraciones = new MutableList[Double]//Cada clave es la alternativa
   //var costos = new HashMap[Int,Double]//Cada clave es la alternativa
   //SE PASO A RECORRIDO
-  var tramo:Tramo = null
   
   def getLineas() = recorridos.map(recorrido => recorrido.getLineas()).flatten
   
   def getTipos() = recorridos.map(recorrido => recorrido.getTipos()).flatten
   
   def getCompanias() = recorridos.map(recorrido => recorrido.getCompanias()).flatten
-  
-  def perteneceALaZona(zona:Zona)={
-    this.tramo.perteneceALaZona(zona)
-  }
-  
-  def costoViaje()={
-    this.tramo.costoTramo()
-  }
-  
-  def tiempoViaje()={
-    this.tramo.tiempoTramo()
-  }
-  
-  def saleDesdeLaZona(zona:Zona)={
-    this.tramo.saleDesdeLaZona(zona)
-  }
-  
-  def llegaALaZona(zona:Zona)={
-    this.tramo.llegaALaZona(zona)
-  }
-  
+    
   def calcularDuraciones(){
     recorridos.map(recorrido => recorrido.calcularDuracion())
   }
-  
 
   def calcularCostos(tarjeta:Tarjeta){
     recorridos.map(recorrido => recorrido.calcularCosto(tarjeta))

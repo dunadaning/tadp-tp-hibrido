@@ -3,12 +3,14 @@ package utn.tadp.g5.objetos
 import scala.collection.mutable.HashMap
 import scala.collection.mutable.ArrayBuffer
 import utn.tadp.g5.objetos.tarjetas.Tarjeta
+import utn.tadp.g5.objetos.tarjetas.Zona
 
 class Recorrido {
   var ruta = List[Transporte]()
   var duracion:Double = 0
   var costo:Double = 0
   var descuento:Double = 0
+  var tramo:Tramo = null
   
   def getLineas() = ruta.map(transporte => transporte.getMedio().getLinea())
   
@@ -30,7 +32,20 @@ class Recorrido {
   }
   
   def aplicarDescuento(tarjeta:Tarjeta){
-    descuento = costo * tarjeta.getDescuento()
+    descuento = tarjeta.aplicarDescuentoAlRecorrido(this)
     costo -= (descuento)
   }
+  
+  def perteneceALaZona(zona:Zona)={
+    ruta.exists(transporte => transporte.perteneceALaZona(zona))
+  }
+    
+  def saleDesdeLaZona(zona:Zona)={
+    ruta.exists(transporte => transporte.saleDesdeLaZona(zona))
+  }
+  
+  def llegaALaZona(zona:Zona)={
+    ruta.exists(transporte => transporte.llegaALaZona(zona))
+  }
+  
 }
