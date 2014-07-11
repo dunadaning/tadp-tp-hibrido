@@ -8,6 +8,7 @@ import utn.tadp.g5.objetos.tarjetas.Discapacitados
 import utn.tadp.g5.objetos.tarjetas.Turismo
 import utn.tadp.g5.objetos.tarjetas.Trabajo
 import utn.tadp.g5.objetos.tarjetas.Zona
+import utn.tadp.g5.objetos.tarjetas.Tarjeta
 
 class ComoViajoTest {
  	
@@ -107,7 +108,7 @@ class ComoViajoTest {
 	  	  
 	  imprimirTest("TEST Viaje con Descuento para Discapacitados:")
 	  imprimirDescripcion("Dado una consulta con descuento, se le aplica el mismo al costo")
-	  mostrarResultadoPorConsola(miViaje)
+	  mostrarResultadoPorConsola(miViaje, miDescuento)
     
 	  miViaje.recorridos.foreach(recorrido => assertTrue(recorrido.costo == 0))
 	  
@@ -125,7 +126,7 @@ class ComoViajoTest {
 	  	  
 	  imprimirTest("TEST Viaje con Descuento para Trabajador:")
 	  imprimirDescripcion("Dado una consulta con descuento, se le aplica el mismo al costo")
-	  mostrarResultadoPorConsola(miViaje)
+	  mostrarResultadoPorConsola(miViaje, miDescuento)
     
 	  assertEquals(miViaje.recorridos.size,1)
 	  
@@ -143,7 +144,7 @@ class ComoViajoTest {
 	  	  
 	  imprimirTest("TEST Viaje con Descuento para Turismo:")
 	  imprimirDescripcion("Dado una consulta con descuento, se le aplica el mismo al costo")
-	  mostrarResultadoPorConsola(miViaje)
+	  mostrarResultadoPorConsola(miViaje, miDescuento)
     
 	  miViaje.recorridos.foreach(recorrido => recorrido.getPorcentajeDescuento()==10)
     
@@ -164,7 +165,7 @@ class ComoViajoTest {
 	  assertEquals(miViaje.recorridos.size,0)
 	}
 
-  def mostrarResultadoPorConsola(viaje: Viaje){   
+  def mostrarResultadoPorConsola(viaje: Viaje, tarjeta:Tarjeta){   
     var orden:Int = 0
     var descripcion:String = null
     var linea:Any = null 
@@ -193,7 +194,7 @@ class ComoViajoTest {
         } 
         println(resultadoCompleto)
         imprimirDuracion(viaje,i)
-        imprimirCostos(viaje,i)
+        imprimirCostos(viaje,i, tarjeta)
         
       }else if (recorridos(i).ruta.size>0){
           //orden = (i+1)
@@ -216,18 +217,21 @@ class ComoViajoTest {
           
           println(resultadoCompleto)   
           imprimirDuracion(viaje,i)
-          imprimirCostos(viaje,i)
+          imprimirCostos(viaje,i, tarjeta)
       }           
     } 
     println("")
   }
-  
-  def imprimirDuracion(viaje:Viaje, i:Int){
-    println("Duracion: " + viaje.recorridos(i).duracion + " minutos")
+  def mostrarResultadoPorConsola(viaje: Viaje){
+    this.mostrarResultadoPorConsola(viaje, null)
   }
   
-  def imprimirCostos(viaje:Viaje, i:Int){
-    println("Costo: $ " + viaje.recorridos(i).costo)
+  def imprimirDuracion(viaje:Viaje, i:Int){
+    println("Duracion: " + viaje.recorridos(i).getDuracion() + " minutos")
+  }
+  
+  def imprimirCostos(viaje:Viaje, i:Int, tarjeta:Tarjeta){
+    println("Costo: $ " + viaje.recorridos(i).getCosto(tarjeta))
     if (viaje.recorridos(i).descuento>0) println("Descuento: $ " + viaje.recorridos(i).descuento)
   }
   
