@@ -7,11 +7,13 @@ import scala.collection.mutable.MutableList
 
 class Viaje { 
   //CORRECCION: recorridos, duraciones y costos deberia ser una sola coleccion con objetos que tengan esos tres datos(por ej: Recorrido)
-  var recorridos: ArrayBuffer[Recorrido] = null //Cada indice del Array es una alternativa de viaje
+  //SE UTILIZA UNA LISTA
+  var recorridos: List[Recorrido] = null //Cada indice del Array es una alternativa de viaje
   
   //CORRECCION: Un Array o una lista es mas apropiado que un map en este caso.
-  var duraciones = new MutableList[Double]//Cada clave es la alternativa
-  var costos = new HashMap[Int,Double]//Cada clave es la alternativa
+  //var duraciones = new MutableList[Double]//Cada clave es la alternativa
+  //var costos = new HashMap[Int,Double]//Cada clave es la alternativa
+  //SE PASO A RECORRIDO
   var tramo:Tramo = null
   
   def getLineas() = recorridos.map(recorrido => recorrido.getLineas()).flatten
@@ -40,7 +42,7 @@ class Viaje {
     this.tramo.llegaALaZona(zona)
   }
   
-  def calcularDuraciones(){
+  /*def calcularDuraciones(){
     //TODO a partir de los recorridos, calcular cada duracion por alternativa
     val alternativas = recorridos.toArray
     
@@ -84,5 +86,5 @@ class Viaje {
     }
     
     return total
-  }
+  }*/
 }

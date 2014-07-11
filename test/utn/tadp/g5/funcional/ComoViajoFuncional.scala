@@ -1,4 +1,4 @@
-package test
+package utn.tadp.g5.funcional
 
 import utn.tadp.g5.funcional.ModuloExterno
 import utn.tadp.g5.objetos.Direccion

@@ -4,20 +4,16 @@ import scala.collection.mutable.HashMap
 import scala.collection.mutable.ArrayBuffer
 
 class Recorrido {
-  //var medio:Medio = null// = new Medio()
-  //var direccion:Direccion = null// = new Direccion()
-  var mapa: HashMap[Int,Transporte] = new HashMap
-  var duracion: Double = 0.0
-  var costo: Double = 0.0
+  var ruta = List[Transporte]()
+  var duracion:Double = 0
+  var costo:Double = 0
   
-  //val tramos = new ArrayBuffer[Tramo]
- 
-  def getLineas() = mapa.mapValues(transporte => transporte.getMedio.getLinea())
+  def getLineas() = ruta.map(transporte => transporte.getMedio().getLinea())
   
-  def getTipos() = mapa.mapValues(transporte => transporte.getMedio.getDescripcion())
+  def getTipos() = ruta.map(transporte => transporte.getMedio().getDescripcion())
   
-  def getCompanias() = mapa.mapValues(transporte => transporte.getMedio.getCompania())
-  
+  def getCompanias() = ruta.map(transporte => transporte.getMedio().getCompania())
+    
   def calcular():Int = {
     return 1
   }

@@ -21,7 +21,7 @@ class CriterioCosto extends Criterio {
     var min:Double = 0
     var idx:Int = 0
     
-    if (viaje.costos.size>0){
+    /*if (viaje.costos.size>0){
       min = viaje.costos(0)
       idx = 0
     }
@@ -38,7 +38,7 @@ class CriterioCosto extends Criterio {
     viajeRespuesta.duraciones = new MutableList[Double]
     viajeRespuesta.duraciones += viaje.duraciones(idx)
     viajeRespuesta.costos = new HashMap[Int,Double]
-    viajeRespuesta.costos += (0 -> viaje.costos(idx))
+    viajeRespuesta.costos += (0 -> viaje.costos(idx))*/
     viajeRespuesta
   }  
 }

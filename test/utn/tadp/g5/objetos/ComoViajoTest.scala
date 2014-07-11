@@ -22,7 +22,7 @@ class ComoViajoTest {
     
 	  assertEquals(miViaje.recorridos.toArray.size,1)
 	}
-
+/* 
   @Test
 	def testConsultarViajeCombina = {
     val origen = new Direccion("Pedernera", 750)
@@ -74,7 +74,6 @@ class ComoViajoTest {
 	  
 	}
     
-/* 
   @Test
 	def testConsultarViajeNoHayRecorrido {
     val origen = new Direccion("Jujuy", 750)
@@ -84,31 +83,30 @@ class ComoViajoTest {
 	  assertEquals("d",ConsultaExterna.consultar(viaje).size,0)
 	}
 	*/
-  
   def mostrarResultadoPorConsola(viaje: Viaje){   
     var orden:Int = 0
     var descripcion:String = null
     var linea:Any = null 
     var direccionInicio:String = null
     var direccionFin:String = null
-    val recorridos = viaje.recorridos.toArray
+    val recorridos = viaje.recorridos
     var combina:String = null
     var resultadoCompleto:String = null
     var ordenCom = 0
     var ordenDir = 0
     
     for (i <- 0 until recorridos.size){                  
-      if (recorridos(i).mapa.size>1){
+      if (recorridos(i).ruta.size>1){
         ordenCom += 1
         resultadoCompleto = "Alternativa combinada " + (ordenCom).toString() + " : "
         
-        for (e <- 0 until recorridos(i).mapa.size){          
-          descripcion =  recorridos(i).mapa(e).getMedio.getDescripcion().toString()
-          linea = recorridos(i).mapa(e).getMedio.getLinea()
-          direccionInicio = recorridos(i).mapa(e).getDireccionInicio.calle + " " + recorridos(i).mapa(e).getDireccionInicio.numero
-          direccionFin = recorridos(i).mapa(e).getDireccionFin.calle + " " + recorridos(i).mapa(e).getDireccionFin.numero
+        for (e <- 0 until recorridos(i).ruta.size){          
+          descripcion =  recorridos(i).ruta(e).getMedio().getDescripcion().toString()
+          linea = recorridos(i).ruta(e).getMedio().getLinea()
+          direccionInicio = recorridos(i).ruta(e).getDireccionInicio().calle + " " + recorridos(i).ruta(e).getDireccionInicio().numero
+          direccionFin = recorridos(i).ruta(e).getDireccionFin().calle + " " + recorridos(i).ruta(e).getDireccionFin().numero
           resultadoCompleto += descripcion + "-" + linea + " / " + "Direccion (desde/hasta): " + direccionInicio + " a " + direccionFin
-          if (e<(recorridos(i).mapa.size-1)){
+          if (e<(recorridos(i).ruta.size-1)){
             resultadoCompleto += " --> "
           }                             
         } 
@@ -116,21 +114,21 @@ class ComoViajoTest {
         imprimirDuracion(viaje,i)
         imprimirCostos(viaje,i)
         
-      }else if (recorridos(i).mapa.size>0){
+      }else if (recorridos(i).ruta.size>0){
           //orden = (i+1)
           ordenDir += 1
-          descripcion =  recorridos(i).mapa(i).getMedio.getDescripcion().toString()
-          linea = recorridos(i).mapa(i).getMedio.getLinea()
-          direccionInicio = recorridos(i).mapa(i).getDireccionInicio.calle
+          descripcion =  recorridos(i).ruta.head.getMedio().getDescripcion().toString()
+          linea = recorridos(i).ruta.head.getMedio().getLinea()
+          direccionInicio = recorridos(i).ruta(i).getDireccionInicio().calle
           
-          if (recorridos(i).mapa(i).getDireccionInicio.numero>0){
-            direccionInicio += " " + recorridos(i).mapa(i).getDireccionInicio.numero
+          if (recorridos(i).ruta(i).getDireccionInicio().numero>0){
+            direccionInicio += " " + recorridos(i).ruta(i).getDireccionInicio().numero
           }
           
-          direccionFin = recorridos(i).mapa(i).getDireccionFin.calle
+          direccionFin = recorridos(i).ruta(i).getDireccionFin().calle
           
-          if (recorridos(i).mapa(i).getDireccionFin.numero>0){
-            direccionFin += " " + recorridos(i).mapa(i).getDireccionFin.numero
+          if (recorridos(i).ruta(i).getDireccionFin().numero>0){
+            direccionFin += " " + recorridos(i).ruta(i).getDireccionFin().numero
           }
           
           resultadoCompleto = "Alternativa directa " + ordenDir + ": " + descripcion + "-" + linea + " / " + "Direccion (desde/hasta): " + direccionInicio + " a " + direccionFin
@@ -144,11 +142,11 @@ class ComoViajoTest {
   }
   
   def imprimirDuracion(viaje:Viaje, i:Int){
-    println("Duracion: " + viaje.duraciones(i) + " minutos")
+    println("Duracion: " + viaje.recorridos(i).duracion + " minutos")
   }
   
   def imprimirCostos(viaje:Viaje, i:Int){
-    println("Costo: $ " + viaje.costos(i))
+    println("Costo: $ " + viaje.recorridos(i).costo)
   }
   
   def imprimirTest(nombre:String){    

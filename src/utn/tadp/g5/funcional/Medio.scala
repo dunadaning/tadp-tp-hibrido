@@ -3,7 +3,7 @@ package utn.tadp.g5.funcional
 import utn.tadp.g5.objetos.Direccion
 import utn.tadp.g5.objetos.ModuloExterno
 import scala.collection.immutable.TreeMap
-import test.ModuloExternoImplementado
+import utn.tadp.g5.funcional.ModuloExternoImplementado
 
 trait Medio {
 	def getLinea(): String

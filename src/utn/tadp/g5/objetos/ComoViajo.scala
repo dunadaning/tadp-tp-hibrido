@@ -4,6 +4,7 @@ import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.HashMap
 import utn.tadp.g5.objetos.mediosTransporte.Medio
 import utn.tadp.g5.objetos.criterios.Criterio
+import scala.collection.mutable.ListBuffer
 
 class ComoViajo {
 
@@ -17,20 +18,20 @@ class ComoViajo {
     transporteCercanosFin = obtenerTransportesCercanosEn(parametrosDeViaje.destino)
 
     viaje.recorridos = calcularRecorridos(transporteCercanosInicio, transporteCercanosFin, criterio)
-    viaje.calcularDuraciones()
-    viaje.calcularCostos()
+    //viaje.calcularDuraciones()
+    //viaje.calcularCostos()
     
     return  viaje
         
   }
-  
-  def calcularRecorridos(tInicio:ArrayBuffer[Cercano], tFin:ArrayBuffer[Cercano], criterio:Criterio): ArrayBuffer[Recorrido] = {
-    var recorridos = ArrayBuffer[Recorrido]()
     
-    recorridos += calcularDirecto(tInicio, tFin)
-    recorridos = fusionarRecorridos(recorridos, calcularCombinado(tInicio, tFin))
+  def calcularRecorridos(tInicio:ArrayBuffer[Cercano], tFin:ArrayBuffer[Cercano], criterio:Criterio): List[Recorrido] = {    
+    var recorridos = ListBuffer[Recorrido]()
     
-    recorridos
+    recorridos = calcularDirecto(tInicio, tFin)
+    //recorridos = fusionarRecorridos(recorridos, calcularCombinado(tInicio, tFin))
+       
+    recorridos.toList
     
   }
 
@@ -43,32 +44,47 @@ class ComoViajo {
     recorridosFusionados
   }
   
-  def calcularDirecto(tInicio:ArrayBuffer[Cercano], tFin:ArrayBuffer[Cercano]): Recorrido = {    
-    val recorrido = new Recorrido()    
+  def calcularDirecto(tInicio:ArrayBuffer[Cercano], tFin:ArrayBuffer[Cercano]): ListBuffer[Recorrido] = {    
+    var recorrido : Recorrido = null
+    val recorridos = ListBuffer[Recorrido]()  
+    var ruta = ListBuffer[Transporte]()
+    var rutaFiltrada = List[Transporte]()
     
     //CORRECCION: map en lugar de foreach - cambio foreach por foldLeft
-    tInicio.foldLeft(recorrido)((recorrido: Recorrido, cercano: Cercano) => this.obtenerRecorrido(cercano, tFin, recorrido))
+    //SE UTILIZA UN MAP
+    //tInicio.foldLeft(recorrido)((recorrido: Recorrido, cercano: Cercano) => this.obtenerTransporte(cercano, tFin, recorrido))
+    tInicio.map(cercano => ruta += obtenerTransporte(cercano, tFin))
+    rutaFiltrada = ruta.toList.filter(e => e!=null)
+    
+    rutaFiltrada.map{transporte => 
+        recorrido = new Recorrido()
+        recorrido.ruta = List(transporte)
+        recorridos += recorrido}
+         
+    //recorridos += recorrido 
+    //var r = recorridos.toList
+    recorridos
   }
   
-  def obtenerRecorrido(inicio: Cercano, transportesFin: ArrayBuffer[Cercano], recorridos: Recorrido): Recorrido = {
+  def obtenerTransporte(inicio: Cercano, transportesFin: ArrayBuffer[Cercano]): Transporte = {
         
     val cercano = buscarMedioQuePasaPorDestino(inicio.medio, transportesFin)
-    var transporte = new Transporte()
+    var transporte:Transporte = null
     
     if (!cercano.equals(None)){       
        
-      transporte = new Transporte(inicio.medio, inicio.direccion, cercano.get.direccion)       
-      recorridos.mapa += (getKeyMap(recorridos.mapa) -> transporte)     
+      transporte = new Transporte(inicio.medio, inicio.direccion, cercano.get.direccion)                
       
       }
-          recorridos
+    
+    transporte
   }
   
   def getKeyMap(mapa:HashMap[Int,Transporte]): Int = {
     return mapa.size    
   }
   
-  def calcularCombinado(tInicio:ArrayBuffer[Cercano], tFin:ArrayBuffer[Cercano]): ArrayBuffer[Recorrido] = {    
+  /*def calcularCombinado(tInicio:ArrayBuffer[Cercano], tFin:ArrayBuffer[Cercano]): ArrayBuffer[Recorrido] = {    
     //var recorridos = new Recorrido() 
     var combinados = new ArrayBuffer[Recorrido]
     var transporteA = new Transporte()
@@ -93,13 +109,14 @@ class ComoViajo {
     }
     
     return combinados
-  }
+  }*/
   
   def obtenerTransportesCercanosEn(direccion:Direccion): ArrayBuffer[Cercano] = {    
     ModuloExterno.consultarCercanos(direccion)
   }
 
   //CORRECCION: pasaPorDestino no expresa lo que hace.
+  //SE MODIFICA EL NOMBRE
   def buscarMedioQuePasaPorDestino(myTransportIda:Medio, transporteCercanosFin:ArrayBuffer[Cercano]) : Option[Cercano] = {
 	  transporteCercanosFin.find(cercano => cercano.elMedioCoinideCon(myTransportIda))
   }

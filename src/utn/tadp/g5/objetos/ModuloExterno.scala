@@ -24,6 +24,9 @@ object ModuloExterno {
       transporteA = new Cercano(new Colectivo(54,""), new Direccion("Acevedo",350))
       respuesta += transporteA
       
+      transporteA = new Cercano(new Colectivo(105,""), new Direccion("Diaz Velez",350))
+      respuesta += transporteA
+      
       transporteA = new Cercano(new Subte('A', this.getEstacionesSubte('A')))
       transporteA.direccion = new Direccion("Rio de Janeiro")
       
@@ -32,8 +35,10 @@ object ModuloExterno {
     }else if (direccion.calle.equals("Alsina")){
       var transporteA = new Cercano(new Subte('A', this.getEstacionesSubte('A')))
       transporteA.direccion = new Direccion("Saenz Penia") 
-      
       respuesta += transporteA
+      
+      transporteA = new Cercano(new Colectivo(105,""), new Direccion("Bartolome Mitre",350))
+      respuesta += transporteA    
       
     }else if (direccion.calle.equals("Pedernera")){
       var transporteA = new Cercano(new Colectivo(103,""), new Direccion("Primera Junta", 35))

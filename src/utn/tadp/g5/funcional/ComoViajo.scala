@@ -2,7 +2,7 @@ package utn.tadp.g5.funcional
 
 import utn.tadp.g5.objetos.Direccion
 import scala.collection.mutable.ArrayBuffer
-import test.ModuloExternoImplementado
+import utn.tadp.g5.funcional.ModuloExternoImplementado
 
 trait ModuloExterno{
 	def consultarCercanos(direccion :Direccion):ArrayBuffer[(Medio,Direccion)]
