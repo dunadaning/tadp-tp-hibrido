@@ -15,13 +15,13 @@ class Viaje {
   //SE PASO A RECORRIDO
   
   //DETALLE: se puede hacer con un flatmap
-  def getLineas() = recorridos.map(recorrido => recorrido.getLineas()).flatten
+  def getLineas() = recorridos.flatMap(recorrido => recorrido.getLineas())
   
   //DETALLE: se puede hacer con un flatmap
-  def getTipos() = recorridos.map(recorrido => recorrido.getTipos()).flatten
+  def getTipos() = recorridos.flatMap(recorrido => recorrido.getTipos())
   
   //DETALLE: se puede hacer con un flatmap
-  def getCompanias() = recorridos.map(recorrido => recorrido.getCompanias()).flatten
+  def getCompanias() = recorridos.flatMap(recorrido => recorrido.getCompanias())
     
   def calcularDuraciones(){
     recorridos.map(recorrido => recorrido.calcularDuracion())

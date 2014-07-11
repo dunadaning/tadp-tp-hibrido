@@ -55,7 +55,9 @@ class ComoViajo {
     //tInicio.foldLeft(recorrido)((recorrido: Recorrido, cercano: Cercano) => this.obtenerTransporte(cercano, tFin, recorrido))
     
     //CORRECCION: map devuelve una coleccion con los elementos transformados de la coleccion original. Usar foldLeft para acumular.
-    tInicio.map(cercano => ruta += obtenerTransporte(cercano, tFin))
+    //tInicio.map(cercano => ruta += obtenerTransporte(cercano, tFin))
+    tInicio.foldLeft(ruta)((ruta:ListBuffer[Transporte], cercano: Cercano) => ruta += obtenerTransporte(cercano, tFin))
+    
     rutaFiltrada = ruta.toList.filter(e => e!=null)
     
     rutaFiltrada.map{transporte => 
