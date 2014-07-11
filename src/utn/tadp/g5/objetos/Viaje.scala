@@ -7,19 +7,20 @@ import scala.collection.mutable.MutableList
 import utn.tadp.g5.objetos.tarjetas.Tarjeta
 
 class Viaje { 
-  //CORRECCION: recorridos, duraciones y costos deberia ser una sola coleccion con objetos que tengan esos tres datos(por ej: Recorrido)
   //SE UTILIZA UNA LISTA
   var recorridos: List[Recorrido] = null //Cada indice del Array es una alternativa de viaje
   
-  //CORRECCION: Un Array o una lista es mas apropiado que un map en este caso.
   //var duraciones = new MutableList[Double]//Cada clave es la alternativa
   //var costos = new HashMap[Int,Double]//Cada clave es la alternativa
   //SE PASO A RECORRIDO
   
+  //DETALLE: se puede hacer con un flatmap
   def getLineas() = recorridos.map(recorrido => recorrido.getLineas()).flatten
   
+  //DETALLE: se puede hacer con un flatmap
   def getTipos() = recorridos.map(recorrido => recorrido.getTipos()).flatten
   
+  //DETALLE: se puede hacer con un flatmap
   def getCompanias() = recorridos.map(recorrido => recorrido.getCompanias()).flatten
     
   def calcularDuraciones(){

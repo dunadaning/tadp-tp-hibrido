@@ -53,6 +53,8 @@ class ComoViajo {
     //CORRECCION: map en lugar de foreach - cambio foreach por foldLeft
     //SE UTILIZA UN MAP
     //tInicio.foldLeft(recorrido)((recorrido: Recorrido, cercano: Cercano) => this.obtenerTransporte(cercano, tFin, recorrido))
+    
+    //CORRECCION: map devuelve una coleccion con los elementos transformados de la coleccion original. Usar foldLeft para acumular.
     tInicio.map(cercano => ruta += obtenerTransporte(cercano, tFin))
     rutaFiltrada = ruta.toList.filter(e => e!=null)
     
@@ -112,7 +114,6 @@ class ComoViajo {
     ModuloExterno.consultarCercanos(direccion)
   }
 
-  //CORRECCION: pasaPorDestino no expresa lo que hace.
   //SE MODIFICA EL NOMBRE
   def buscarMedioQuePasaPorDestino(myTransportIda:Medio, transporteCercanosFin:ArrayBuffer[Cercano]) : Option[Cercano] = {
 	  transporteCercanosFin.find(cercano => cercano.elMedioCoinideCon(myTransportIda))

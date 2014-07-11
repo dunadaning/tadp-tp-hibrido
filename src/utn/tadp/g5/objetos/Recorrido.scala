@@ -20,16 +20,21 @@ class Recorrido {
   def getDuracion() = duracion
   
   def getCosto() = costo
-   
+  
+  //CORRECCION: no esta bueno hacerlo con map. Para hacer una sumatoria usen fold. 
+  // Ademas se va a aumentar la duración cada vez que se llame a calcularDuracion.
+  // Deberian calcular la duracion en el metodo getDuracion sin efecto colateral(sin cambiar la variable duracion).
   def calcularDuracion() {
     ruta.map(transporte => duracion+=transporte.getMedio().tiempoPara(transporte.getDireccionInicio(), transporte.getDireccionFin()))    
   }
 
+  //CORRECCION: idem calcularDuracion
   def calcularCosto(tarjeta:Tarjeta) {
     ruta.map(transporte => costo+=transporte.getMedio().costoPara(transporte.getDireccionInicio(), transporte.getDireccionFin()))
     if (tarjeta!=null) aplicarDescuento(tarjeta)
   }
   
+  //CORRECCION: de nuevo el efecto colateral. Deberian aplicar el descuento cuando se pide el costo total.
   def aplicarDescuento(tarjeta:Tarjeta){
     descuento = tarjeta.aplicarDescuentoAlRecorrido(this)
     costo -= (descuento)
