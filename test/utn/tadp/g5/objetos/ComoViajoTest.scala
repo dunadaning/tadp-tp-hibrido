@@ -119,16 +119,16 @@ class ComoViajoTest {
           ordenDir += 1
           descripcion =  recorridos(i).ruta.head.getMedio().getDescripcion().toString()
           linea = recorridos(i).ruta.head.getMedio().getLinea()
-          direccionInicio = recorridos(i).ruta(i).getDireccionInicio().calle
+          direccionInicio = recorridos(i).ruta.head.getDireccionInicio().calle
           
-          if (recorridos(i).ruta(i).getDireccionInicio().numero>0){
-            direccionInicio += " " + recorridos(i).ruta(i).getDireccionInicio().numero
+          if (recorridos(i).ruta.head.getDireccionInicio().numero>0){
+            direccionInicio += " " + recorridos(i).ruta.head.getDireccionInicio().numero
           }
           
-          direccionFin = recorridos(i).ruta(i).getDireccionFin().calle
+          direccionFin = recorridos(i).ruta.head.getDireccionFin().calle
           
-          if (recorridos(i).ruta(i).getDireccionFin().numero>0){
-            direccionFin += " " + recorridos(i).ruta(i).getDireccionFin().numero
+          if (recorridos(i).ruta.head.getDireccionFin().numero>0){
+            direccionFin += " " + recorridos(i).ruta.head.getDireccionFin().numero
           }
           
           resultadoCompleto = "Alternativa directa " + ordenDir + ": " + descripcion + "-" + linea + " / " + "Direccion (desde/hasta): " + direccionInicio + " a " + direccionFin
