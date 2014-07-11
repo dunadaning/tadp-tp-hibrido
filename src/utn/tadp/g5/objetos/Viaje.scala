@@ -50,34 +50,14 @@ class Viaje {
   def calcularCostos(){
     recorridos.map(recorrido => recorrido.calcularCosto())
   }
+
   
-/*  
-  def getDuracion(recorrido:HashMap[Int,Transporte]):Double = {
-    var total:Double = 0
-    
-    for (i <- 0 until recorrido.size){
-      total += recorrido(i).getMedio.tiempoPara(recorrido(i).getDireccionInicio, recorrido(i).getDireccionFin)
-      if (i>0){
-        //combinacion
-        total +=recorrido(i).getMedio.tiempoCombinacion(recorrido(i).getDireccionInicio, recorrido(i-1).getMedio, recorrido(i).getDireccionFin)         
-      }
-      
-    }
-      
-    return total
+  def getRecorridoDuracionMinima():Recorrido = {
+    recorridos.min(Ordering.by((r:Recorrido) => r.duracion))
   }
   
-   def getCosto(recorrido:HashMap[Int,Transporte]):Double = {
-    var total:Double = 0
-    
-    for (i <- 0 until recorrido.size){
-      total += recorrido(i).getMedio.costoPara(recorrido(i).getDireccionInicio, recorrido(i).getDireccionFin) 
-      if (i>0){
-        //combinacion
-        total +=recorrido(i).getMedio.costoCombinacion(recorrido(i-1).getMedio, recorrido(i).getDireccionInicio, recorrido(i).getDireccionFin)         
-      }
-    }
-    
-    return total
-  }*/
+  def getRecorridoCostoMinimo():Recorrido = {
+    recorridos.min(Ordering.by((r:Recorrido) => r.costo))
+  }
+
 }

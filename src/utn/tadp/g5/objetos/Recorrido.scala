@@ -13,35 +13,18 @@ class Recorrido {
   def getTipos() = ruta.map(transporte => transporte.getMedio().getDescripcion())
   
   def getCompanias() = ruta.map(transporte => transporte.getMedio().getCompania())
-    
-  def calcular():Int = {
-    return 1
-  }
   
-  /*def this(transporteSalida:Transporte, transporteLlegada :Transporte)={
-   this()
-   this.transportes += transporteSalida
-   this.transportes += transporteLlegada
-  }
+  def getDuracion() = duracion
   
-  def this(transporteSalida:Transporte, transporteLlegada :Transporte, direccion:Direccion)={
-   this()
-   this.transportes += transporteSalida
-   this.transportes += new Transporte(transporteSalida.medio , direccion)
-   this.transportes += new Transporte(transporteLlegada.medio, direccion)
-   this.transportes += transporteLlegada
-  }*/
+  def getCosto() = costo
   
-  /*def costo() = {
-    for()
-  }*/
-  def tiempoDeViaje() = 1
+  //def tiempoDeViaje() = 1
   
   def calcularDuracion() {
     ruta.map(transporte => duracion+=transporte.getMedio().tiempoPara(transporte.getDireccionInicio(), transporte.getDireccionFin()))    
   }
 
   def calcularCosto() {
-    ruta.map(transporte => duracion+=transporte.getMedio().costoPara(transporte.getDireccionInicio(), transporte.getDireccionFin()))    
+    ruta.map(transporte => costo+=transporte.getMedio().costoPara(transporte.getDireccionInicio(), transporte.getDireccionFin()))    
   }
 }

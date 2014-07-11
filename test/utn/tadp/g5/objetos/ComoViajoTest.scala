@@ -20,9 +20,9 @@ class ComoViajoTest {
 	  imprimirDescripcion("Consulta de un origen/destino, resultado una sola posibilidad de viaje")
 	  mostrarResultadoPorConsola(miViaje)
     
-	  assertEquals(miViaje.recorridos.toArray.size,1)
+	  assertEquals(miViaje.recorridos.size,1)
 	}
-/* 
+
   @Test
 	def testConsultarViajeCombina = {
     val origen = new Direccion("Pedernera", 750)
@@ -76,13 +76,19 @@ class ComoViajoTest {
     
   @Test
 	def testConsultarViajeNoHayRecorrido {
-    val origen = new Direccion("Jujuy", 750)
-	  val destino = new Direccion("Pedernera", 1350)
-	  val direcciones = new ParametrosDeViaje(origen, destino)
-	  val viaje = new Viaje(direcciones) 
-	  assertEquals("d",ConsultaExterna.consultar(viaje).size,0)
+	  val origen = new Direccion("Jujuy", 37)
+	  val destino = new Direccion("Pedernera", 1400)
+	  val parametrosViaje = new ParametrosDeViaje(origen, destino)	 
+	  val miConsultaDeViaje = new ComoViajo()
+	  val miViaje = miConsultaDeViaje.consultar(parametrosViaje)
+	  
+	  imprimirTest("TEST Viaje SIN Recorrido:")
+	  imprimirDescripcion("Consulta de un origen/destino, y no exiten resultados")
+	  mostrarResultadoPorConsola(miViaje)
+    
+	  assertEquals(miViaje.recorridos.size,0)
 	}
-	*/
+	
   def mostrarResultadoPorConsola(viaje: Viaje){   
     var orden:Int = 0
     var descripcion:String = null
