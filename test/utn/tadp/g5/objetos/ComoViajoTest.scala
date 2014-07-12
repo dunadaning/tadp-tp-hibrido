@@ -20,9 +20,6 @@ class ComoViajoTest {
 	  val miConsultaDeViaje = new ComoViajo()
 	  val miViaje = miConsultaDeViaje.consultar(parametrosViaje)
 	  
-	  imprimirTest("TEST Viaje Directo:")
-	  imprimirDescripcion("Consulta de un origen/destino, resultado una sola posibilidad de viaje")
-	  
 	  val recorrido = miViaje.recorridos(0)
 	  assertEquals(2.75, recorrido.getCosto, 0.1)
 	  assertEquals(21.6, recorrido.getDuracion, 0.1)
@@ -42,7 +39,6 @@ class ComoViajoTest {
 	  //Test que por cada alternativa de recorrido el tramo es directo
 	  miViaje.recorridos.foreach(recorrido => assertEquals(recorrido.ruta.size,1))
 	  
-	  mostrarResultadoPorConsola(miViaje)
     	  
 	}
   
@@ -61,9 +57,6 @@ class ComoViajoTest {
 	  val parametrosViaje = new ParametrosDeViaje(origen, destino)	 
 	  val miConsultaDeViaje = new ComoViajo()
 	  val miViaje = miConsultaDeViaje.consultar(parametrosViaje)
-	  
-	  imprimirTest("TEST Viaje Combinado:")
-	  imprimirDescripcion("Dado un origen y un destino se tiene como resultado 2 alternativas de viaje que a su vez son combinadas")
 	  
 	  val recorrido = miViaje.recorridos(0)
 	  assertEquals(5.35, recorrido.getCosto, 0.1)
@@ -87,8 +80,7 @@ class ComoViajoTest {
     
 	  //assertTrue: Test que por cada alternativa de recorrido el tramo es combinado
 	  miViaje.recorridos.foreach(recorrido => assertTrue(recorrido.ruta.size > 1))
-	  
-	  mostrarResultadoPorConsola(miViaje)
+
 	}
 
   @Test
@@ -101,16 +93,11 @@ class ComoViajoTest {
 	  val miConsultaDeViaje = new ComoViajo()
 	  val miViaje = miCriterio.consultar(miConsultaDeViaje.consultar(parametrosViaje))
 	  	  
-	  imprimirTest("TEST Viaje Criterio Tiempo:")
-	  imprimirDescripcion("Dado una consulta con distintas alternativas se selecciona segun criterio")
-	  
 	  val recorrido = miViaje.recorridos(0)
 	  assertEquals(5.35, recorrido.getCosto, 0.1)
 	  assertEquals(52.0, recorrido.getDuracion, 0.1)
 	  assertEquals("103", recorrido.ruta(0).getMedio().getLinea())
 	  assertEquals("86", recorrido.ruta(1).getMedio().getLinea())
-	  
-	  mostrarResultadoPorConsola(miViaje)
     
 	  assertEquals(miViaje.recorridos.size,1)
 	  
@@ -129,16 +116,11 @@ class ComoViajoTest {
 	  val miConsultaDeViaje = new ComoViajo()
 	  val miViaje = miCriterio.consultar(miConsultaDeViaje.consultar(parametrosViaje))
 	  	  
-	  imprimirTest("TEST Viaje Directo:")
-	  imprimirDescripcion("Se consulta un solo tramo de un viaje combinado para testear el costo")
-	  
 	  val recorrido = miViaje.recorridos(0)
 	  assertEquals(2.85, recorrido.getCosto, 0.1)
 	  assertEquals(52.0, recorrido.getDuracion, 0.1)
 	  assertEquals("103", recorrido.ruta(0).getMedio().getLinea())
 	  
-	  mostrarResultadoPorConsola(miViaje)
-    
 	  assertEquals(miViaje.recorridos.size,1)
 	  
 	}
@@ -153,16 +135,11 @@ class ComoViajoTest {
 	  val miConsultaDeViaje = new ComoViajo()
 	  val miViaje = miCriterio.consultar(miConsultaDeViaje.consultar(parametrosViaje))
 	  	  
-	  imprimirTest("TEST Viaje Criterio Costo:")
-	  imprimirDescripcion("Dado una consulta con distintas alternativas se selecciona segun criterio")
-	  
 	  val recorrido = miViaje.recorridos(0)
 	  assertEquals(5.35, recorrido.getCosto, 0.1)
 	  assertEquals(52.0, recorrido.getDuracion, 0.1)
 	  assertEquals("103", recorrido.ruta(0).getMedio().getLinea())
-	  
-	  mostrarResultadoPorConsola(miViaje)
-    
+
 	  assertEquals(miViaje.recorridos.size,1)
 	  
 	}
@@ -177,9 +154,6 @@ class ComoViajoTest {
 	  val miConsultaDeViaje = new ComoViajo()
 	  val miViaje = miConsultaDeViaje.consultar(parametrosViaje, miDescuento)
 	  	  
-	  imprimirTest("TEST Viaje con Descuento para Discapacitados:")
-	  imprimirDescripcion("Dado una consulta con descuento, se le aplica el mismo al costo")
-	  
 	  val recorrido = miViaje.recorridos(0)
 	  assertEquals(0.0, recorrido.getCosto(miDescuento), 0.1)
 	  assertEquals(21.6, recorrido.getDuracion, 0.1)
@@ -189,9 +163,7 @@ class ComoViajoTest {
 	  assertEquals(0.0, recorrido2.getCosto(miDescuento), 0.1)
 	  assertEquals(12.0, recorrido2.getDuracion, 0.1)
 	  assertEquals('A', recorrido2.ruta(0).getMedio().getLinea())
-	  
-	  mostrarResultadoPorConsola(miViaje, miDescuento)
-    
+	
 	  miViaje.recorridos.foreach(recorrido => assertTrue(recorrido.getCosto(miDescuento) == 0))
 	  
 	}    
@@ -206,16 +178,10 @@ class ComoViajoTest {
 	  val miConsultaDeViaje = new ComoViajo()
 	  val miViaje = miConsultaDeViaje.consultar(parametrosViaje, miDescuento)
 	  	  
-	  imprimirTest("TEST Viaje con Descuento para Trabajador:")
-	  imprimirDescripcion("Dado una consulta con descuento, se le aplica el mismo al costo")
-	  
 	  val recorrido = miViaje.recorridos(0)
 	  assertEquals(1.5, recorrido.getCosto(miDescuento), 0.1)
 	  assertEquals(66.8, recorrido.getDuracion, 0.1)
 	  assertEquals("8", recorrido.ruta(0).getMedio().getLinea())
-	  
-	  mostrarResultadoPorConsola(miViaje, miDescuento)
-    
 	  assertEquals(miViaje.recorridos.size,1)
 	  
 	}
@@ -229,10 +195,7 @@ class ComoViajoTest {
 	  val parametrosViaje = new ParametrosDeViaje(origen, destino)	 
 	  val miConsultaDeViaje = new ComoViajo()
 	  val miViaje = miConsultaDeViaje.consultar(parametrosViaje, miDescuento)
-	  	  
-	  imprimirTest("TEST Viaje con Descuento para Turismo:")
-	  imprimirDescripcion("Dado una consulta con descuento, se le aplica el mismo al costo")
-	  
+	  	   
 	  val recorrido = miViaje.recorridos(0)
 	  assertEquals(2.75, recorrido.getCosto(miDescuento), 0.1)
 	  assertEquals(21.6, recorrido.getDuracion, 0.1)
@@ -241,10 +204,7 @@ class ComoViajoTest {
 	  val recorrido2 = miViaje.recorridos(1)
 	  assertEquals(4.05, recorrido2.getCosto(miDescuento), 0.1)
 	  assertEquals(12.0, recorrido2.getDuracion, 0.1)
-	  assertEquals('A', recorrido2.ruta(0).getMedio().getLinea())
-	  
-	  mostrarResultadoPorConsola(miViaje, miDescuento)
-    
+	  assertEquals('A', recorrido2.ruta(0).getMedio().getLinea())	  	      
 	  miViaje.recorridos.foreach(recorrido => recorrido.getPorcentajeDescuento(miDescuento)==10)
     
 	}
@@ -256,89 +216,8 @@ class ComoViajoTest {
 	  val parametrosViaje = new ParametrosDeViaje(origen, destino)	 
 	  val miConsultaDeViaje = new ComoViajo()
 	  val miViaje = miConsultaDeViaje.consultar(parametrosViaje)
-	  
-	  imprimirTest("TEST Viaje SIN Recorrido:")
-	  imprimirDescripcion("Consulta de un origen/destino, y no exiten resultados")
-	  mostrarResultadoPorConsola(miViaje)
-    
+	  	       
 	  assertEquals(miViaje.recorridos.size,0)
 	}
 
-  def mostrarResultadoPorConsola(viaje: Viaje, tarjeta:Tarjeta){   
-    var orden:Int = 0
-    var descripcion:String = null
-    var linea:Any = null 
-    var direccionInicio:String = null
-    var direccionFin:String = null
-    val recorridos = viaje.recorridos
-    var combina:String = null
-    var resultadoCompleto:String = null
-    var ordenCom = 0
-    var ordenDir = 0
-    
-    for (i <- 0 until recorridos.size){                  
-      if (recorridos(i).ruta.size>1){
-        ordenCom += 1
-        resultadoCompleto = "Alternativa combinada " + (ordenCom).toString() + " : "
-        
-        for (e <- 0 until recorridos(i).ruta.size){          
-          descripcion =  recorridos(i).ruta(e).getMedio().getDescripcion().toString()
-          linea = recorridos(i).ruta(e).getMedio().getLinea()
-          direccionInicio = recorridos(i).ruta(e).getDireccionInicio().calle + " " + recorridos(i).ruta(e).getDireccionInicio().numero
-          direccionFin = recorridos(i).ruta(e).getDireccionFin().calle + " " + recorridos(i).ruta(e).getDireccionFin().numero
-          resultadoCompleto += descripcion + "-" + linea + " / " + "Direccion (desde/hasta): " + direccionInicio + " a " + direccionFin
-          if (e<(recorridos(i).ruta.size-1)){
-            resultadoCompleto += " --> "
-          }                             
-        } 
-        println(resultadoCompleto)
-        imprimirDuracion(viaje,i)
-        imprimirCostos(viaje,i, tarjeta)
-        
-      }else if (recorridos(i).ruta.size>0){
-          //orden = (i+1)
-          ordenDir += 1
-          descripcion =  recorridos(i).ruta.head.getMedio().getDescripcion().toString()
-          linea = recorridos(i).ruta.head.getMedio().getLinea()
-          direccionInicio = recorridos(i).ruta.head.getDireccionInicio().calle
-          
-          if (recorridos(i).ruta.head.getDireccionInicio().numero>0){
-            direccionInicio += " " + recorridos(i).ruta.head.getDireccionInicio().numero
-          }
-          
-          direccionFin = recorridos(i).ruta.head.getDireccionFin().calle
-          
-          if (recorridos(i).ruta.head.getDireccionFin().numero>0){
-            direccionFin += " " + recorridos(i).ruta.head.getDireccionFin().numero
-          }
-          
-          resultadoCompleto = "Alternativa directa " + ordenDir + ": " + descripcion + "-" + linea + " / " + "Direccion (desde/hasta): " + direccionInicio + " a " + direccionFin
-          
-          println(resultadoCompleto)   
-          imprimirDuracion(viaje,i)
-          imprimirCostos(viaje,i, tarjeta)
-      }           
-    } 
-    println("")
-  }
-  def mostrarResultadoPorConsola(viaje: Viaje){
-    this.mostrarResultadoPorConsola(viaje, null)
-  }
-  
-  def imprimirDuracion(viaje:Viaje, i:Int){
-    println("Duracion: " + viaje.recorridos(i).getDuracion() + " minutos")
-  }
-  
-  def imprimirCostos(viaje:Viaje, i:Int, tarjeta:Tarjeta){
-    println("Costo: $ " + viaje.recorridos(i).getCosto(tarjeta))
-    //if (viaje.recorridos(i).descuento>0) println("Descuento: $ " + viaje.recorridos(i).descuento)
-  }
-  
-  def imprimirTest(nombre:String){    
-	  println(nombre)	  
-  }
-  
-  def imprimirDescripcion(descripcion:String){
-    println(descripcion)
-  }
 }
