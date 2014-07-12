@@ -22,11 +22,28 @@ class ComoViajoTest {
 	  
 	  imprimirTest("TEST Viaje Directo:")
 	  imprimirDescripcion("Consulta de un origen/destino, resultado una sola posibilidad de viaje")
-	  mostrarResultadoPorConsola(miViaje)
-    
+	  
+	  //Test de que existe un recorrido en Subte de 12 minutos
+	  assertEquals(getRecorridoConDuracion(miViaje,12).size,1)
+	  
+	  //Test de que existe un recorrido en Subte de costo es $ 4.5
+	  assertEquals(getRecorridoConCosto(miViaje,4.5).size,1)
+	  
+	  //Test que por cada alternativa de recorrido el tramo es directo)
 	  miViaje.recorridos.foreach(recorrido => assertEquals(recorrido.ruta.size,1))
+	  
+	  mostrarResultadoPorConsola(miViaje)
+    	  
 	}
+  
+  def getRecorridoConDuracion(viaje:Viaje, duracion:Double):Option[Recorrido] = {
+    viaje.recorridos.find(recorrido => recorrido.getDuracion()==duracion)
+  }
 
+  def getRecorridoConCosto(viaje:Viaje, costo:Double):Option[Recorrido] = {
+    viaje.recorridos.find(recorrido => recorrido.getCosto()==costo)
+  }
+    
   @Test
 	def testConsultarViajeCombina = {
     val origen = new Direccion("Pedernera", 750)
@@ -146,7 +163,7 @@ class ComoViajoTest {
 	  imprimirDescripcion("Dado una consulta con descuento, se le aplica el mismo al costo")
 	  mostrarResultadoPorConsola(miViaje, miDescuento)
     
-	  //miViaje.recorridos.foreach(recorrido => recorrido.getPorcentajeDescuento()==10)
+	  miViaje.recorridos.foreach(recorrido => recorrido.getPorcentajeDescuento(miDescuento)==10)
     
 	}
 

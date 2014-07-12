@@ -58,8 +58,6 @@ class Recorrido(val ruta:List[Transporte]) {
     ruta.exists(transporte => transporte.llegaALaZona(zona))
   }
   
-  //def getCostoTotal() = costo + descuento
-  
-  //def getPorcentajeDescuento() = (descuento * 100) / getCostoTotal()
+  def getPorcentajeDescuento(tarjeta:Tarjeta) = (getCosto(tarjeta) * 100) / getCosto(tarjeta)
   
 }
