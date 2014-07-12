@@ -19,8 +19,6 @@ class ComoViajo {
     transporteCercanosFin = obtenerTransportesCercanosEn(parametrosDeViaje.destino)
 
     viaje.recorridos = calcularRecorridos(transporteCercanosInicio, transporteCercanosFin)
-    //viaje.calcularDuraciones()
-    //viaje.calcularCostos(tarjeta)
     
     return  viaje
         
@@ -61,8 +59,7 @@ class ComoViajo {
     rutaFiltrada = ruta.toList.filter(e => e!=null)
     
     rutaFiltrada.map{transporte => 
-        recorrido = new Recorrido()
-        recorrido.ruta = List(transporte)
+        recorrido = new Recorrido(List(transporte))
         recorridos += recorrido}
 
     recorridos
@@ -96,14 +93,15 @@ class ComoViajo {
      for (p <- 0 until tf.size){
        direccion = ModuloExterno.consultarCombinacion(ti(i).medio, tf(p).medio)
        if (direccion!=null){
-         var recorridos = new Recorrido()
+         
          //recorridos.ruta = List[Transporte]()
          ruta = ListBuffer[Transporte]()
          transporteA = new Transporte(ti(i).medio, ti(i).direccion, direccion) 
          transporteB = new Transporte(tf(p).medio, direccion, tf(p).direccion) 
          ruta += transporteA
-         ruta += transporteB  
-         recorridos.ruta = ruta.toList
+         ruta += transporteB
+         
+         var recorridos = new Recorrido(ruta.toList)
          combinados += recorridos
        }
      }              
