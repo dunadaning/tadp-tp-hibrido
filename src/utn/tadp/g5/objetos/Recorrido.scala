@@ -5,8 +5,7 @@ import scala.collection.mutable.ArrayBuffer
 import utn.tadp.g5.objetos.tarjetas.Tarjeta
 import utn.tadp.g5.objetos.tarjetas.Zona
 
-class Recorrido(camino:List[Transporte]) {
-  val ruta = camino
+class Recorrido(val ruta:List[Transporte]) {
   
   def getLineas() = ruta.map(transporte => transporte.getMedio().getLinea())
   
