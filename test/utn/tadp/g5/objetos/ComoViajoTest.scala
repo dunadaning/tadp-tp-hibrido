@@ -23,13 +23,17 @@ class ComoViajoTest {
 	  imprimirTest("TEST Viaje Directo:")
 	  imprimirDescripcion("Consulta de un origen/destino, resultado una sola posibilidad de viaje")
 	  
+	  val recorrido = miViaje.recorridos(0)
+	  assertEquals(2.75, recorrido.getCosto, 0.1)
+	  assertEquals("105", recorrido.ruta(0).getMedio().getLinea())
+	  
 	  //Test de que existe un recorrido en Subte de 12 minutos
 	  assertEquals(getRecorridoConDuracion(miViaje,12).size,1)
 	  
 	  //Test de que existe un recorrido en Subte de costo es $ 4.5
 	  assertEquals(getRecorridoConCosto(miViaje,4.5).size,1)
 	  
-	  //Test que por cada alternativa de recorrido el tramo es directo)
+	  //Test que por cada alternativa de recorrido el tramo es directo
 	  miViaje.recorridos.foreach(recorrido => assertEquals(recorrido.ruta.size,1))
 	  
 	  mostrarResultadoPorConsola(miViaje)
@@ -54,9 +58,14 @@ class ComoViajoTest {
 	  
 	  imprimirTest("TEST Viaje Combinado:")
 	  imprimirDescripcion("Dado un origen y un destino se tiene como resultado 2 alternativas de viaje que a su vez son combinadas")
-	  mostrarResultadoPorConsola(miViaje)
- 
+	  
+	  //assertTrue: Test que prueba que me tengo que tomar el 103 para ambos tramos
+	  miViaje.recorridos.foreach(recorrido => assertTrue(recorrido.ruta.exists(t => t.getMedio().getLinea()=="103")))
+    
+	  //assertTrue: Test que por cada alternativa de recorrido el tramo es combinado
 	  miViaje.recorridos.foreach(recorrido => assertTrue(recorrido.ruta.size > 1))
+	  
+	  mostrarResultadoPorConsola(miViaje)
 	}
 
   @Test
@@ -74,6 +83,11 @@ class ComoViajoTest {
 	  mostrarResultadoPorConsola(miViaje)
     
 	  assertEquals(miViaje.recorridos.size,1)
+	  
+	  val recorrido = miViaje.recorridos(0)
+	  
+	  //Test que prueba que el viaje mas corto lo hago con el colectivo 103
+	  assertEquals(recorrido.ruta(0).getMedio().getLinea(),"103")
 	  
 	}
 
